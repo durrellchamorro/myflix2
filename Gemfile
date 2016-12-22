@@ -3,17 +3,17 @@ ruby '2.1.2'
 
 gem 'bootstrap-sass', '3.1.1.1'
 gem 'coffee-rails'
-gem 'rails', '4.1.1'
 gem 'haml-rails'
-gem 'sass-rails'
-gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
+gem 'rails', '4.1.1'
+gem 'sass-rails'
+gem 'uglifier'
 
 group :development do
-  gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'thin'
 end
 
 group :development, :test do
@@ -31,4 +31,3 @@ end
 group :production do
   gem 'rails_12factor'
 end
-
