@@ -1,8 +1,10 @@
 %article.video
   .container
     .row
-      .video_large_cover.col-sm-7.col-sm-offset-1
-        = image_tag(@video.large_cover_url)
+      .col-sm-7.col-sm-offset-1
+        .embed-responsive.embed-responsive-16by9
+          %iframe{allowfullscreen: "", height: "480", src: "https://www.youtube.com/embed/M94yyfWy-KI", width: "854"}
+
       .video_info.col-sm-3
         %header
           %h3
