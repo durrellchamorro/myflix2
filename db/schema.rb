@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219005925) do
+ActiveRecord::Schema.define(version: 20161227004315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -22,12 +23,22 @@ ActiveRecord::Schema.define(version: 20161219005925) do
     t.datetime "updated_at"
   end
 
+  create_table "users", force: true do |t|
+    t.string   "full_name"
+    t.citext   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "videos", force: true do |t|
-    t.string  "title"
-    t.string  "small_cover_url"
-    t.string  "large_cover_url"
-    t.text    "description"
-    t.integer "category_id"
+    t.string   "title"
+    t.string   "small_cover_url"
+    t.string   "large_cover_url"
+    t.text     "description"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
