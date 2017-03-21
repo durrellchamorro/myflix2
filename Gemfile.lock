@@ -56,6 +56,13 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.9.1)
     execjs (2.0.2)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
+    faker (1.7.3)
+      i18n (~> 0.5)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -170,6 +177,8 @@ DEPENDENCIES
   bootstrap_form
   coffee-rails
   database_cleaner (= 1.4.1)
+  factory_girl_rails (~> 4.8)
+  faker (~> 1.7, >= 1.7.3)
   haml-rails
   jquery-rails
   pg
