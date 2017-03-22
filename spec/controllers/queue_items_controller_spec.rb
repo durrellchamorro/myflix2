@@ -67,4 +67,39 @@ describe QueueItemsController do
       end
     end
   end
+
+  describe "DELETE destroy" do
+    context "with authenticated user" do
+      let(:queue_item) { create(:queue_item, user: User.find(session[:user_id])) }
+
+      before do
+        session[:user_id] = create(:user).id
+        delete :destroy, id: queue_item.id
+      end
+
+      it "redirects to the my queue page" do
+        expect(response).to redirect_to(my_queue_path)
+      end
+
+      it "deletes the queue item" do
+        expect(QueueItem.count).to eq(0)
+      end
+
+      it "does not delete the queue item if the current user does not own the queue item" do
+        other_user = create(:user)
+        other_users_queue_item = create(:queue_item, user: other_user)
+        delete :destroy, id: other_users_queue_item.id
+
+        expect(QueueItem.find(other_users_queue_item.id)).to be_present
+      end
+    end
+
+    context "with unauthenticated user" do
+      it "redirects to the login page" do
+        delete :destroy, id: 1
+
+        expect(response).to redirect_to(:login)
+      end
+    end
+  end
 end

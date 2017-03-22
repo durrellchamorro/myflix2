@@ -11,7 +11,13 @@ class QueueItemsController < ApplicationController
   end
 
   def destroy
+    queue_item = QueueItem.find(params["id"])
 
+    if queue_item && queue_item.user == current_user
+      QueueItem.delete(queue_item)
+    end
+
+    redirect_to my_queue_path
   end
 
   private
