@@ -7,7 +7,8 @@ Myflix::Application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   post 'reviews', to: 'reviews#create'
   get 'my_queue', to: 'queue_items#index'
-
+  post 'update_queue', to: 'queue_items#update_queue'
+  
   resources :videos do
     collection do
       get 'search'

@@ -70,11 +70,15 @@ describe QueueItemsController do
 
   describe "DELETE destroy" do
     context "with authenticated user" do
-      let(:queue_item) { create(:queue_item, user: User.find(session[:user_id])) }
+      let!(:queue_item1) { create(:queue_item, user: neo, position: 2) }
+      let!(:queue_item2) { create(:queue_item, user: neo, position: 3) }
+      let!(:queue_item3) { create(:queue_item, user: neo, position: 6) }
+
+      let(:neo) { create(:user) }
 
       before do
-        session[:user_id] = create(:user).id
-        delete :destroy, id: queue_item.id
+        session[:user_id] = neo.id
+        delete :destroy, id: queue_item2.id
       end
 
       it "redirects to the my queue page" do
@@ -82,7 +86,7 @@ describe QueueItemsController do
       end
 
       it "deletes the queue item" do
-        expect(QueueItem.count).to eq(0)
+        expect(QueueItem.count).to eq(2)
       end
 
       it "does not delete the queue item if the current user does not own the queue item" do
@@ -92,6 +96,11 @@ describe QueueItemsController do
 
         expect(QueueItem.find(other_users_queue_item.id)).to be_present
       end
+
+      it "normalizes the remaining queue items" do
+        expect(queue_item1.reload.position).to eq(1)
+        expect(queue_item3.reload.position).to eq(2)
+      end
     end
 
     context "with unauthenticated user" do
@@ -99,6 +108,86 @@ describe QueueItemsController do
         delete :destroy, id: 1
 
         expect(response).to redirect_to(:login)
+      end
+    end
+  end
+
+  describe "POST update_queue" do
+    context "with valid inputs" do
+      let(:neo) { create(:user) }
+      let(:queue_item1) { create(:queue_item, user: neo, position: 1) }
+      let(:queue_item2) { create(:queue_item, user: neo, position: 2) }
+
+      before do
+        session[:user_id] = neo.id
+      end
+
+      it "redirects to the my queue page" do
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }]
+        expect(response).to redirect_to(my_queue_path)
+      end
+
+      it "reorders the queue items" do
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 2 }, { id: queue_item2.id, position: 1 }]
+
+        expect(queue_item1.reload.position).to eq(2)
+        expect(queue_item2.reload.position).to eq(1)
+      end
+
+      it "normalizes the position numbers" do
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }]
+
+        expect(queue_item1.reload.position).to eq(2)
+        expect(queue_item2.reload.position).to eq(1)
+      end
+    end
+
+    context "with invalid inputs" do
+      let(:neo) { create(:user) }
+      let(:queue_item1) { create(:queue_item, user: neo, position: 3) }
+      let(:queue_item2) { create(:queue_item, user: neo, position: 4) }
+
+      before do
+        session[:user_id] = neo.id
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2.5 }]
+      end
+
+      it "redirects to the my queue page" do
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "sets the flash error message" do
+        expect(flash[:danger]).to be_present
+      end
+
+      it "does not change the queue items" do
+        expect(queue_item1.reload.position).to eq(3)
+      end
+    end
+
+    context "with unauthenticated user" do
+      let(:queue_item1) { create(:queue_item) }
+      let(:queue_item2) { create(:queue_item) }
+
+      it "redirects to the login path" do
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }]
+
+        expect(response).to redirect_to(:login)
+      end
+    end
+
+    context "with queue items that don't belong to the current user" do
+      let(:neo) { create(:user) }
+      let(:queue_item1) { create(:queue_item, user: neo, position: 3) }
+      let(:queue_item2) { create(:queue_item, user: neo, position: 4) }
+      let(:morpheus) { create(:user) }
+
+      it "does not change the queue items" do
+        session[:user_id] = morpheus.id
+        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }]
+
+        expect(queue_item1.reload.position).to eq(3)
+        expect(queue_item2.reload.position).to eq(4)
       end
     end
   end

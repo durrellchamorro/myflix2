@@ -3,6 +3,8 @@ require 'spec_helper'
 describe QueueItem do
   it { should belong_to(:user) }
   it { should belong_to(:video) }
+  it { should validate_numericality_of(:position).only_integer }
+
   let(:video) { create(:video) }
   let(:queue_item) { create(:queue_item, video: video) }
 
