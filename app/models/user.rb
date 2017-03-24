@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
       queue_item.update(position: index + 1) if queue_item
     end
   end
+
+  def video_review(video)
+    Review.find_by(user: self, video: video).try(:rating)
+  end
 end

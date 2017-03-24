@@ -11,7 +11,7 @@
                 %th(width="10%") List Order
                 %th(width="30%") Video Title
                 %th(width="10%") Play
-                %th(width="20%") Rating
+                %th(width="20%") My Rating
                 %th(width="15%") Genre
                 %th(width="15%") Remove
             %tbody
@@ -24,7 +24,7 @@
                     = link_to queue_item.video_title, queue_item.video
                   %td
                     = button_to "Play", nil, class: "btn btn-default"
-                  %td= queue_item.rating
+                  %td= select_tag "queue_items[][rating]", options_for_video_reviews(current_user.video_review(queue_item.video)), include_blank: true
                   %td
                     = link_to queue_item.category_name, '#'
                   %td

@@ -10,7 +10,7 @@ class Video < ActiveRecord::Base
   end
 
   def print_average_video_rating
-    return "N/A" if reviews.blank?
+    return nil if reviews.blank?
     average = reviews.map(&:rating).reduce(:+) / reviews.size.to_f
 
     average.round(2)

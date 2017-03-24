@@ -17,14 +17,17 @@ describe QueueItem do
   end
 
   describe "#rating" do
-    it "returns the average rating of the associated video when rating is present" do
-      create(:review, video: video, rating: 1)
+    it "returns the users rating of the associated video when rating is present" do
+      neo = create(:user)
+      queue_item.user = neo
+
+      create(:review, video: video, rating: 1, user: neo)
       create(:review, video: video, rating: 2)
 
-      expect(queue_item.rating).to eq(1.5)
+      expect(queue_item.rating).to eq(1)
     end
-    it "return N/A when the associated video doesn't have a rating" do
-      expect(queue_item.rating).to eq("N/A")
+    it "return nil when the associated video doesn't have a rating" do
+      expect(queue_item.rating).to eq(nil)
     end
   end
 
@@ -37,6 +40,40 @@ describe QueueItem do
   describe "#category" do
     it "returns the category object of the associated video" do
       expect(queue_item.category).to eq(video.category)
+    end
+  end
+
+  describe '#rating=' do
+    it "changes the rating of the review if the review is present" do
+      video = create(:video)
+      neo = create(:user)
+      create(:review, video: video, rating: 4, user: neo)
+      queue_item = create(:queue_item, user: neo, video: video)
+
+      queue_item.rating = 1
+
+      expect(queue_item.rating).to eq(1)
+    end
+
+    it "clears the rating of the review if the review is present" do
+      video = create(:video)
+      neo = create(:user)
+      create(:review, video: video, rating: 4, user: neo)
+      queue_item = create(:queue_item, user: neo, video: video)
+
+      queue_item.rating = nil
+
+      expect(queue_item.rating).to be_nil
+    end
+
+    it "creates a review with the rating if the review is not present" do
+      video = create(:video)
+      neo = create(:user)
+      queue_item = create(:queue_item, user: neo, video: video)
+
+      queue_item.rating = 5
+
+      expect(queue_item.rating).to eq(5)
     end
   end
 end

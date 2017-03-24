@@ -92,8 +92,8 @@ describe Video do
   describe "#print_average_video_rating" do
     let(:video) { create(:video) }
 
-    it "retuns N/A when there are no ratings" do
-      expect(video.print_average_video_rating).to eq("N/A")
+    it "retuns nil when there are no ratings" do
+      expect(video.print_average_video_rating).to eq(nil)
     end
 
     it "returns the rating when there is one rating" do
