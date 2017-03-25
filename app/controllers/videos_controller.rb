@@ -7,7 +7,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    @reviews = Review.where(video: @video.id)
+    @reviews = Review.valid_reviews(@video)
   end
 
   def search

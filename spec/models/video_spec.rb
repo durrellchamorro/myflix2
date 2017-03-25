@@ -47,7 +47,7 @@ describe Video do
                             large_cover_url: "http://dummyimage.com/665x375/000000/00a2ff",
                             category_id: 1,
                             created_at: 1.day.ago)
-      expect(Video.search_by_title('Fami')).to eq([video1, video2, video3])
+      expect(Video.search_by_title('Fami')).to match_array([video1, video2, video3])
     end
 
     it 'returns an array of one video when only one video title matches the query' do
@@ -114,6 +114,26 @@ describe Video do
       create(:review, rating: 3, video: video)
 
       expect(video.print_average_video_rating).to eq(1.67)
+    end
+
+    it "doesn't calculate nil ratings" do
+      create(:review, rating: 1, video: video)
+      review = build(:review, rating: nil, video: video)
+      review.save(validate: false)
+
+      expect(video.print_average_video_rating).to eq(1)
+    end
+
+    it "doesn't calculate 0 ratings" do
+      create(:review, rating: 1, video: video)
+      review = build(:review, rating: 0, video: video)
+      review.save(validate: false)
+
+      expect(video.print_average_video_rating).to eq(1)
+    end
+
+    it "returns nil when there aren't any accepted reviews" do
+      expect(video.print_average_video_rating).to eq(nil)
     end
   end
 end

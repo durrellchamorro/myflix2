@@ -11,8 +11,25 @@ class Video < ActiveRecord::Base
 
   def print_average_video_rating
     return nil if reviews.blank?
-    average = reviews.map(&:rating).reduce(:+) / reviews.size.to_f
+    average_video_rating.try(:round, 2)
+  end
 
-    average.round(2)
+  private
+
+  def accepted_reviews
+    reviews.reject { |review| review.rating.nil? || review.rating == 0 }
+  end
+
+  def averagable_reviews_count(reviews_difference)
+    reviews_difference >= 1 ? reviews_difference.to_f : reviews.size.to_f
+  end
+
+  def average_video_rating
+    if accepted_reviews.present?
+      accepted_reviews.map(&:rating).reduce(:+) /
+      averagable_reviews_count(reviews.size - accepted_reviews.size)
+    else
+      nil
+    end
   end
 end

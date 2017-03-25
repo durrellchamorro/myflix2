@@ -5,5 +5,19 @@ class Review < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :video_id
   validates_presence_of :rating
+  validate :one_review_per_video_for_user
 
+  def self.valid_reviews(video)
+    Review.where(video: video).reject { |review| review.rating == 0 || review.rating.nil? }
+  end
+
+  private
+
+  def one_review_per_video_for_user
+    errors.add(:rating, "You have already reviewed this video.") if user_already_reviewed?
+  end
+
+  def user_already_reviewed?
+    Review.where(user: user, video: video).present?
+  end
 end
