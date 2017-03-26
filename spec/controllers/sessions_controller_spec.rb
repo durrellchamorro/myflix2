@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   describe "GET new" do
     it "redirects to home_path if current_user" do
-      session[:user_id] = create(:user).id
+      set_current_user
       get :new
 
       expect(response).to redirect_to(home_path)
@@ -20,7 +20,7 @@ describe SessionsController do
     before do
       post :create, email: user.email, password: user.password
     end
-    
+
     context "user authenticates" do
       let(:user) { create(:user) }
 
@@ -52,7 +52,7 @@ describe SessionsController do
 
   describe "GET destroy" do
     before do
-      session[:user_id] = create(:user).id
+      set_current_user
       get :destroy
     end
 

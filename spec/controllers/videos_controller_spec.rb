@@ -4,8 +4,9 @@ describe VideosController do
   describe "GET show" do
     context "with authenticated users" do
       let(:video) { create(:comedy_video) }
+
       before do
-        session[:user_id] = create(:user).id
+        set_current_user
         get :show, id: video.id
       end
 
@@ -22,21 +23,19 @@ describe VideosController do
       end
     end
 
-    context "with unauthenticated users" do
-      let(:video) { create(:comedy_video) }
-      it "redirects the user to the sign in page" do
-        get :show, id: video.id
-
-        expect(response).to redirect_to(:login)
-      end
+    it_behaves_like "require_sign_in" do
+      video = FactoryGirl.create(:comedy_video)
+      let(:action) { get :show, id: video.id }
     end
+
 
     describe "POST search" do
       context "with authenticated user" do
         let(:video1) { create(:comedy_video, title: "Family Guy") }
         let(:video2) { create(:comedy_video, title: "Star Trek") }
+
         before do
-          session[:user_id] = create(:user).id
+          set_current_user
         end
 
         it "sets @videos to the result of Video.search_by_title(params[:search_term])" do

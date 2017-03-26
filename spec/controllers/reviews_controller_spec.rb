@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe ReviewsController do
   describe "POST create" do
-    context "with unauthenticated users" do
-      it "redirects the user to the sign in page" do
-        post :create
-
-        expect(response).to redirect_to(:login)
-      end
+    it_behaves_like "require_sign_in" do
+      let(:action) { post :create }
     end
 
     context "with authenticated user" do
@@ -16,7 +12,7 @@ describe ReviewsController do
 
       context "with valid form data" do
         before do
-          session[:user_id] = user.id
+          set_current_user
           review = build(:review, user: user, video: video)
           post :create, review.attributes
         end
@@ -44,7 +40,7 @@ describe ReviewsController do
 
       context "with invalid form data" do
         before do
-          session[:user_id] = user.id
+          set_current_user
           review = build(:review, user: user, video: video, content: nil, rating: nil)
           post :create, review.attributes
         end
@@ -60,6 +56,7 @@ describe ReviewsController do
         it "sets the danger flash" do
           expect(flash[:danger]).to be_present
         end
+
         it "renders the video show page" do
           expect(response).to render_template("videos/show")
         end

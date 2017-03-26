@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     if review.persisted?
       flash[:success] = "Review created successfully."
     else
-      flash[:danger] = "That didn't work."
+      flash[:danger] = "You must fill in all fields. If you did, then you already rated this video or it is in your queue. Queued videos can only be rated in the queue. You can update your rating by putting the video in the queue and changing the rating there."
     end
 
     @video = Video.find(review_params[:video_id])
