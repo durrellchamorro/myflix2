@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   def video_review(video)
     Review.find_by(user: self, video: video).try(:rating)
   end
+
+  def queued_video?(video)
+    QueueItem.find_by(user: self, video: video).present?
+  end
 end

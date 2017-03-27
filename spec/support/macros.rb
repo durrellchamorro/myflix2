@@ -9,3 +9,38 @@ end
 def clear_current_user
   session[:user_id] = nil
 end
+
+# Feature Specs
+
+def sign_in(user=nil)
+  user ||= create(:user)
+  visit login_path
+  fill_in('Email Address', with: user.email)
+  fill_in('Password', with: user.password)
+  click_on("Sign In")
+end
+
+def sign_out(user)
+  click_on "#{user.full_name}"
+  click_on "Sign Out"
+end
+
+def expect_to_see(text)
+  expect(page).to have_content(text)
+end
+
+def expect_not_to_see(text)
+  expect(page).to have_no_content(text)
+end
+
+def click_video(video)
+  find("a[href='/videos/#{video.id}']").click
+end
+
+def expect_page_to_have_video_title(video)
+  expect(page).to have_content(video.title)
+end
+
+def expect_page_not_to_have_content(content)
+  expect(page).not_to have_content(content)
+end

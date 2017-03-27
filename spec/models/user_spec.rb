@@ -21,4 +21,19 @@ describe User do
       expect(neo.video_review(video)).to eq(nil)
     end
   end
+
+  describe "#queued_video?" do
+    let(:video) { create(:video) }
+    let(:neo) { create(:user) }
+
+    it "returns true if the user queued the video" do
+      create(:queue_item, video: video, user: neo)
+
+      expect(neo.queued_video?(video)).to be_truthy
+    end
+
+    it "returns false if the user did not queue the video" do
+      expect(neo.queued_video?(video)).to be_falsey
+    end
+  end
 end
