@@ -26,7 +26,7 @@
                     = button_to "Play", nil, class: "btn btn-default"
                   %td= select_tag "queue_items[][rating]", options_for_video_reviews(current_user.video_review(queue_item.video)), include_blank: true
                   %td
-                    = link_to queue_item.category_name, '#'
+                    = link_to queue_item.category_name, queue_item.category
                   %td
                     = link_to queue_item, method: :delete do
                       %i.glyphicon.glyphicon-remove

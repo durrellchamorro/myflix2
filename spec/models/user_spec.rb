@@ -5,7 +5,7 @@ describe User do
   it { should validate_presence_of(:password_digest) }
   it { should validate_presence_of(:full_name) }
   it { should validate_uniqueness_of(:email) }
-  it { should have_many(:reviews) }
+  it { should have_many(:reviews).order("created_at DESC") }
   it { should have_many(:queue_items).order(:position) }
 
   describe '#video_review' do

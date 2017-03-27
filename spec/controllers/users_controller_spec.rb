@@ -40,10 +40,29 @@ describe UsersController do
       it "renders the new template" do
         expect(response).to render_template(:new)
       end
-      
+
       it "sets @user" do
         expect(assigns(:user)).to be_instance_of(User)
       end
+    end
+
+  end
+
+  describe "GET show" do
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :show, id: 1 }
+    end
+
+    it "sets @user" do
+      set_current_user
+      neo = create(:user)
+
+      get :show, id: neo.id
+
+      expect(assigns(:user)).to eq(neo)
+
+
+
     end
   end
 end
