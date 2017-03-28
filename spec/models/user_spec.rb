@@ -36,4 +36,25 @@ describe User do
       expect(neo.queued_video?(video)).to be_falsey
     end
   end
+
+  describe "#leading_relationships" do
+    let(:neo) { create(:user) }
+    let(:morpheus) { create(:user) }
+    let(:trinity) { create(:user) }
+
+    it "returns more than one relationship when the user is the leader of more than one relationship" do
+      relationship1 = create(:relationship, leader: neo, follower: morpheus)
+      relationship2 = create(:relationship, leader: neo, follower: trinity)
+
+      expect(neo.leading_relationships).to match_array([relationship1, relationship2])
+    end
+    it "returns and empty array when there are no relationships where the user is a leader" do
+      expect(neo.leading_relationships).to match_array([])
+    end
+    it "returns one relationship when there is one relationship where the user is the leader" do
+      relationship1 = create(:relationship, leader: neo, follower: morpheus)
+
+      expect(neo.leading_relationships).to match_array([relationship1])
+    end
+  end
 end

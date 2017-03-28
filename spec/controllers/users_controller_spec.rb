@@ -60,9 +60,6 @@ describe UsersController do
       get :show, id: neo.id
 
       expect(assigns(:user)).to eq(neo)
-
-
-
     end
   end
 end
