@@ -6,28 +6,28 @@ feature "User interacts with social networking features" do
   end
 
   scenario "user follows and unfollows another user" do
-    alex = create(:user)
-    bob = create(:user)
+    Neo = create(:user, full_name: "Neo")
+    bob = create(:user, full_name: "Morpheus")
     drama = create(:category)
     titans = create(:video, category_id: drama.id)
     create(:review, user: bob, video: titans)
 
-    sign_in(alex)
+    sign_in(Neo)
     click_video(titans)
-    click_on(bob.full_name)
+    click_on("Morpheus")
     click_on('Follow')
-    expect_to_see(bob.full_name)
+    expect_to_see("Morpheus")
 
-    click_on(bob.full_name)
+    click_on("Morpheus")
     expect_not_to_see('Follow')
 
     click_link('People')
     click_unfollow_button
-    expect_to_see(bob.full_name)
+    expect_not_to_see("Morpheus")
 
-    click_link('Videos')
+    click_on('Videos')
     click_video(titans)
-    click_link(bob.full_name)
+    click_on("Morpheus")
     expect_to_see('Follow')
   end
 end
