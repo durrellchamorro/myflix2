@@ -14,7 +14,7 @@ feature "user interacts with queue" do
     click_video(video)
     click_link '+ My Queue'
   end
-  
+
   scenario "user adds and reorders videos in the queue" do
     drama = create(:category)
     monk = create(:video, title: "Monk", category: drama)
@@ -29,7 +29,7 @@ feature "user interacts with queue" do
     expect_page_to_have_video_title(monk)
 
     visit video_path(monk)
-    expect_page_not_to_have_content("+ My Queue")
+    expect_not_to_see("+ My Queue")
 
     add_video_to_queue(jurassic)
     add_video_to_queue(titans)

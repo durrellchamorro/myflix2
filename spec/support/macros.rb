@@ -29,8 +29,8 @@ def expect_to_see(text)
   expect(page).to have_content(text)
 end
 
-def expect_not_to_see(text)
-  expect(page).to have_no_content(text)
+def expect_not_to_see(content)
+  expect(page).not_to have_content(content)
 end
 
 def click_video(video)
@@ -39,8 +39,4 @@ end
 
 def expect_page_to_have_video_title(video)
   expect(page).to have_content(video.title)
-end
-
-def expect_page_not_to_have_content(content)
-  expect(page).not_to have_content(content)
 end
