@@ -26,10 +26,11 @@ class User < ActiveRecord::Base
   end
 
   def can_follow?(leader_id)
-    relationship =
-    Relationship.find_by(follower: self, leader_id: leader_id)
+    (follows?(leader_id) || leader_is_self?(leader_id)) == false
+  end
 
-    (relationship || leader_is_self?(leader_id)) == false
+  def follows?(leader_id)
+    Relationship.find_by(follower: self, leader_id: leader_id)
   end
 
   private
