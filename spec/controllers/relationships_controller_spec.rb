@@ -58,12 +58,49 @@ describe RelationshipsController do
 
       expect(flash[:success]).to be_present
     end
+
     it "sets the danger flash if the relationship was not deleted" do
       relationship = create(:relationship, leader: neo, follower: morpheus)
 
       delete :destroy, id: relationship.id
 
       expect(flash[:danger]).to be_present
+    end
+  end
+
+  describe "POST create" do
+    let(:neo) { create(:user) }
+    let(:morpheus) { create(:user) }
+    before do
+      set_current_user(neo)
+    end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { post :create, leader_id: 1 }
+    end
+
+    it "creates a relationship that the current user follows the leader" do
+      post :create, leader_id: morpheus.id
+
+      expect(neo.following_relationships.first.leader).to eq(morpheus)
+    end
+
+    it "redirects to the people page" do
+      post :create, leader_id: morpheus.id
+      expect(response).to redirect_to people_path
+    end
+
+    it "does not create a relationship if the current user already follows the leader" do
+      create(:relationship, leader: morpheus, follower: neo)
+      post :create, leader_id: morpheus.id
+
+      expect(Relationship.count).to eq(1)
+    end
+
+    it "does not allow user to follow himself" do
+      post :create, leader_id: neo.id
+
+      expect(Relationship.count).to eq(0)
     end
   end
 end

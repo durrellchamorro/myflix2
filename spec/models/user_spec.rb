@@ -48,13 +48,34 @@ describe User do
 
       expect(neo.leading_relationships).to match_array([relationship1, relationship2])
     end
+
     it "returns and empty array when there are no relationships where the user is a leader" do
       expect(neo.leading_relationships).to match_array([])
     end
+
     it "returns one relationship when there is one relationship where the user is the leader" do
       relationship1 = create(:relationship, leader: neo, follower: morpheus)
 
       expect(neo.leading_relationships).to match_array([relationship1])
+    end
+  end
+
+  describe "#can_follow?" do
+    let(:neo) { create(:user) }
+    let(:morpheus) { create(:user) }
+
+    it "returns false if leader_id is the user id" do
+      expect(neo.can_follow?(neo.id)).to be_falsey
+    end
+
+    it "returns false if the user already following the leader" do
+      create(:relationship, leader: neo, follower: morpheus)
+
+      expect(morpheus.can_follow?(neo.id)).to be_falsey
+    end
+
+    it "returns true if the leader_id is not the same as the user id and the user is not folloing the leader" do
+      expect(neo.can_follow?(morpheus.id)).to be_truthy
     end
   end
 end

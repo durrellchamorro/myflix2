@@ -14,6 +14,13 @@ class RelationshipsController < ApplicationController
     else
       flash[:danger] = "That didn't work"
     end
+
+    redirect_to people_path
+  end
+
+  def create
+    Relationship.create(leader_id: params[:leader_id], follower: current_user) if current_user.can_follow?(params[:leader_id])
+
     redirect_to people_path
   end
 end

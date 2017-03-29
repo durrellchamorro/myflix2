@@ -24,4 +24,17 @@ class User < ActiveRecord::Base
   def leading_relationships
     Relationship.where(leader_id: id)
   end
+
+  def can_follow?(leader_id)
+    relationship =
+    Relationship.find_by(follower: self, leader_id: leader_id)
+
+    (relationship || leader_is_self?(leader_id)) == false
+  end
+
+  private
+
+  def leader_is_self?(leader_id)
+    leader_id.to_i == id
+  end
 end

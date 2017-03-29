@@ -33,3 +33,7 @@ Video.create(title: '24', description: 'Jack Bauer, Director of Field Ops for th
              small_cover_url: '/tmp/24_show.jpg', large_cover_url: "http://dummyimage.com/665x375/000000/00a2ff", category_id: 2)
 Category.create([{ name: 'TV Comedies' }, { name: 'TV Dramas' },
                  { name: 'Reality TV' }, { name: 'Cartoon' }, { name: 'Drama' }])
+
+neo = create(:user)
+morpheus = create(:user)
+relationship = create(:relationship, leader: morpheus, follower: neo)
