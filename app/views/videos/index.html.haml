@@ -6,5 +6,5 @@
       - category.recent_videos.each do |video|
         .video.col-xs-6.col-sm-3.col-md-2
           .custom_thumb
-            = link_to(video_path(video.id)) do
+            = link_to(video_path(video.slug)) do
               = image_tag(video.small_cover_url)

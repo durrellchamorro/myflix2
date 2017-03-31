@@ -10,10 +10,12 @@ describe UsersController do
   end
 
   describe "POST create" do
-    context "User created successfully" do
+    context "User created successfully with valid input" do
       before do
-        post :create, user: attributes_for(:user)
+        post :create, user: attributes_for(:user, full_name: "Thomas Anderson", email: "neo@matrix.io")
       end
+
+      after { ActionMailer::Base.deliveries.clear }
 
       it "creates a user when all the fields are correct" do
         expect(User.all.size).to eq(1)
@@ -26,12 +28,22 @@ describe UsersController do
       it "sets the success flash" do
         expect(flash[:success]).to be_present
       end
+
+      it "sends out email to the user" do
+        expect(ActionMailer::Base.deliveries.last.to).to eq(["neo@matrix.io"])
+      end
+
+      it "sends out email containing the users name" do
+        expect(ActionMailer::Base.deliveries.last.body).to include("Thomas Anderson")
+      end
     end
 
-    context "User not created" do
+    context "User not created with invalid input" do
       before do
         post :create, user: { email: "" }
       end
+
+      after { ActionMailer::Base.deliveries.clear }
 
       it "does not create a user when not enough information given" do
         expect(User.count).to eq(0)
@@ -44,8 +56,11 @@ describe UsersController do
       it "sets @user" do
         expect(assigns(:user)).to be_instance_of(User)
       end
-    end
 
+      it "does not send out an email" do
+        expect(ActionMailer::Base.deliveries).to be_empty
+      end
+    end
   end
 
   describe "GET show" do

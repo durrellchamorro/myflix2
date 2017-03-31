@@ -2,11 +2,11 @@ require 'spec_helper'
 
 feature "user interacts with queue" do
   def set_video_position_in_queue(video, position)
-    find("input[data-video-id='#{video.id}']").set(position)
+    find("input[data-video-slug='#{video.slug}']").set(position)
   end
 
   def expect_video_in_correct_position(video, position)
-    expect(find("input[data-video-id='#{video.id}']").value).to eq(position.to_s)
+    expect(find("input[data-video-slug='#{video.slug}']").value).to eq(position.to_s)
   end
 
   def add_video_to_queue(video)

@@ -35,7 +35,7 @@ class QueueItemsController < ApplicationController
   private
 
   def queue_video
-    QueueItem.create(video_id: params["video_id"], user: current_user,
+    QueueItem.create(video: video, user: current_user,
                      position: new_queue_item_position)
   end
 
@@ -44,7 +44,11 @@ class QueueItemsController < ApplicationController
   end
 
   def video_already_in_queue?
-    QueueItem.where(user: current_user, video_id: params["video_id"]).present?
+    QueueItem.where(user: current_user, video: video).present?
+  end
+
+  def video
+    @video ||= Video.friendly.find(params[:video_slug])
   end
 
   def update_queue_items

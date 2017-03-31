@@ -34,7 +34,7 @@ def expect_not_to_see(content)
 end
 
 def click_video(video)
-  find("a[href='/videos/#{video.id}']").click
+  find("a[href='/videos/#{video.slug}']").click
 end
 
 def expect_page_to_have_video_title(video)

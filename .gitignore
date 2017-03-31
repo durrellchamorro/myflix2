@@ -16,3 +16,6 @@
 
 # Ignore the database.yml file
   config/database.yml
+
+# Environment files that may contain sensitive data
+.env

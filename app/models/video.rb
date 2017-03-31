@@ -1,4 +1,7 @@
 class Video < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
   belongs_to :category
   validates_presence_of :title, :description
   has_many :reviews

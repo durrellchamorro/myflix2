@@ -12,14 +12,17 @@ gem 'rails', '4.1.1'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'bcrypt'
+gem 'friendly_id', '~> 5.2'
 
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'thin'
+  gem 'mailcatcher', '~> 0.6.5'
 end
 
 group :development, :test do
+  gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now'
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'

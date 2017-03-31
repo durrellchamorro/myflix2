@@ -19,48 +19,57 @@ describe QueueItemsController do
 
   describe "POST create" do
     context "with authenticated user" do
-      let(:video) { create(:video) }
+      let(:star_wars) { create(:video) }
 
       before do
         set_current_user
-        post :create, video_id: video.id
       end
 
       it "redirects to the my queue page" do
+        post :create, video_slug: star_wars.slug
+
         expect(response).to redirect_to(my_queue_path)
       end
 
       it "creates a queue item" do
+        post :create, video_slug: star_wars.slug
+
         expect(QueueItem.count).to eq(1)
       end
 
       it "creates the queue item that is associated with the video" do
-        expect(QueueItem.first.video).to eq(video)
+        post :create, video_slug: star_wars.slug
+
+        expect(QueueItem.first.video).to eq(star_wars)
       end
 
       it "creates the queue item that is associated with the signed in user" do
+        post :create, video_slug: star_wars.slug
+
         expect(QueueItem.first.user.id).to eq(session[:user_id])
       end
 
       it "puts the video as the last one in the queue" do
+        create(:queue_item, video: star_wars, user: current_user, position: 1)
+        star_wars_queue_item = star_wars.queue_items.first
         matrix = create(:video)
-        post :create, video_id: matrix.id
-        matrix_queue_item = QueueItem.where(user: current_user, video: matrix).first
-        video_queue_item = QueueItem.where(user: current_user, video: video).first
+        
+        post :create, video_slug: matrix.slug
+        matrix_queue_item = matrix.queue_items.first
 
         expect(matrix_queue_item.position).to eq(2)
-        expect(video_queue_item.position).to eq(1)
+        expect(star_wars_queue_item.position).to eq(1)
       end
 
       it "does not add the video to the queue if the video is already in the queue" do
-        post :create, video_id: video.id
+        post :create, video_slug: star_wars.slug
 
         expect(current_user.queue_items.count).to eq(1)
       end
     end
 
     it_behaves_like "require_sign_in" do
-      let(:action) { post :create, video_id: create(:video).id }
+      let(:action) { post :create, video_slug: create(:video).slug }
     end
   end
 
