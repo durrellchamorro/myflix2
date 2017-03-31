@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history]
+  friendly_id :title, use: :history
 
   belongs_to :category
   validates_presence_of :title, :description
@@ -18,6 +18,10 @@ class Video < ActiveRecord::Base
   end
 
   private
+
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 
   def accepted_reviews
     reviews.reject { |review| review.rating.nil? || review.rating == 0 }
