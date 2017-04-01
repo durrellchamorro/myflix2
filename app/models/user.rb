@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     Relationship.find_by(follower: self, leader_id: leader_id)
   end
 
+  def generate_token
+    update_column(:token, SecureRandom.urlsafe_base64)
+  end
+
   private
 
   def leader_is_self?(leader_id)
