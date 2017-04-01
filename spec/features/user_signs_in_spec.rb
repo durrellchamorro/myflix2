@@ -5,7 +5,7 @@ feature "User signs in" do
 
   scenario "the user signs in successfully" do
     sign_in(user)
-    expect_to_see("Welcome #{user.full_name}")
+    expect_to_see("Welcome, #{user.full_name}")
   end
 
   scenario "user signs in with wrong password" do
