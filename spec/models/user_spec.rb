@@ -78,4 +78,28 @@ describe User do
       expect(neo.can_follow?(morpheus.id)).to be_truthy
     end
   end
+
+  describe "#follow" do
+    let(:morpheus) { create(:user) }
+    let(:neo) { create(:user) }
+
+    it "makes the user follow the leader" do
+      morpheus.follow(neo)
+
+      expect(morpheus.follows?(neo)).to be_truthy
+    end
+
+    it "doesn't allow the user to follow himself" do
+      neo.follow(neo)
+
+      expect(neo.follows?(neo)).to be_falsey
+    end
+
+    it "doesn't make the user follow the leader if the user is already following the leader" do
+      create(:relationship, leader: neo, follower: morpheus)
+      morpheus.follow(neo)
+
+      expect(Relationship.count).to eq(1)
+    end
+  end
 end

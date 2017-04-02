@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     update_column(:token, SecureRandom.urlsafe_base64)
   end
 
+  def follow(leader)
+    Relationship.create(leader_id: leader.id, follower: self) if self.can_follow?(leader.id)
+  end
+
   private
 
   def leader_is_self?(leader_id)
