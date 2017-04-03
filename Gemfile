@@ -13,6 +13,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'bcrypt'
 gem 'friendly_id', '~> 5.2'
+gem 'puma', '~> 3.8', '>= 3.8.2'
 
 group :development do
   gem "better_errors"
