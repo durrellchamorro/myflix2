@@ -14,6 +14,8 @@ gem 'uglifier'
 gem 'bcrypt'
 gem 'friendly_id', '~> 5.2'
 gem 'puma', '~> 3.8', '>= 3.8.2'
+gem 'sidekiq', '~> 4.2', '>= 4.2.10'
+gem 'redis', '~> 3.3', '>= 3.3.3'
 
 group :development do
   gem "better_errors"

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash[:success] = "You signed up successfully."
 
       inviter_and_invitee_follow_eachother
-      AppMailer.send_welcome_email(@user).deliver
+      AppMailer.delay.send_welcome_email(@user)
 
       redirect_to login_path
     else
