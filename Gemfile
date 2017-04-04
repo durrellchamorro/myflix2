@@ -44,4 +44,5 @@ end
 
 group :production, :staging do
   gem 'rails_12factor'
+  gem 'sentry-raven', '~> 2.4'
 end
