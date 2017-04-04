@@ -42,6 +42,6 @@ group :test do
   gem 'capybara-email', '~> 2.5'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end

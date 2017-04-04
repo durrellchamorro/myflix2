@@ -23,9 +23,12 @@ Myflix::Application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'durrellsnetflix.herokuapp.com',
+    :domain         => 'durrellsnetflixstaging.herokuapp.com',
     :authentication => :plain
   }
   ActionMailer::Base.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'durrellsnetflix.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'durrellsnetflixstaging.herokuapp.com' }
+
+  uri = URI.parse(Rails.application.secrets.redistogo_url)
+  REDIS = Redis.new(:url => uri)
 end
