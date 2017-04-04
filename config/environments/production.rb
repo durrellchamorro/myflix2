@@ -28,4 +28,7 @@ Myflix::Application.configure do
   }
   ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'durrellsnetflix.herokuapp.com' }
+
+  uri = URI.parse(Rails.application.secrets.redistogo_url)
+  REDIS = Redis.new(:url => uri)
 end
