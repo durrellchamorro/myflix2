@@ -1,0 +1,21 @@
+machine:
+  ruby:
+    version: 2.1.2
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app durrellsnetflix
+      - heroku pg:backups capture --app durrellsnetflix
+      - git fetch --unshallow
+      - git push git@heroku.com:durrellsnetflix.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app durrellsnetflix
+      - heroku maintenance:off --app durrellsnetflix
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app durrellsnetflixstaging
+      - git fetch --unshallow
+      - git push git@heroku.com:durrellsnetflixstaging.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app durrellsnetflixstaging
+      - heroku maintenance:off --app durrellsnetflixstaging
