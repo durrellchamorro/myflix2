@@ -2,6 +2,11 @@ def set_current_user(user = nil)
   session[:user_id] = (user || create(:user)).id
 end
 
+def set_current_admin(admin = nil)
+  admin.update(admin: true)if admin
+  session[:user_id] = (admin || create(:user, admin: true)).id
+end
+
 def current_user
   User.find(session[:user_id])
 end

@@ -1,3 +1,5 @@
+@import "variables"
+
 body
   margin: 20px
   background-color: #E1E1E1
@@ -34,3 +36,15 @@ fieldset.actions
   right: 0
   margin: auto
   box-sizing: border-box
+
+@media (min-width: 1px)
+  .text-tab
+    text-align: center
+
+@media (max-width: $screen-sm)
+  .text-tab
+    font-size: 12px
+
+@media (max-width: $screen-xs)
+  .text-tab
+    font-size: 8px
