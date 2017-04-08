@@ -18,6 +18,9 @@ Myflix::Application.routes.draw do
   get 'password_reset/:token', to: 'password_resets#show', as: 'password_reset'
   get 'expired_token', to: 'pages#expired_token', as: 'expired_token'
 
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
 
   resources :videos do
     collection do

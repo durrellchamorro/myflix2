@@ -1,3 +1,5 @@
+@import "variables"
+
 section#top-header
   background: #B9090B
   margin: 0
@@ -8,37 +10,56 @@ section#top-header
     color: white
   h1
     font-size: 20px
-  > ul
-    padding-top: 12px
-    li
-      float: left
-      margin-right: 30px
-      text-transform: uppercase
-      &:first-of-type
-        margin-left: -15px
-  form
-    padding-top: 6px
-    margin: 0
-    input[type="text"]
-      width: 320px
-      float: left
-    input[type="submit"]
-      margin-left: 10px
-      float: left
+
+
+#user_links
+  ul a
+    color: black
+
+#user_links
+  font-size: 13px
+  text-align: center
+
+ul.header-links
+  text-align: center
+  font-size: 12px
+  text-transform: uppercase
+  margin-bottom: 10px
+  li
+    display: inline-block
+    margin-right: 8px
+    margin-left: 8px
+
+@media (max-width: $screen-md)
+  ul.header-links
+    font-size: 14px
+
+  section#top-header
+    h1
+      text-align: center
+      margin-bottom: 10px
   #user_links
-    padding-top: 8px
-    > ul
-      > li
-        float: left
-        width: 200px
-        a
-          margin: 0 10px
-          b
-            border-top-color: white
-        > ul
-          > li
-            &.open &:hover
-              background: red
-            a
-              color: black
-              margin: 0
+    padding-top: 10px
+
+#custom-search-input
+  padding: 3px
+  border: solid 1px #E4E4E4
+  border-radius: 6px
+  background-color: #fff
+  div.input-group
+    width: 100%
+  input
+    border: 0
+    box-shadow: none
+    width: 80%
+  button
+    margin: 0 0 0 0
+    background: none
+    box-shadow: none
+    border: 0
+    color: #666666
+    padding: 10px 10px 10px 10px
+    border-left: solid 1px #ccc
+    width: 100%
+  .glyphicon-search
+    font-size: 23px
