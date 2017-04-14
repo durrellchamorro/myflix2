@@ -1,5 +1,4 @@
 require "shrine/storage/s3"
-require "shrine/storage/memory"
 
 s3_options = {
   access_key_id:     Rails.application.secrets.aws_access_key_id,
@@ -9,6 +8,8 @@ s3_options = {
 }
 
 if Rails.env.test?
+  require "shrine/storage/memory"
+  
   Shrine.storages = {
     cache: Shrine::Storage::Memory.new,
     store: Shrine::Storage::Memory.new,
