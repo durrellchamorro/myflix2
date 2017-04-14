@@ -1,0 +1,25 @@
+%section.admin_add_video
+  .container
+    .row
+      .col-xs-12
+        %ul.nav.nav-tabs.text-tab
+          %li.col-xs-6.col-sm-3
+            %a(href="#") Recent Payments
+          %li.active.col-xs-6.col-sm-3
+            %a(href="") Add a New Video
+    %br
+    .row
+      .col-xs-12
+        = bootstrap_form_for [:admin, video], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-6", data: "upload-form" do |f|
+          %fieldset
+            .form-group
+              = f.text_field :title
+            .form-group
+              = f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "col-sm-2"
+            .form-group
+              = f.text_area :description, rows: 8
+            .form-group
+              -# = f.hidden_field :image
+              = f.file_field :image, name: "photo[image]"
+            .form-group
+              = f.submit value: "Add Video", class: "btn btn-default col-sm-offset-3 submit_button"

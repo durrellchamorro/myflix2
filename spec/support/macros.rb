@@ -3,7 +3,7 @@ def set_current_user(user = nil)
 end
 
 def set_current_admin(admin = nil)
-  admin.update(admin: true)if admin
+  admin.update(admin: true) if admin
   session[:user_id] = (admin || create(:user, admin: true)).id
 end
 

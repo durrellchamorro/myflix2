@@ -51,5 +51,34 @@ describe VideosController do
         expect(response).to redirect_to(:login)
       end
     end
+
+    describe "GET index" do
+      context "with authenticated user" do
+        before do
+          set_current_user
+        end
+
+        it "sets @categories" do
+          get :index
+          expect(assigns(:categories)).to be_a(Array)
+        end
+
+        it "sets @categories equal only to categories with videos associated" do
+          action = create(:category)
+          create(:category)
+          create(:video, category: action)
+
+          get :index
+
+          expect(assigns(:categories)).to match_array([action])
+        end
+      end
+
+      context "with unauthenticated user" do
+        it_behaves_like "require_sign_in" do
+          let(:action) { get :index }
+        end
+      end
+    end
   end
 end

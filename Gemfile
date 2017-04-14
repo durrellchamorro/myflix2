@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'activerecord-postgresql-citext'
 gem 'rails', '4.1.1'
+gem 'turbolinks', '~> 5.0', '>= 5.0.1'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'bcrypt'
@@ -16,6 +17,10 @@ gem 'friendly_id', '~> 5.2'
 gem 'puma', '~> 3.8', '>= 3.8.2'
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'redis', '~> 3.3', '>= 3.3.3'
+gem 'shrine', '~> 2.6'
+gem 'aws-sdk', '~> 2.9', '>= 2.9.7'
+gem 'roda', '~> 2.24'
+gem 'jquery-fileupload-rails', '~> 0.4.7'
 
 group :development do
   gem "better_errors"
@@ -28,7 +33,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now'
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.3'
 end
@@ -40,6 +45,7 @@ group :test do
   gem 'capybara', '~> 2.13'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'capybara-email', '~> 2.5'
+  gem 'shrine-memory', '~> 0.2.2'
 end
 
 group :production, :staging do

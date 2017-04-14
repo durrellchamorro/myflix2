@@ -6,25 +6,106 @@ describe Admin::VideosController do
       let(:action) { get :new }
     end
 
+    it_behaves_like "require_admin" do
+      let(:action) { post :create }
+    end
+
     it "sets the @video to a new video" do
       set_current_admin(create(:user))
       get :new
 
       expect(assigns(:video)).to be_a_new(Video)
     end
+  end
 
-    it "redirects the regular user to the home path" do
-      set_current_user
-      get :new
-
-      expect(response).to redirect_to home_path
+  describe "POST create" do
+    it_behaves_like "require_sign_in" do
+      let(:action) { post :create }
     end
 
-    it "sets the flash error message for the regular user" do
-      set_current_user
-      get :new
+    it_behaves_like "require_admin" do
+      let(:action) { post :create }
+    end
 
-      expect(flash[:danger]).to be_present 
+    context "with valid input" do
+      before do
+        set_current_admin
+        post :create, video: attributes_for(:video).merge(category_id: 1), photo: attributes_for(:photo), format: :js
+      end
+
+      it "renders the new_with_success_flash template" do
+        expect(response).to render_template :new_with_success_flash
+      end
+
+      it "creates a video" do
+        expect(Video.count).to eq(1)
+      end
+
+      it "sets @flash" do
+        expect(assigns(:flash_message)).to be_a(String)
+      end
+
+      it "sets @video to a new instance of Video" do
+        expect(assigns(:video)).to be_a_new(Video)
+      end
+
+      it "creates a Photo" do
+        expect(Photo.count).to eq(1)
+      end
+    end
+
+    context "with a photo but invalid input" do
+      before do
+        set_current_admin
+        post :create, video: { title: "", description: "", category_id: "" }, photo: attributes_for(:photo), format: :js
+      end
+
+      it "does not create a video" do
+        expect(Video.count).to be(0)
+      end
+
+      it "does not create a photo" do
+        expect(Photo.count).to eq(0)
+      end
+
+      it "renders the :new template" do
+        expect(response).to render_template :new_with_danger_flash
+      end
+
+      it "sets @video" do
+        expect(assigns(:video)).to be_a_new(Video)
+      end
+
+      it "sets the flass danger message" do
+        expect(assigns(:flash_message)).to be_a(String)
+      end
+    end
+
+    context "with valid input but no photo" do
+      before do
+        set_current_admin
+        post :create, video: attributes_for(:video).merge(category_id: 1), format: :js
+      end
+
+      it "does not create a video" do
+        expect(Video.count).to be(0)
+      end
+
+      it "does not create a photo" do
+        expect(Photo.count).to eq(0)
+      end
+
+      it "renders the :new template" do
+        expect(response).to render_template :new_with_danger_flash
+      end
+
+      it "sets @video" do
+        expect(assigns(:video)).to be_a_new(Video)
+      end
+
+      it "sets the flass danger message" do
+        expect(assigns(:flash_message)).to be_a(String)
+      end
     end
   end
 end
