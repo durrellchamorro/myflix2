@@ -24,7 +24,11 @@ class Admin::VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:title, :description, :category_id)
+    params.require(:video).permit(:title, :description, :category_id, :token)
+  end
+
+  def photo_params
+    params.require(:photo).permit(:image)
   end
 
   def create_photo(video)
@@ -42,9 +46,5 @@ class Admin::VideosController < ApplicationController
       fail ActiveRecord::Rollback unless video.save
       fail ActiveRecord::Rollback unless create_photo(video)
     end
-  end
-
-  def photo_params
-    params.require(:photo).permit(:image)
   end
 end

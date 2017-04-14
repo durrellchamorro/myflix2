@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   friendly_id :title, use: :history
 
   belongs_to :category
-  validates_presence_of :title, :description
+  validates_presence_of :title, :description, :token
   has_many :reviews
   has_many :queue_items
   has_many :photos, dependent: :destroy

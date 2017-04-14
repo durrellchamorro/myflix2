@@ -30,7 +30,7 @@ describe Admin::VideosController do
     context "with valid input" do
       before do
         set_current_admin
-        post :create, video: attributes_for(:video).merge(category_id: 1), photo: attributes_for(:photo), format: :js
+        post :create, video: attributes_for(:video), photo: attributes_for(:photo), format: :js
       end
 
       it "renders the new_with_success_flash template" do
@@ -88,7 +88,7 @@ describe Admin::VideosController do
       end
 
       it "does not create a video" do
-        expect(Video.count).to be(0)
+        expect(Video.count).to eq(0)
       end
 
       it "does not create a photo" do
