@@ -33,7 +33,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now'
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.3'
 end
