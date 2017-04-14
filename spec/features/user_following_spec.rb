@@ -6,13 +6,14 @@ feature "User interacts with social networking features" do
   end
 
   scenario "user follows and unfollows another user" do
-    Neo = create(:user, full_name: "Neo")
+    neo = create(:user, full_name: "Neo")
     bob = create(:user, full_name: "Morpheus")
     drama = create(:category)
     titans = create(:video, category_id: drama.id)
+    create(:photo, video: titans)
     create(:review, user: bob, video: titans)
 
-    sign_in(Neo)
+    sign_in(neo)
     click_video(titans)
     click_on("Morpheus")
     click_on('Follow')

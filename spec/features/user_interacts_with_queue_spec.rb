@@ -18,8 +18,11 @@ feature "user interacts with queue" do
   scenario "user adds and reorders videos in the queue" do
     drama = create(:category)
     monk = create(:video, title: "Monk", category: drama)
+    create(:photo, video: monk)
     jurassic = create(:video, title: "Jurassic", category: drama)
+    create(:photo, video: jurassic)
     titans = create(:video, title: "Titans", category: drama)
+    create(:photo, video: titans)
 
     sign_in
     click_video(monk)

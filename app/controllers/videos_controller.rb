@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :require_user
 
   def index
-    @categories = Category.all
+    @categories = Category.all.reject { |category| category.videos.empty? }
   end
 
   def show
