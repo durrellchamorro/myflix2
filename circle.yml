@@ -5,7 +5,6 @@ deployment:
   production:
     branch: master
     commands:
-      - gem install bundler
       - heroku maintenance:on --app durrellsnetflix
       - heroku pg:backups capture --app durrellsnetflix
       - git fetch --unshallow
@@ -15,9 +14,11 @@ deployment:
   staging:
     branch: staging
     commands:
-      - gem install bundler 
       - heroku maintenance:on --app durrellsnetflixstaging
       - git fetch --unshallow
       - git push git@heroku.com:durrellsnetflixstaging.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app durrellsnetflixstaging
       - heroku maintenance:off --app durrellsnetflixstaging
+dependencies:
+  pre:
+    - gem install bundler
