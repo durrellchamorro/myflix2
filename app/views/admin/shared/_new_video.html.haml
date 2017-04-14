@@ -1,3 +1,6 @@
+- content_for :for_head do
+  %meta(name="turbolinks-cache-control" content="no-cache")
+
 %section.admin_add_video
   .container
     .row
@@ -16,6 +19,8 @@
               = f.text_field :title
             .form-group
               = f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "col-sm-2"
+            .form-group
+              = f.text_field :token, label: "Youtube Token"
             .form-group
               = f.text_area :description, rows: 8
             .form-group

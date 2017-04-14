@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VideosController do
   describe "GET show" do
     context "with authenticated users" do
-      let(:video) { create(:comedy_video) }
+      let(:video) { create(:video) }
 
       before do
         set_current_user
@@ -24,15 +24,15 @@ describe VideosController do
     end
 
     it_behaves_like "require_sign_in" do
-      video = FactoryGirl.create(:comedy_video)
+      video = FactoryGirl.create(:video)
       let(:action) { get :show, id: video.id }
     end
 
 
     describe "POST search" do
       context "with authenticated user" do
-        let(:video1) { create(:comedy_video, title: "Family Guy") }
-        let(:video2) { create(:comedy_video, title: "Star Trek") }
+        let(:video1) { create(:video, title: "Family Guy") }
+        let(:video2) { create(:video, title: "Star Trek") }
 
         before do
           set_current_user
