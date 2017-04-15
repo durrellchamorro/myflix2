@@ -10,8 +10,7 @@
   %body
     %header
       = render 'shared/header'
-    %section.content.clearfix
-      = render 'shared/messages'
+    %section.content.clearfix.unobtrusive-flash-container
       = yield
     %footer
       &copy 2017 MyFLIX
