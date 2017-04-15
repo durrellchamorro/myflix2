@@ -1,4 +1,4 @@
-%section.admin_add_video
+%section.admin_add_video.unobtrusive-flash-container
   .container
     .row
       .col-xs-12
@@ -16,6 +16,8 @@
               = f.text_field :title
             .form-group
               = f.select :category_id, options_for_select(Category.all.map { |category| [category.name, category.id] }), class: "col-sm-2"
+            .form-group
+              = f.text_field :token, label: "Youtube Token"
             .form-group
               = f.text_area :description, rows: 8
             .form-group

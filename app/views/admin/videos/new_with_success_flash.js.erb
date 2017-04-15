@@ -1,2 +1,0 @@
-$("section.admin_add_video").html("<div class='alert alert-dismissible alert-success'><button aria-hidden='true' class='close' data-dismiss='alert' type='button'>×</button><div id='flash_notice'><%=escape_javascript(@flash_message)%></div></div>");
-$("section.admin_add_video").append("<%= escape_javascript(render partial: 'admin/shared/new_video', locals: { video: @video }) %>");

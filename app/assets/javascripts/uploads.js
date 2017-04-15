@@ -2,14 +2,15 @@
 
 $(document).on("turbolinks:load", function() {
   var bind_all_event_listeners = function() {
+    UnobtrusiveFlash.flashOptions['timeout'] = 8000; // milliseconds
     bind_file_upload();
     bind_submit_button();
   };
 
   var bind_submit_button = function(image, params_key) {
-    $($(".submit_button")).on("click", function(event) {
+    $($(".submit_button")).off().on("click", function(event) {
       event.preventDefault();
-      
+
       var $form = $("form[data='upload-form']");
       var form_data = new FormData($form[0]);
 
@@ -30,7 +31,7 @@ $(document).on("turbolinks:load", function() {
   var bind_file_upload = function() {
     $("[type=file]").fileupload({
       add: function(e, data) {
-        data.progressBar = $("<div class='progress' style='width: 300px'><div class='progress-bar'></div></div>").insertAfter("form[data='upload-form']");
+        data.progressBar = $("<div class='progress progress-striped active' style='width: 200px'><div class='progress-bar progress-bar-danger' role='progressbar'></div></div>").insertAfter("form[data='upload-form']");
         var options = {
           extension: data.files[0].name.match(/(\.\w+)?$/)[0], // set extension
           _: Date.now(),                                       // prevent caching
