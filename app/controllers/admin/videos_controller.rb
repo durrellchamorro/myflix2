@@ -11,13 +11,13 @@ class Admin::VideosController < ApplicationController
     create_video(video)
 
     if video.persisted?
-      @flash_message = "#{video.title} was successfully created."
+      flash[:success] = "#{video.title} was successfully created."
       @video = Video.new
-      render :new_with_success_flash
+      render :new
     else
-      @flash_message = "That didn't work. No input can be blank and a picutre must be chosen."
+      flash[:danger] = "That didn't work. No input can be blank and a picutre must be chosen."
       @video = video
-      render :new_with_danger_flash
+      render :new
     end
   end
 

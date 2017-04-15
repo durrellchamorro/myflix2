@@ -21,6 +21,7 @@ gem 'shrine', '~> 2.6'
 gem 'aws-sdk', '~> 2.9', '>= 2.9.7'
 gem 'roda', '~> 2.24'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
+gem 'unobtrusive_flash', '~> 3.3', '>= 3.3.1'
 
 group :development do
   gem "better_errors"
@@ -45,6 +46,7 @@ group :test do
   gem 'capybara', '~> 2.13'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'capybara-email', '~> 2.5'
+  gem 'selenium-webdriver', '~> 3.3'
   gem 'shrine-memory', '~> 0.2.2'
 end
 
