@@ -33,16 +33,16 @@ describe Admin::VideosController do
         post :create, video: attributes_for(:video), photo: attributes_for(:photo), format: :js
       end
 
-      it "renders the new_with_success_flash template" do
-        expect(response).to render_template :new_with_success_flash
+      it "renders the new template" do
+        expect(response).to render_template :new
       end
 
       it "creates a video" do
         expect(Video.count).to eq(1)
       end
 
-      it "sets @flash" do
-        expect(assigns(:flash_message)).to be_a(String)
+      it "sets the success flash" do
+        expect(flash[:success]).to be_present
       end
 
       it "sets @video to a new instance of Video" do
@@ -69,7 +69,7 @@ describe Admin::VideosController do
       end
 
       it "renders the :new template" do
-        expect(response).to render_template :new_with_danger_flash
+        expect(response).to render_template :new
       end
 
       it "sets @video" do
@@ -77,7 +77,7 @@ describe Admin::VideosController do
       end
 
       it "sets the flass danger message" do
-        expect(assigns(:flash_message)).to be_a(String)
+        expect(flash[:danger]).to be_present
       end
     end
 
@@ -96,7 +96,7 @@ describe Admin::VideosController do
       end
 
       it "renders the :new template" do
-        expect(response).to render_template :new_with_danger_flash
+        expect(response).to render_template :new
       end
 
       it "sets @video" do
@@ -104,7 +104,7 @@ describe Admin::VideosController do
       end
 
       it "sets the flass danger message" do
-        expect(assigns(:flash_message)).to be_a(String)
+        expect(flash[:danger]).to be_present
       end
     end
   end

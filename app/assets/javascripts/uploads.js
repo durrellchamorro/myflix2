@@ -2,12 +2,13 @@
 
 $(document).on("turbolinks:load", function() {
   var bind_all_event_listeners = function() {
+    UnobtrusiveFlash.flashOptions['timeout'] = 8000; // milliseconds
     bind_file_upload();
     bind_submit_button();
   };
 
   var bind_submit_button = function(image, params_key) {
-    $($(".submit_button")).on("click", function(event) {
+    $($(".submit_button")).off().on("click", function(event) {
       event.preventDefault();
 
       var $form = $("form[data='upload-form']");

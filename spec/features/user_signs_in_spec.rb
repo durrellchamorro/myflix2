@@ -8,7 +8,7 @@ feature "User signs in" do
     expect_to_see("Welcome, #{user.full_name}")
   end
 
-  scenario "user signs in with wrong password" do
+  scenario "user signs in with wrong password", js: true do
     visit login_path
     fill_in('Email Address', with: user.email)
     fill_in("Password", with: "wrong password")
