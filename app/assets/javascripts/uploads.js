@@ -33,7 +33,7 @@ $(document).on("turbolinks:load", function() {
       var src1 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
       $(".video .custom_thumb").append("<img src='" + src1 + "'>");
     } else if (location.hostname === "durrellsnetflixstaging.herokuapp.com") {
-      var src2 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache" + image.id;
+      var src2 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
       $(".video .custom_thumb").append("<img src='" + src2 + "'>");
     } else {
       var src3 = "https://durrells-myflix-development.s3-us-west-1.amazonaws.com/cache/" + image.id;
