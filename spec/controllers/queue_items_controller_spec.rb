@@ -53,7 +53,7 @@ describe QueueItemsController do
         create(:queue_item, video: star_wars, user: current_user, position: 1)
         star_wars_queue_item = star_wars.queue_items.first
         matrix = create(:video)
-        
+
         post :create, video_slug: matrix.slug
         matrix_queue_item = matrix.queue_items.first
 
@@ -186,6 +186,23 @@ describe QueueItemsController do
 
         expect(queue_item1.reload.position).to eq(3)
         expect(queue_item2.reload.position).to eq(4)
+      end
+    end
+
+    context "with no items in the queue" do
+      let(:neo) { create(:user) }
+
+      before do
+        set_current_user(neo)
+        post :update_queue
+      end
+
+      it "redirects to the my queue page" do
+        expect(response).to redirect_to my_queue_path
+      end
+
+      it "sets the flash error message" do
+        expect(flash[:danger]).to be_present
       end
     end
   end

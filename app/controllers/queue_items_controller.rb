@@ -25,6 +25,8 @@ class QueueItemsController < ApplicationController
     begin
       update_queue_items
       current_user.normalize_queue_item_positions
+    rescue NoMethodError
+      flash[:danger] = "You must have items in your queue to update it."
     rescue ActiveRecord::RecordInvalid
       flash[:danger] = "Invalid position numbers."
     end
@@ -55,7 +57,7 @@ class QueueItemsController < ApplicationController
     ActiveRecord::Base.transaction do
       params["queue_items"].each do |data|
         queue_item = QueueItem.find(data[:id])
-        queue_item.update!(position: data[:position], rating: data["rating"]) if queue_item && queue_item.user == current_user
+        queue_item.update!(position: data[:position], rating: data["rating"]) if queue_item.try(:user) == current_user
       end
     end
   end
