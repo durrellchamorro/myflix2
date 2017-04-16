@@ -1,12 +1,56 @@
+@import "variables"
+
 section.site_title
   background: #f7f7f7
-  padding: 100px 215px
+  padding: 70px 70px
+  h1:first-of-type
+    font-size: 34px
+    margin-bottom: 5px
   h1
-    font-size: 32px
+    font-size: 34px
     margin-bottom: 30px
   p.sign_up
-    font-size: 24px
+    font-size: 30px
     margin-bottom: 30px
+
+@media (max-width: $screen-md)
+  section.site_title
+    padding: 50px 50px
+    h1:first-of-type
+      font-size: 30px
+      margin-bottom: 5px
+    h1
+      font-size: 30px
+      margin-bottom: 30px
+    p.sign_up
+      font-size: 26px
+      margin-bottom: 30px
+
+@media (max-width: $screen-sm)
+  section.site_title
+    padding: 25px 25px
+    h1:first-of-type
+      font-size: 20px
+      margin-bottom: 5px
+    h1
+      font-size: 20px
+      margin-bottom: 30px
+    p.sign_up
+      font-size: 16px
+      margin-bottom: 30px
+
+@media (max-width: $screen-xs)
+  section.site_title
+    padding: 25px 20px
+    h1:first-of-type
+      font-size: 15px
+      margin-bottom: 5px
+    h1
+      font-size: 15px
+      margin-bottom: 30px
+    p.sign_up
+      font-size: 12px
+      margin-bottom: 30px
 
 section.register, section.sign_in, section.reset_password
   form

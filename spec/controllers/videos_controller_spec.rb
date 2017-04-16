@@ -60,7 +60,7 @@ describe VideosController do
 
         it "sets @categories" do
           get :index
-          expect(assigns(:categories)).to be_a(Array)
+          expect(assigns(:categories)).to be_a(ActiveRecord::Relation)
         end
 
         it "sets @categories equal only to categories with videos associated" do
@@ -71,6 +71,21 @@ describe VideosController do
           get :index
 
           expect(assigns(:categories)).to match_array([action])
+        end
+
+        it "orders the categories alphabetically" do
+          scifi = create(:category, name: "Sci-Fi")
+          create(:video, category: scifi)
+          action = create(:category, name: "Action")
+          create(:video, category: action)
+          zebra = create(:category, name: "Zebra")
+          create(:video, category: zebra)
+          comedy = create(:category, name: "Comedy")
+          create(:video, category: comedy)
+
+          get :index
+
+          expect(assigns(:categories)).to eq([action, comedy, scifi, zebra])
         end
       end
 
