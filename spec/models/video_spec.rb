@@ -27,7 +27,7 @@ describe Video do
       video2 = create(:video, title: "Mia Familia", created_at: 2.days.ago)
       video3 = create(:video, title: "asdfFamiaaaaa", created_at: 1.day.ago)
 
-      expect(Video.search_by_title('Fami')).to match_array([video1, video2, video3])
+      expect(Video.search_by_title('Fami')).to eq([video1, video2, video3])
     end
 
     it 'returns an array of one video when only one video title matches the query' do
