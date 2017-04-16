@@ -30,7 +30,7 @@ $(document).on("turbolinks:load", function() {
 
   var insert_image_into_dom = function(image) {
     if (location.hostname === "durrellsnetflix.herokuapp.com") {
-      var src1 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
+      var src1 = "https://durrells-myflix-production.s3-us-west-1.amazonaws.com/cache/" + image.id;
       $(".video .custom_thumb").append("<img src='" + src1 + "'>");
     } else if (location.hostname === "durrellsnetflixstaging.herokuapp.com") {
       var src2 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
