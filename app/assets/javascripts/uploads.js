@@ -28,9 +28,23 @@ $(document).on("turbolinks:load", function() {
     });
   };
 
+  var insert_image_into_dom = function(image) {
+    if (location.hostname === "durrellsnetflix.herokuapp.com") {
+      var src1 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
+      $(".video .custom_thumb").append("<img src='" + src1 + "'>");
+    } else if (location.hostname === "durrellsnetflixstaging.herokuapp.com") {
+      var src2 = "https://durrells-myflix-staging.s3-us-west-1.amazonaws.com/cache/" + image.id;
+      $(".video .custom_thumb").append("<img src='" + src2 + "'>");
+    } else {
+      var src3 = "https://durrells-myflix-development.s3-us-west-1.amazonaws.com/cache/" + image.id;
+      $(".video .custom_thumb").append("<img src='" + src3 + "'>");
+    }
+  };
+
   var bind_file_upload = function() {
     $("[type=file]").fileupload({
       add: function(e, data) {
+        $(".video .custom_thumb img").remove();
         data.progressBar = $("<div class='progress progress-striped active' style='width: 200px'><div class='progress-bar progress-bar-danger' role='progressbar'></div></div>").insertAfter("form[data='upload-form']");
         var options = {
           extension: data.files[0].name.match(/(\.\w+)?$/)[0], // set extension
@@ -49,8 +63,7 @@ $(document).on("turbolinks:load", function() {
         data.progressBar.find(".progress-bar").css("width", percentage).html(percentage);
       },
       done: function(e, data) {
-        data.progressBar.remove();
-
+        var params_key = $(this).attr("name");
         var image = {
           id: data.formData.key.match(/cache\/(.+)/)[1], // we have to remove the prefix part
           storage: "cache",
@@ -60,7 +73,9 @@ $(document).on("turbolinks:load", function() {
             mime_type: data.files[0].type
           }
         };
-        var params_key = $(this).attr("name");
+
+        data.progressBar.remove();
+        insert_image_into_dom(image);
         bind_submit_button(image, params_key);
       }
     });

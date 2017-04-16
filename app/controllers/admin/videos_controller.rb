@@ -9,7 +9,6 @@ class Admin::VideosController < ApplicationController
     video = Video.new(video_params)
 
     create_video(video)
-
     if video.persisted?
       flash[:success] = "#{video.title} was successfully created."
       @video = Video.new

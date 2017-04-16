@@ -1,6 +1,6 @@
 Myflix::Application.routes.draw do
   mount ImageUploader::UploadEndpoint => "/images"
-  
+
   get 'ui(/:action)', controller: 'ui'
   root 'pages#front'
   get '/home', to: 'videos#index'
