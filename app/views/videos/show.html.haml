@@ -1,58 +1,55 @@
-%article.video
-  .container
-    .row
-      .col-sm-7.col-sm-offset-1
-        .embed-responsive.embed-responsive-16by9
-          %iframe{allowfullscreen: "", height: "480", src: "https://www.youtube.com/embed/#{@video.token}", width: "854"}
+%article.video.row
+  .col-lg-7.col-lg-offset-1
+    .embed-responsive.embed-responsive-16by9
+      %iframe{allowfullscreen: "", height: "480", src: "https://www.youtube.com/embed/#{@video.token}", width: "854"}
 
-      .video_info.col-sm-3
-        %header
-          %h3
-            = @video.title
-          %h4
-            Rating:
-            = @video.print_average_video_rating
-        %p
-          = @video.description
-        .actions
-          - unless current_user.queued_video?(@video)
-            = link_to "+ My Queue", queue_items_path(video_slug: @video), method: :post, class: "btn btn-primary"
+  .video_info.col-lg-3
+    %header
+      %h3
+        = @video.title
+      %h4
+        Rating:
+        = @video.print_average_video_rating
+    %p
+      = @video.description
+    .actions
+      - unless current_user.queued_video?(@video)
+        = link_to "+ My Queue", queue_items_path(video_slug: @video), method: :post, class: "btn btn-primary"
 
-%section.reviews.container
-  .row
-    .col-sm-10.col-sm-offset-1
-      %form{ action: "/reviews", method: "post" }
-        = hidden_field_tag :authenticity_token, form_authenticity_token
-        = hidden_field_tag :video_id, @video.id
-        %fieldset
-          .form-group
-            %label Rate this video
-            .row
-              .col-sm-3
-                %select.form-control(name="rating")
-                  %option(value="5") 5 Stars
-                  %option(value="4") 4 Stars
-                  %option(value="3") 3 Stars
-                  %option(value="2") 2 Stars
-                  %option(value="1") 1 Star
-          .form-group
-            %label Write Review
-            .row
-              .col-sm-8
-                %textarea.form-control(name="content" rows="6")
-        %fieldset.form-group.actions.clearfix
-          %input(type="submit" value="Submit" class="btn")
-          %a(href="") Cancel
-      %header
-        %h3 User Reviews (#{@reviews.count})
-      %ul
-        - @reviews.each do |review|
-          %article.review
-            %li.row
-              .col-sm-2
-                %span Rating: #{review.rating} / 5
-                %p
-                  by
-                  = link_to review.user.full_name, review.user
-              .col-sm-8
-                %p= review.content
+%section.reviews.row
+  .col-lg-10.col-lg-offset-1
+    %form{ action: "/reviews", method: "post" }
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      = hidden_field_tag :video_id, @video.id
+      %fieldset
+        .form-group
+          %label Rate this video
+          .row
+            .col-lg-3
+              %select.form-control(name="rating")
+                %option(value="5") 5 Stars
+                %option(value="4") 4 Stars
+                %option(value="3") 3 Stars
+                %option(value="2") 2 Stars
+                %option(value="1") 1 Star
+        .form-group
+          %label Write Review
+          .row
+            .col-lg-8
+              %textarea.form-control(name="content" rows="6")
+      %fieldset.form-group.actions.clearfix
+        %input(type="submit" value="Submit" class="btn")
+        %a(href="") Cancel
+    %header
+      %h3 User Reviews (#{@reviews.count})
+    %ul
+      - @reviews.each do |review|
+        %article.review
+          %li.row
+            .col-lg-2
+              %span Rating: #{review.rating} / 5
+              %p
+                by
+                = link_to review.user.full_name, review.user
+            .col-lg-8
+              %p= review.content
