@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :require_user
 
   def index
-    @categories = Category.all.reject { |category| category.videos.empty? }
+    @categories = Category.joins(:videos).distinct.order(:name)
   end
 
   def show

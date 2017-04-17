@@ -1,3 +1,5 @@
+@import 'variables'
+
 article.video
   background-color: #F7F7F7
   padding: 30px
@@ -11,13 +13,29 @@ article.video
       h3
         font-weight: bold
         font-size: 20px
+      h4
+        margin-top: 5px
     p
       margin-bottom: 20px
     .actions
       a
         margin-right: 20px
 
+@media (max-width: $screen-lg)
+  article.video
+    .video_info
+      padding-top: 10px
+      margin-left: 0px
+  section.reviews.row
+    padding: 0px
+    .col-lg-10.col-lg-offset-1
+      padding-left: 0px
+      padding-right: 0px
+
+
 section.reviews
+  padding: 30px
+  margin: 0px
   form
     margin-bottom: 30px
   ul
