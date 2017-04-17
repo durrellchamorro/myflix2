@@ -8,7 +8,7 @@ deployment:
       - heroku maintenance:on --app durrellsnetflix
       - heroku pg:backups capture --app durrellsnetflix
       - git fetch --unshallow
-      - heroku buildpacks:add --index 1 https://github.com/NetsoftHoldings/heroku-buildpack-magic.git
+      - heroku buildpacks:add --app durrellsnetflix --index 1 https://github.com/NetsoftHoldings/heroku-buildpack-magic.git
       - git push git@heroku.com:durrellsnetflix.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app durrellsnetflix
       - heroku maintenance:off --app durrellsnetflix
@@ -17,7 +17,7 @@ deployment:
     commands:
       - heroku maintenance:on --app durrellsnetflixstaging
       - git fetch --unshallow
-      - heroku buildpacks:add --index 1 https://github.com/NetsoftHoldings/heroku-buildpack-magic.git
+      - heroku buildpacks:add --app durrellsnetflixstaging --index 1 https://github.com/NetsoftHoldings/heroku-buildpack-magic.git
       - git push git@heroku.com:durrellsnetflixstaging.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app durrellsnetflixstaging
       - heroku maintenance:off --app durrellsnetflixstaging
