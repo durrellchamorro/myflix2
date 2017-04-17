@@ -9,7 +9,7 @@ s3_options = {
 
 if Rails.env.test?
   require "shrine/storage/memory"
-  
+
   Shrine.storages = {
     cache: Shrine::Storage::Memory.new,
     store: Shrine::Storage::Memory.new,
@@ -24,3 +24,4 @@ end
 Shrine.plugin :activerecord
 Shrine.plugin :direct_upload
 Shrine.plugin :restore_cached_data
+Shrine.plugin :determine_mime_type, analyzer: :filemagic

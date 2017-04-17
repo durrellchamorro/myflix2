@@ -197,6 +197,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-filemagic (0.7.1)
     ruby_parser (3.9.0)
       sexp_processor (~> 4.1)
     rubyzip (1.2.1)
@@ -299,6 +300,7 @@ DEPENDENCIES
   redis (~> 3.3, >= 3.3.3)
   roda (~> 2.24)
   rspec-rails (~> 3.5, >= 3.5.2)
+  ruby-filemagic (~> 0.7.1)
   sass-rails
   selenium-webdriver (~> 3.3)
   sentry-raven (~> 2.4)

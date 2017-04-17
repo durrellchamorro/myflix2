@@ -22,6 +22,7 @@ gem 'aws-sdk', '~> 2.9', '>= 2.9.7'
 gem 'roda', '~> 2.24'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
 gem 'unobtrusive_flash', '~> 3.3', '>= 3.3.1'
+gem 'ruby-filemagic', '~> 0.7.1'
 
 group :development do
   gem "better_errors"
