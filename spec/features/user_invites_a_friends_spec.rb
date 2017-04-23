@@ -36,7 +36,7 @@ feature "User successfully invites a friend" do
 
     # does not work
     page.execute_script("$(\"input[name='cardnumber']\").value = '4242424242424242';")
-    stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
+    # stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
 
     # this does not work either
     Capybara.within_frame stripe_iframe do
