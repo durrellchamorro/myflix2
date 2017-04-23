@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "User successfully invites a friend" do
-  scenario "user invites a friend and the friend signs up" do
+  scenario "user invites a friend and the friend signs up", js: true do
     bob = create(:user, full_name: "bob")
     sign_in(bob)
     invite_a_friend
@@ -18,6 +18,7 @@ feature "User successfully invites a friend" do
   end
 
   def invite_a_friend
+    sleep 1
     click_on "Welcome, bob"
     click_link 'Invite a Friend'
     fill_in("Friend's Name", with: "ralph")
@@ -27,11 +28,25 @@ feature "User successfully invites a friend" do
   end
 
   def friend_signs_up
+    sleep 1
     open_email("ralph@gmail.com")
     current_email.click_link 'Accept this invitation'
     fill_in("Password", with: "password")
     fill_in("Full Name", with: "ralph")
-    click_button("Register")
+    page.execute_script("$(\"input[name='cardnumber']\").value = '1234';")
+    stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
+
+    Capybara.within_frame stripe_iframe do
+      fill_in("input[class='TextField is-empty']", with: "4242424242424242")
+      date = Date.today.year + 3
+      fill_in("input[name='exp-date']", with: "01#{date.to_s.last(2)}")
+      fill_in("input[name='cvc']", with: "123")
+    end
+
+
+
+    save_and_open_page
+    click_button("Sign Up")
   end
 
   def friend_signs_in

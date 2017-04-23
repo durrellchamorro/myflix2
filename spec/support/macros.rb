@@ -26,6 +26,7 @@ def sign_in(user=nil)
 end
 
 def sign_out(user)
+  sleep 1
   click_on "#{user.full_name}"
   click_on "Sign Out"
 end
