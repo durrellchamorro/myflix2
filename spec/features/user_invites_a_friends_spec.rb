@@ -33,17 +33,18 @@ feature "User successfully invites a friend" do
     current_email.click_link 'Accept this invitation'
     fill_in("Password", with: "password")
     fill_in("Full Name", with: "ralph")
-    page.execute_script("$(\"input[name='cardnumber']\").value = '1234';")
+
+    # does not work
+    page.execute_script("$(\"input[name='cardnumber']\").value = '4242424242424242';")
     stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
 
+    # this does not work either
     Capybara.within_frame stripe_iframe do
-      fill_in("input[class='TextField is-empty']", with: "4242424242424242")
+      fill_in("input[name='cardnumber']", with: "4242424242424242")
       date = Date.today.year + 3
       fill_in("input[name='exp-date']", with: "01#{date.to_s.last(2)}")
       fill_in("input[name='cvc']", with: "123")
     end
-
-
 
     save_and_open_page
     click_button("Sign Up")
