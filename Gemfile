@@ -15,6 +15,7 @@ gem 'uglifier'
 gem 'bcrypt'
 gem 'friendly_id', '~> 5.2'
 gem 'puma', '~> 3.8', '>= 3.8.2'
+
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'redis', '~> 3.3', '>= 3.3.3'
 gem 'shrine', '~> 2.6'
@@ -23,6 +24,8 @@ gem 'roda', '~> 2.24'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
 gem 'unobtrusive_flash', '~> 3.3', '>= 3.3.1'
 gem 'ruby-filemagic', '~> 0.7.1'
+
+gem 'stripe', '~> 2.4'
 
 group :development do
   gem "better_errors"
@@ -41,9 +44,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner', '1.4.1'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem 'shoulda-matchers', '2.7.0'
-  gem 'vcr', '2.9.3'
+  gem 'vcr', '~> 3.0', '>= 3.0.3'
   gem 'capybara', '~> 2.13'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'capybara-email', '~> 2.5'

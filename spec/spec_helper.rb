@@ -111,4 +111,6 @@ RSpec.configure do |config|
   end
 
   Capybara.javascript_driver = :chrome
+  Capybara.server_port = 3001
+  Capybara.app_host = 'http://localhost:3001'
 end

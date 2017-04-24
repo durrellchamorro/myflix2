@@ -15,7 +15,7 @@ describe UsersController do
       let(:invitation) { create(:invitation, inviter: morpheus, recipient_email: "neo@matrix.io") }
 
       before do
-        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, token: invitation.token
+        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, token: invitation.token, stripeToken: "tok_visa" 
       end
 
       it "creates a user when all the fields are correct" do
