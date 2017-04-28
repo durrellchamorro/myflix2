@@ -38,6 +38,7 @@ feature "User successfully invites a friend" do
       date = Date.today.year + 3
       page.find("input[name='exp-date']").set("01#{date.to_s.last(2)}")
       page.find("input[name='cvc']").set("123")
+      sleep 1
       page.find("input[name='postal']").set("90210")
     end
 
