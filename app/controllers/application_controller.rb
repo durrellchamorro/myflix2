@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  after_filter :prepare_unobtrusive_flash
+  after_action :prepare_unobtrusive_flash
   rescue_from ActionController::InvalidAuthenticityToken, with: :redirect_to_referer_or_path
 
   def redirect_to_referer_or_path
