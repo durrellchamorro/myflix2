@@ -6,7 +6,6 @@ describe StripeWrapper do
       it "makes a successful charge", :vcr do
         response = StripeWrapper::Charge.create(
           amount: 999,
-          currency: "usd",
           source: "tok_visa",
           description: "A valid charge"
         )
@@ -17,7 +16,6 @@ describe StripeWrapper do
       it "makes an unsuccessful charge due to a declined card", :vcr do
         response = StripeWrapper::Charge.create(
           amount: 999,
-          currency: "usd",
           source: "tok_chargeDeclined",
           description: "An invalid charge"
         )
@@ -28,7 +26,6 @@ describe StripeWrapper do
       it "returns the error message for declined charges", :vcr do
         response = StripeWrapper::Charge.create(
           amount: 999,
-          currency: "usd",
           source: "tok_chargeDeclined",
           description: "An invalid charge"
         )

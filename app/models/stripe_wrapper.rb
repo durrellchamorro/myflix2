@@ -7,13 +7,13 @@ module StripeWrapper
       @error_message = error_message
     end
 
-    def self.create(options = {})
+    def self.create(amount:, source:, description:)
       begin
         response = Stripe::Charge.create(
-          amount: options[:amount],
+          amount: amount,
           currency: 'usd',
-          source: options[:source],
-          description: options[:description]
+          source: source,
+          description: description
         )
         new(response: response)
       rescue Stripe::CardError => e
