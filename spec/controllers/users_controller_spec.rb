@@ -10,12 +10,14 @@ describe UsersController do
   end
 
   describe "POST create" do
-    context "with valid input" do
+    context "with valid personal info and valid card info" do
       let(:morpheus) { create(:user) }
       let(:invitation) { create(:invitation, inviter: morpheus, recipient_email: "neo@matrix.io") }
 
       before do
-        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, token: invitation.token, stripeToken: "tok_visa" 
+        charge = double(successful?: true)
+        allow(StripeWrapper::Charge).to receive(:create).and_return(charge)
+        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, token: invitation.token, stripeToken: "tok_visa"
       end
 
       it "creates a user when all the fields are correct" do
@@ -53,7 +55,27 @@ describe UsersController do
       end
     end
 
-    context "User not created with invalid input" do
+    context "valid personal info and declined card" do
+      before do
+        charge = double(successful?: false, error_message: "Your card was declined.")
+        expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
+        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, stripeToken: "tok_chargeDeclined"
+      end
+
+      it "does not create a new user record" do
+        expect(User.count).to eq(0)
+      end
+
+      it "renders the new template" do
+        expect(response).to render_template :new
+      end
+
+      it "sets the flash error message" do
+        expect(flash[:danger]).to be_present
+      end
+    end
+
+    context "User not created with invalid personal info" do
       before do
         post :create, user: { email: "" }
       end
@@ -72,6 +94,10 @@ describe UsersController do
 
       it "does not send out an email" do
         expect(ActionMailer::Base.deliveries).to be_empty
+      end
+
+      it "does not charge the card" do
+        expect(StripeWrapper::Charge).not_to receive(:create)
       end
     end
   end

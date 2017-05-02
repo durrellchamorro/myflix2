@@ -42,11 +42,13 @@ feature "User successfully invites a friend" do
       page.find("input[name='postal']").set("90210")
     end
 
+    charge = double(successful?: true)
+    allow(StripeWrapper::Charge).to receive(:create).and_return(charge)
     click_button("Sign Up")
   end
 
   def friend_signs_in
-    sleep 1
+    sleep 2
     fill_in "Email Address", with: "ralph@gmail.com"
     fill_in 'Password', with: 'password'
     click_button 'Sign In'
