@@ -9,7 +9,7 @@ feature "User registers", :js, :vcr do
     fill_in_valid_user_info
     fill_in_card_info("4242424242424242")
     click_button("Sign Up")
-    sleep 2
+    sleep 3
     expect_to_see("You signed up successfully.")
   end
 
