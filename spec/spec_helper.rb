@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'support/factory_girl'
 require 'capybara/rails'
 require 'capybara/email/rspec'
+require 'capybara/poltergeist'
 require 'sidekiq/testing'
 require 'vcr'
 
@@ -18,35 +19,13 @@ end
 
 Sidekiq::Testing.inline!
 
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.include WaitForAjax, type: :feature
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
+  config.include WaitForPage, type: :feature
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
@@ -102,17 +81,6 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explictly tag your specs with their type, e.g.:
-  #
-  #     describe UsersController, :type => :controller do
-  #       # ...
-  #     end
-  #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/v/3-0/docs
   config.infer_spec_type_from_file_location!
@@ -121,7 +89,7 @@ RSpec.configure do |config|
     Capybara::Selenium::Driver.new(app, :browser => :chrome)
   end
 
-  Capybara.javascript_driver = :chrome
+  Capybara.javascript_driver = :poltergeist
   Capybara.server_port = 3001
   Capybara.app_host = 'http://localhost:3001'
   Capybara.default_max_wait_time = 10

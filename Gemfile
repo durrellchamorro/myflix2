@@ -49,6 +49,7 @@ group :test do
   gem 'capybara', '~> 2.13'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'capybara-email', '~> 2.5'
+  gem 'poltergeist', '~> 1.15'
   gem 'selenium-webdriver', '~> 3.3'
   gem 'shrine-memory', '~> 0.2.2'
 end
