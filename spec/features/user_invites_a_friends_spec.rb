@@ -31,19 +31,7 @@ feature "User successfully invites a friend" do
     current_email.click_link 'Accept this invitation'
     fill_in("Password", with: "password")
     fill_in("Full Name", with: "ralph")
-
-    stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
-    Capybara.within_frame stripe_iframe do
-      page.find("input[name='cardnumber']").set("4242424242424242")
-      date = Date.today.year + 3
-      page.find("input[name='exp-date']").set("01#{date.to_s.last(2)}")
-      page.find("input[name='cvc']").set("123")
-      sleep 1
-      page.find("input[name='postal']").set("90210")
-    end
-
-    charge = double(successful?: true)
-    allow(StripeWrapper::Charge).to receive(:create).and_return(charge)
+    fill_in_card_info("4242424242424242")
     click_button("Sign Up")
   end
 
