@@ -39,6 +39,7 @@ feature "User successfully invites a friend" do
     sleep 2
     fill_in "Email Address", with: "ralph@gmail.com"
     fill_in 'Password', with: 'password'
+    wait_for_button("Sign In")
     click_button 'Sign In'
   end
 

@@ -23,6 +23,14 @@ module WaitForPage
     page.evaluate_script('jQuery.active').zero?
   end
 
+  def wait_for_button(text)
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until !!find_button(text)
+    end
+  rescue Capybara::ElementNotFound => e
+    false
+  end
+
   def text_visible?(text)
     if text
       expect_to_see(text)
