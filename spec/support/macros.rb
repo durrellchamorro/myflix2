@@ -46,3 +46,16 @@ end
 def expect_page_to_have_video_title(video)
   expect(page).to have_content(video.title)
 end
+
+def fill_in_card_info(card_number)
+  stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
+
+  Capybara.within_frame stripe_iframe do
+    page.find("input[name='cardnumber']").set(card_number)
+    date = Date.today.year + 3
+    page.find("input[name='exp-date']").set("01#{date.to_s.last(2)}")
+    page.find("input[name='cvc']").set("123")
+    sleep 2
+    page.find("input[name='postal']").set("90210")
+  end
+end
