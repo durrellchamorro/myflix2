@@ -9,7 +9,7 @@ feature "User registers", :js, :vcr do
     fill_in_valid_user_info
     fill_in_card_info("4242424242424242")
     click_button("Sign Up")
-    sleep 3
+    wait_for_ajax
     expect_to_see("You signed up successfully.")
   end
 
@@ -28,7 +28,7 @@ feature "User registers", :js, :vcr do
     click_button("Sign Up")
 
     expect(User.count).to eq(0)
-    sleep 3
+    wait_for_ajax
     expect_to_see("Your card was declined.")
   end
 
@@ -38,7 +38,7 @@ feature "User registers", :js, :vcr do
     click_button("Sign Up")
 
     expect(User.count).to eq(0)
-    sleep 3
+    wait_for_ajax
     expect_to_see("can't be blank")
   end
 
@@ -57,7 +57,7 @@ feature "User registers", :js, :vcr do
     click_button("Sign Up")
 
     expect(User.count).to eq(0)
-    sleep 3
+    wait_for_ajax
     expect_to_see("can't be blank")
   end
 
