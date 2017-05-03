@@ -26,8 +26,8 @@ def sign_in(user=nil)
 end
 
 def sign_out(user)
-  sleep 1
-  click_on "#{user.full_name}"
+  wait_for_text(user.full_name.to_s)
+  click_on user.full_name.to_s
   click_on "Sign Out"
 end
 
@@ -56,6 +56,7 @@ def fill_in_card_info(card_number)
     page.find("input[name='exp-date']").set("01#{date.to_s.last(2)}")
     page.find("input[name='cvc']").set("123")
 
+    wait_for_dom(dom_finder: "input[name='postal']")
     page.find("input[name='postal']").set("90210")
   end
 end
