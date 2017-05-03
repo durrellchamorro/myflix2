@@ -36,10 +36,9 @@ feature "User successfully invites a friend" do
   end
 
   def friend_signs_in
-    sleep 2
+    wait_for_button("Sign In")
     fill_in "Email Address", with: "ralph@gmail.com"
     fill_in 'Password', with: 'password'
-    wait_for_button("Sign In")
     click_button 'Sign In'
   end
 
@@ -50,7 +49,7 @@ feature "User successfully invites a friend" do
 
   def friend_should_follow_inviter
     friend = User.find_by(email: "ralph@gmail.com")
-    sleep 2
+    wait_for_page(text: "PEOPLE")
     click_link("People")
     expect_to_see("Welcome, #{friend.full_name}")
     expect_to_see("bob")
