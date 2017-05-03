@@ -37,6 +37,7 @@ feature "User registers", :js, :vcr do
     click_button("Sign Up")
 
     expect(User.count).to eq(0)
+    sleep 2
     expect_to_see("can't be blank")
   end
 
