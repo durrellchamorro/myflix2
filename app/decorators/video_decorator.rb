@@ -6,6 +6,10 @@ class VideoDecorator < Draper::Decorator
     average_video_rating.try(:round, 2)
   end
 
+  def youtube_iframe
+    "<iframe height='480' src='https://www.youtube.com/embed/#{token}' width='854'></iframe>".html_safe
+  end
+
   private
 
   def accepted_reviews

@@ -1,7 +1,7 @@
 %article.video.row
   .col-lg-7.col-lg-offset-1
     .embed-responsive.embed-responsive-16by9
-      %iframe{allowfullscreen: "", height: "480", src: "https://www.youtube.com/embed/#{@video.token}", width: "854"}
+      = @video.youtube_iframe
 
   .video_info.col-lg-3
     %header
