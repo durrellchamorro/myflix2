@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
       flash[:danger] = "You must fill in all fields. If you did, then you already rated this video or it is in your queue. Queued videos can only be rated in the queue. You can update your rating by putting the video in the queue and changing the rating there."
     end
 
-    @video = Video.friendly.find(review_params[:video_id])
+    @video = Video.friendly.find(review_params[:video_id]).decorate
     @reviews = Review.where(video: review_params[:video_id])
 
     render "videos/show"

@@ -6,7 +6,7 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.friendly.find(params[:id])
+    @video = Video.friendly.find(params[:id]).decorate
     @reviews = Review.valid_reviews(@video)
   end
 

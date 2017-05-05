@@ -13,6 +13,7 @@ gem 'uglifier', '~> 3.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'friendly_id', '~> 5.2'
 gem 'puma', '~> 3.8', '>= 3.8.2'
+gem 'draper', '~> 2.1'
 
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'redis', '~> 3.3', '>= 3.3.3'
@@ -36,7 +37,7 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.2', require: 'dotenv/rails-now'
   gem 'pry', '~> 0.10.4'
   gem 'pry-nav', '~> 0.2.4'
-  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'rspec-rails', '~> 3.6'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.3'
 end
