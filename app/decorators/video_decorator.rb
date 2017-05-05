@@ -6,6 +6,10 @@ class VideoDecorator < Draper::Decorator
     average_video_rating.try(:round, 2)
   end
 
+  def youtube_iframe
+    "<iframe height='480' src='https://www.youtube.com/embed/#{token}' width='854'></iframe>".html_safe
+  end
+
   private
 
   def accepted_reviews
@@ -17,7 +21,7 @@ class VideoDecorator < Draper::Decorator
   end
 
   def average_video_rating
-    return nill unless accepted_reviews.present?
+    return nil unless accepted_reviews.present?
     accepted_reviews.map(&:rating).reduce(:+) /
       averagable_reviews_count(reviews.size - accepted_reviews.size)
   end

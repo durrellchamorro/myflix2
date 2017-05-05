@@ -1,7 +1,7 @@
 %article.video.row
   .col-lg-7.col-lg-offset-1
     .embed-responsive.embed-responsive-16by9
-      %iframe{allowfullscreen: "", height: "480", src: "https://www.youtube.com/embed/#{@video.token}", width: "854"}
+      = @video.youtube_iframe
 
   .video_info.col-lg-3
     %header
@@ -18,7 +18,7 @@
 
 %section.reviews.row
   .col-lg-10.col-lg-offset-1
-    %form{ action: "/reviews", method: "post" }
+    %form#review_form{ action: "/reviews", method: "post", "data-remote" => "true" }
       = hidden_field_tag :authenticity_token, form_authenticity_token
       = hidden_field_tag :video_id, @video.id
       %fieldset
@@ -40,16 +40,5 @@
       %fieldset.form-group.actions.clearfix
         %input(type="submit" value="Submit" class="btn")
         %a(href="") Cancel
-    %header
-      %h3 User Reviews (#{@reviews.count})
-    %ul
-      - @reviews.each do |review|
-        %article.review
-          %li.row
-            .col-lg-2
-              %span Rating: #{review.rating} / 5
-              %p
-                by
-                = link_to review.user.full_name, review.user
-            .col-lg-8
-              %p= review.content
+    #video_reviews
+      = render partial: 'videos/reviews'
