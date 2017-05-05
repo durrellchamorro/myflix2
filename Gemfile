@@ -38,7 +38,6 @@ group :development, :test do
   gem 'pry', '~> 0.10.4'
   gem 'pry-nav', '~> 0.2.4'
   gem 'rspec-rails', '~> 3.6'
-
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.3'
 end
