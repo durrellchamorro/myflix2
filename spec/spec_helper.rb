@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'sidekiq/testing'
 require 'vcr'
 
+
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
@@ -27,6 +28,14 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include WaitForPage, type: :feature
   config.use_transactional_fixtures = false
+  config.mock_with :rspec do |mocks|
+
+    # This option should be set when all dependencies are being loaded
+    # before a spec run, as is the case in a typical spec helper. It will
+    # cause any verifying double instantiation for a class that does not
+    # exist to raise, protecting against incorrectly spelt names.
+    mocks.verify_doubled_constant_names = true
+  end
 
   config.before(:suite) do
     if config.use_transactional_fixtures?

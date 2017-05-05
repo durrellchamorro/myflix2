@@ -11,17 +11,16 @@ describe UsersController do
 
   describe "POST create" do
     context "with valid personal info and valid card info" do
-      let(:morpheus) { create(:user) }
-      let(:invitation) { create(:invitation, inviter: morpheus, recipient_email: "neo@matrix.io") }
-
       before do
-        charge = double(successful?: true)
-        allow(StripeWrapper::Charge).to receive(:create).and_return(charge)
-        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, token: invitation.token, stripeToken: "tok_visa"
+        user_sign_up = double(successful: true)
+        expect(UserSignUp).to receive(:new).and_return(user_sign_up)
+        expect(user_sign_up).to receive(:sign_up)
+
+        post :create, user: { email: "", password: "", full_name: "" }, token: "", stripeToken: ""
       end
 
-      it "creates a user when all the fields are correct" do
-        expect(User.count).to eq(2)
+      it "assigns @user" do
+        expect(assigns(:user)).to be_instance_of(User)
       end
 
       it "redirects to the login path" do
@@ -31,39 +30,18 @@ describe UsersController do
       it "sets the success flash" do
         expect(flash[:success]).to be_present
       end
-
-      it "sends out email to the user" do
-        expect(ActionMailer::Base.deliveries.last.to).to eq(["neo@matrix.io"])
-      end
-
-      it "sends out email containing the users name" do
-        expect(ActionMailer::Base.deliveries.last.body).to include("Thomas Anderson")
-      end
-
-      it "makes the user follow the inviter" do
-        neo = User.find_by(email: "neo@matrix.io")
-        expect(neo.follows?(morpheus)).to be_truthy
-      end
-
-      it "makes the inviter follow the user" do
-        neo = User.find_by(email: "neo@matrix.io")
-        expect(morpheus.follows?(neo)).to be_truthy
-      end
-
-      it "expires the invitation upon acceptance" do
-        expect(invitation.reload.token).to be_nil
-      end
     end
 
     context "valid personal info and declined card" do
       before do
-        charge = double(successful?: false, error_message: "Your card was declined.")
-        expect(StripeWrapper::Charge).to receive(:create).and_return(charge)
-        post :create, user: { email: 'neo@matrix.io', password: "password", full_name: "Thomas Anderson" }, stripeToken: "tok_chargeDeclined"
+        user_sign_up = double(failed: true, successful: nil, error_message: "Failed")
+        expect(UserSignUp).to receive(:new).and_return(user_sign_up)
+        expect(user_sign_up).to receive(:sign_up)
+        post :create, user: { email: '', password: "", full_name: "" }, stripeToken: ""
       end
 
-      it "does not create a new user record" do
-        expect(User.count).to eq(0)
+      it "assigns @user" do
+        expect(assigns(:user)).to be_instance_of(User)
       end
 
       it "renders the new template" do
@@ -75,13 +53,12 @@ describe UsersController do
       end
     end
 
-    context "User not created with invalid personal info" do
+    context "with invalid personal info" do
       before do
+        user_sign_up = double(failed: nil, successful: nil)
+        expect(UserSignUp).to receive(:new).and_return(user_sign_up)
+        expect(user_sign_up).to receive(:sign_up)
         post :create, user: { email: "" }
-      end
-
-      it "does not create a user when not enough information given" do
-        expect(User.count).to eq(0)
       end
 
       it "renders the new template" do
@@ -90,14 +67,6 @@ describe UsersController do
 
       it "sets @user" do
         expect(assigns(:user)).to be_instance_of(User)
-      end
-
-      it "does not send out an email" do
-        expect(ActionMailer::Base.deliveries).to be_empty
-      end
-
-      it "does not charge the card" do
-        expect(StripeWrapper::Charge).not_to receive(:create)
       end
     end
   end
