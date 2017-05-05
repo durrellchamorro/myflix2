@@ -1,3 +1,4 @@
+$(".video_info h4").html('<%= j("Rating: " + @video.print_average_video_rating.to_s) %>');
 $("#video_reviews").html("<%= j(render partial: 'videos/reviews', locals: { reviews: @reviews }) %>");
-$("textarea.form-control").val("");
 $("select.form-control").val("5");
+$("textarea.form-control").val("");

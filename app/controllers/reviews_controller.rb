@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
   def create
     review = Review.create(review_data)
     @reviews = Review.where(video: review_params[:video_id])
+    @video = Video.friendly.find(review_params[:video_id]).decorate 
 
     if review.persisted?
       flash[:success] = "Review created successfully."

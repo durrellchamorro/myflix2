@@ -25,6 +25,10 @@ describe ReviewsController do
           expect(response).to render_template("videos/show")
         end
 
+        it "sets @video" do
+          expect(assigns(:video)).to eq(video)
+        end
+
         it "sets @reviews" do
           expect(assigns(:reviews)).to eq(Review.where(video: video))
         end
@@ -39,6 +43,10 @@ describe ReviewsController do
           set_current_user
           review = build(:review, user: user, video: video, content: nil, rating: nil)
           post :create, review.attributes
+        end
+
+        it "sets @video" do
+          expect(assigns(:video)).to eq(video)
         end
 
         it "sets @reviews" do
