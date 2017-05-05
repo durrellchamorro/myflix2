@@ -11,7 +11,8 @@
   %body
     %header
       = render 'shared/header'
-    %section.content.clearfix.unobtrusive-flash-container
-      = yield
+    .clearfix.unobtrusive-flash-container(id="flash" data-turbolinks-temporary)
+    = yield
+    %section.footer
     %footer
       &copy 2017 MyFLIX

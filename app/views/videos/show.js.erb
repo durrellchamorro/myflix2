@@ -1,0 +1,3 @@
+$("#video_reviews").html("<%= j(render partial: 'videos/reviews', locals: { reviews: @reviews }) %>");
+$("textarea.form-control").val("");
+$("select.form-control").val("5");

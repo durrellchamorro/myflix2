@@ -17,7 +17,7 @@ class VideoDecorator < Draper::Decorator
   end
 
   def average_video_rating
-    return nill unless accepted_reviews.present?
+    return nil unless accepted_reviews.present?
     accepted_reviews.map(&:rating).reduce(:+) /
       averagable_reviews_count(reviews.size - accepted_reviews.size)
   end
