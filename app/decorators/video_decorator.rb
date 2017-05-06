@@ -10,6 +10,11 @@ class VideoDecorator < Draper::Decorator
     "<iframe height='480' src='https://www.youtube.com/embed/#{token}' width='854'></iframe>".html_safe
   end
 
+  def add_to_queue_button(current_user)
+    return if current_user.queued_video?(self)
+    "<a class='btn btn-primary' data-method='post' href='/queue_items?video_slug=#{slug}'>+ My Queue</a>".html_safe
+  end
+
   private
 
   def accepted_reviews

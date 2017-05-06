@@ -13,8 +13,7 @@
     %p
       = @video.description
     .actions
-      - unless current_user.queued_video?(@video)
-        = link_to "+ My Queue", queue_items_path(video_slug: @video), method: :post, class: "btn btn-primary"
+      = @video.add_to_queue_button(current_user)
 
 %section.reviews.row
   .col-lg-10.col-lg-offset-1
