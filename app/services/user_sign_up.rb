@@ -16,7 +16,7 @@ class UserSignUp
       customer: customer,
       plan: "basic_plan_id"
     )
-
+      
     if subscription.successful?
       @user.stripe_id = customer.id
       @user.save

@@ -100,7 +100,7 @@ describe StripeWrapper do
         end
 
         it "returns the correct error message" do
-          expect(subscription.error_message).to eq(customer.error_message)
+          expect(subscription.error_message).to eq("Your card was declined.")
         end
       end
 
