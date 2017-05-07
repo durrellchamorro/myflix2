@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: amount=999&currency=usd&source=tok_1AFCVqGXpxGLtyRZuUiLlVWg&description=test+charge+for+example%40gmail.com
+      string: email=example%40gmail.com&card=tok_1AGgVBGXpxGLtyRZiAsNY7PE
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/2.8.0
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 03 May 2017 01:42:43 GMT
+      - Sun, 07 May 2017 03:56:10 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '201'
+      - '173'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AaNGGYjFx7M3Sg
+      - req_AbuJ4d92DQC337
       Stripe-Version:
       - '2017-04-06'
     body:
@@ -57,11 +57,11 @@ http_interactions:
           "error": {
             "message": "Your card was declined.",
             "type": "card_error",
+            "param": "",
             "code": "card_declined",
-            "decline_code": "generic_decline",
-            "charge": "ch_1AFCVrGXpxGLtyRZWWTj99od"
+            "decline_code": "generic_decline"
           }
         }
     http_version: 
-  recorded_at: Wed, 03 May 2017 01:42:43 GMT
+  recorded_at: Sun, 07 May 2017 03:56:10 GMT
 recorded_with: VCR 3.0.3

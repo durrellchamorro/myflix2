@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: email=example%40gmail.com&card=tok_1AGgVFGXpxGLtyRZDRZB2TMT
+      string: email=dennis.bergstrom%40framimayert.com&card=tok_visa
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/2.8.0
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 07 May 2017 03:56:13 GMT
+      - Sun, 07 May 2017 04:50:30 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1399'
+      - '1407'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AbuJzf2VlpNkf3
+      - req_AbvCW9iuQ5u6kN
       Stripe-Version:
       - '2017-04-06'
       Strict-Transport-Security:
@@ -56,16 +56,16 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "cus_AbuJomg32BEXNR",
+          "id": "cus_AbvChBD1g4JX5Y",
           "object": "customer",
           "account_balance": 0,
-          "created": 1494129373,
+          "created": 1494132630,
           "currency": null,
-          "default_source": "card_1AGgVFGXpxGLtyRZdV02Wwmn",
+          "default_source": "card_1AGhLmGXpxGLtyRZPq7Gkm4D",
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "example@gmail.com",
+          "email": "dennis.bergstrom@framimayert.com",
           "livemode": false,
           "metadata": {},
           "shipping": null,
@@ -73,7 +73,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1AGgVFGXpxGLtyRZdV02Wwmn",
+                "id": "card_1AGhLmGXpxGLtyRZPq7Gkm4D",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -81,15 +81,15 @@ http_interactions:
                 "address_line1_check": null,
                 "address_line2": null,
                 "address_state": null,
-                "address_zip": "90210",
-                "address_zip_check": "pass",
+                "address_zip": null,
+                "address_zip_check": null,
                 "brand": "Visa",
                 "country": "US",
-                "customer": "cus_AbuJomg32BEXNR",
-                "cvc_check": "pass",
+                "customer": "cus_AbvChBD1g4JX5Y",
+                "cvc_check": null,
                 "dynamic_last4": null,
-                "exp_month": 1,
-                "exp_year": 2020,
+                "exp_month": 8,
+                "exp_year": 2019,
                 "fingerprint": "lDX58NyMrxeFQZLt",
                 "funding": "credit",
                 "last4": "4242",
@@ -100,24 +100,24 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/customers/cus_AbuJomg32BEXNR/sources"
+            "url": "/v1/customers/cus_AbvChBD1g4JX5Y/sources"
           },
           "subscriptions": {
             "object": "list",
             "data": [],
             "has_more": false,
             "total_count": 0,
-            "url": "/v1/customers/cus_AbuJomg32BEXNR/subscriptions"
+            "url": "/v1/customers/cus_AbvChBD1g4JX5Y/subscriptions"
           }
         }
     http_version: 
-  recorded_at: Sun, 07 May 2017 03:56:13 GMT
+  recorded_at: Sun, 07 May 2017 04:50:30 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/subscriptions
     body:
       encoding: UTF-8
-      string: customer=cus_AbuJomg32BEXNR&plan=basic_plan_id
+      string: customer=cus_AbvChBD1g4JX5Y&plan=invalid_plan_name
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/2.8.0
@@ -135,17 +135,17 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
     headers:
       Server:
       - nginx
       Date:
-      - Sun, 07 May 2017 03:56:14 GMT
+      - Sun, 07 May 2017 04:50:31 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1566'
+      - '128'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -159,77 +159,19 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AbuJRNTNyVrVDo
+      - req_AbvCqXxKj23ytI
       Stripe-Version:
       - '2017-04-06'
-      Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "sub_AbuJ4qtoQjwzqW",
-          "object": "subscription",
-          "application_fee_percent": null,
-          "cancel_at_period_end": false,
-          "canceled_at": null,
-          "created": 1494129374,
-          "current_period_end": 1496807774,
-          "current_period_start": 1494129374,
-          "customer": "cus_AbuJomg32BEXNR",
-          "discount": null,
-          "ended_at": null,
-          "items": {
-            "object": "list",
-            "data": [
-              {
-                "id": "si_1AGgVGGXpxGLtyRZMvgUC0K2",
-                "object": "subscription_item",
-                "created": 1494129375,
-                "plan": {
-                  "id": "basic_plan_id",
-                  "object": "plan",
-                  "amount": 999,
-                  "created": 1447988118,
-                  "currency": "usd",
-                  "interval": "month",
-                  "interval_count": 1,
-                  "livemode": false,
-                  "metadata": {},
-                  "name": "basic",
-                  "statement_descriptor": "MyFlix Subscription",
-                  "trial_period_days": null
-                },
-                "quantity": 1
-              }
-            ],
-            "has_more": false,
-            "total_count": 1,
-            "url": "/v1/subscription_items?subscription=sub_AbuJ4qtoQjwzqW"
-          },
-          "livemode": false,
-          "metadata": {},
-          "plan": {
-            "id": "basic_plan_id",
-            "object": "plan",
-            "amount": 999,
-            "created": 1447988118,
-            "currency": "usd",
-            "interval": "month",
-            "interval_count": 1,
-            "livemode": false,
-            "metadata": {},
-            "name": "basic",
-            "statement_descriptor": "MyFlix Subscription",
-            "trial_period_days": null
-          },
-          "quantity": 1,
-          "start": 1494129374,
-          "status": "active",
-          "tax_percent": null,
-          "trial_end": null,
-          "trial_start": null
+          "error": {
+            "type": "invalid_request_error",
+            "message": "No such plan: invalid_plan_name",
+            "param": "plan"
+          }
         }
     http_version: 
-  recorded_at: Sun, 07 May 2017 03:56:14 GMT
+  recorded_at: Sun, 07 May 2017 04:50:31 GMT
 recorded_with: VCR 3.0.3

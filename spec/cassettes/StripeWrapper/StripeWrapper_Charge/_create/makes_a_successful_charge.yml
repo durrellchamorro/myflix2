@@ -29,7 +29,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 02 May 2017 06:26:30 GMT
+      - Sun, 07 May 2017 03:56:20 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Aa4cXq75iLUODR
+      - req_AbuK8TTvK3YUAq
       Stripe-Version:
       - '2017-04-06'
       Strict-Transport-Security:
@@ -56,15 +56,15 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_1AEuSwGXpxGLtyRZ94e1bGtN",
+          "id": "ch_1AGgVMGXpxGLtyRZpGcyDdQb",
           "object": "charge",
           "amount": 999,
           "amount_refunded": 0,
           "application": null,
           "application_fee": null,
-          "balance_transaction": "txn_1AEuSwGXpxGLtyRZOJrgCKb6",
+          "balance_transaction": "txn_1AGgVMGXpxGLtyRZaZKdDkyy",
           "captured": true,
-          "created": 1493706390,
+          "created": 1494129380,
           "currency": "usd",
           "customer": null,
           "description": "A valid charge",
@@ -94,12 +94,12 @@ http_interactions:
             "data": [],
             "has_more": false,
             "total_count": 0,
-            "url": "/v1/charges/ch_1AEuSwGXpxGLtyRZ94e1bGtN/refunds"
+            "url": "/v1/charges/ch_1AGgVMGXpxGLtyRZpGcyDdQb/refunds"
           },
           "review": null,
           "shipping": null,
           "source": {
-            "id": "card_1AEuSwGXpxGLtyRZnWTWmdVt",
+            "id": "card_1AGgVMGXpxGLtyRZESTlGG0x",
             "object": "card",
             "address_city": null,
             "address_country": null,
@@ -129,5 +129,5 @@ http_interactions:
           "transfer_group": null
         }
     http_version: 
-  recorded_at: Tue, 02 May 2017 06:26:30 GMT
+  recorded_at: Sun, 07 May 2017 03:56:20 GMT
 recorded_with: VCR 3.0.3
