@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: amount=999&currency=usd&source=tok_chargeDeclined&description=An+invalid+charge
+      string: email=hillary%40rohan.biz&card=tok_chargeDeclined
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/2.8.0
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 07 May 2017 03:56:19 GMT
+      - Sun, 07 May 2017 04:50:32 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '201'
+      - '173'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AbuJJsEuQEs0gi
+      - req_AbvCmyZ9HkP2jV
       Stripe-Version:
       - '2017-04-06'
     body:
@@ -57,11 +57,11 @@ http_interactions:
           "error": {
             "message": "Your card was declined.",
             "type": "card_error",
+            "param": "",
             "code": "card_declined",
-            "decline_code": "generic_decline",
-            "charge": "ch_1AGgVLGXpxGLtyRZDNreAcYz"
+            "decline_code": "generic_decline"
           }
         }
     http_version: 
-  recorded_at: Sun, 07 May 2017 03:56:19 GMT
+  recorded_at: Sun, 07 May 2017 04:50:32 GMT
 recorded_with: VCR 3.0.3

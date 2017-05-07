@@ -29,7 +29,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 02 May 2017 06:26:29 GMT
+      - Sun, 07 May 2017 03:56:19 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_Aa4csSoP4CSKIv
+      - req_AbuJx43MfKdfXc
       Stripe-Version:
       - '2017-04-06'
     body:
@@ -59,9 +59,9 @@ http_interactions:
             "type": "card_error",
             "code": "card_declined",
             "decline_code": "generic_decline",
-            "charge": "ch_1AEuSvGXpxGLtyRZJTtlAF2P"
+            "charge": "ch_1AGgVLGXpxGLtyRZ6cnxvVha"
           }
         }
     http_version: 
-  recorded_at: Tue, 02 May 2017 06:26:30 GMT
+  recorded_at: Sun, 07 May 2017 03:56:19 GMT
 recorded_with: VCR 3.0.3

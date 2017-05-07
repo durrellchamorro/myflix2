@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature "User successfully invites a friend" do
-  scenario "user invites a friend and the friend signs up", js: true do
+  scenario "user invites a friend and the friend signs up", :js, :vcr do
     bob = create(:user, full_name: "bob")
     sign_in(bob)
     invite_a_friend
