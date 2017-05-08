@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :reviews, -> { order("created_at DESC") }
   has_many :queue_items, -> { order(:position) }
   has_many :following_relationships, class_name: "Relationship", foreign_key: :follower_id
-  has_many :payments 
+  has_many :payments
   has_secure_password
 
   def normalize_queue_item_positions
@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   def follow(leader)
     Relationship.create(leader_id: leader.id, follower: self) if self.can_follow?(leader.id)
+  end
+
+  def deactivate!
+    update_column("active", false)
   end
 
   private

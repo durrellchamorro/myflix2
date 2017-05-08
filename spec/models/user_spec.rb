@@ -103,4 +103,13 @@ describe User do
       expect(Relationship.count).to eq(1)
     end
   end
+
+  describe '#deactivate!' do
+    it "sets the active attribute to false" do
+      neo = create(:user, active: true)
+      neo.deactivate!
+
+      expect(neo.reload).not_to be be_active
+    end
+  end
 end
