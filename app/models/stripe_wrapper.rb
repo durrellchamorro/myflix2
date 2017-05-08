@@ -54,7 +54,7 @@ module StripeWrapper
   end
 
   class Subscription
-    attr_reader :response, :successful, :error_message
+    attr_reader :response, :error_message
 
     def initialize(response: nil, error_message: nil)
       @response = response

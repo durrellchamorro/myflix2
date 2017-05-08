@@ -7,6 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:email) }
   it { should have_many(:reviews).order("created_at DESC") }
   it { should have_many(:queue_items).order(:position) }
+  it { should have_many(:payments) }
 
   describe '#video_review' do
     let(:neo) { create(:user) }
@@ -100,6 +101,15 @@ describe User do
       morpheus.follow(neo)
 
       expect(Relationship.count).to eq(1)
+    end
+  end
+
+  describe '#deactivate!' do
+    it "sets the active attribute to false" do
+      neo = create(:user, active: true)
+      neo.deactivate!
+
+      expect(neo.reload).not_to be be_active
     end
   end
 end
