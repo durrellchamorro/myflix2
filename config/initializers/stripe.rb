@@ -19,4 +19,14 @@ StripeEvent.configure do |events|
 
     user.deactivate!
   end
+
+  events.subscribe 'customer.subscription.created' do |event|
+    object = event.data.object
+    user = User.find_by(stripe_id: object.customer)
+
+    Subscription.create(user: user, amount: object.plan.amount,
+                        reference_id: object.id,
+                        current_period_start: object.current_period_start,
+                        current_period_end: object.current_period_end)
+  end
 end

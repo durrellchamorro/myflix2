@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    (flash[:danger] = 'You must be signed in to do that') && redirect_to(login_path) unless current_user
+    (flash[:danger] = 'You must be signed in to do that.') && redirect_to(login_path) unless current_user
   end
 
   def current_user
