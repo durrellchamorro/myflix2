@@ -23,10 +23,11 @@ feature "User sees plan and billing" do
     click_on("Plan and Billing")
 
     expect_to_see("$9.99 per month")
+    expect_to_see_either(1, 2)
     #neo's subscription date range. Accept both methods of calculating the time from midnight.
-    expect_to_see("12/31/2016 - 01/31/2017") || expect_to_see("01/01/2017 - 02/01/2017")
+    expect_to_see_either("01/01/2017 - 02/01/2017", "12/31/2016 - 01/31/2017")
     #morpheus's subscription date range. Accept both methods of calculating the time from midnight.
-    expect_not_to_see("03/30/1999 - 04/30/1999") || expect_to_see("03/31/1999 - 05/01/1999 ")
+    expect_not_to_see_either("03/31/1999 - 05/01/1999", "03/30/1999 - 04/30/1999")
   end
 
   scenario "morpheus can see his plan and billing, but not neo's plan and billing" do
@@ -37,8 +38,10 @@ feature "User sees plan and billing" do
     click_on("Plan and Billing")
 
     expect_to_see("$9.99 per month")
-    expect_not_to_see("12/31/2016 - 01/31/2017") #neo's subscription date range
-    expect_to_see("03/30/1999 - 04/30/1999") #morpheus's subscription date range
+    #morpheus's subscription date range. Accept both methods of calculating the time from midnight.
+    expect_to_see_either("03/31/1999 - 05/01/1999", "03/30/1999 - 04/30/1999")
+    #neo's subscription date range. Accept both methods of calculating the time from midnight.
+    expect_not_to_see_either("01/01/2017 - 02/01/2017", "12/31/2016 - 01/31/2017")
   end
 
   scenario "an unauthenticated user cannot view the plan and billing", :js do
