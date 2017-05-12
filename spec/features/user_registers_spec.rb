@@ -62,15 +62,9 @@ feature "User registers", :js, :vcr do
     expect_to_see("can't be blank")
   end
 
-  def fill_in_valid_user_info
-    fill_in("Email Address", with: "example@gmail.com")
-    fill_in("Password", with: "password")
-    fill_in("Full Name", with: "ralph")
-  end
-
   def fill_in_invalid_user_info
-    fill_in("Email Address", with: "example@gmail.com")
+    fill_in("Email Address", with: "neo@matrix.io")
     fill_in("Password", with: "")
-    fill_in("Full Name", with: "ralph")
+    fill_in("Full Name", with: "Thomas Anderson")
   end
 end

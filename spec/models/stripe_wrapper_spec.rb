@@ -123,5 +123,18 @@ describe StripeWrapper do
         end
       end
     end
+
+    describe ".cancel" do
+      it "sends the correct messages to Stripe" do
+        myflix_database_subscription = create(:subscription)
+        stripe_database_subscription = double
+        allow(stripe_database_subscription).to receive(:delete)
+        allow(Stripe::Subscription).to receive(:retrieve).and_return(stripe_database_subscription)
+
+        StripeWrapper::Subscription.cancel(myflix_database_subscription)
+
+        expect(stripe_database_subscription).to have_received(:delete).with(at_period_end: true)
+      end
+    end
   end
 end

@@ -112,4 +112,20 @@ describe User do
       expect(neo.reload).not_to be be_active
     end
   end
+
+  describe "#canceling_at_subscription_end?" do
+    it "returns true when the users subscription is set to cancel at the end of its period" do
+      neo = create(:user)
+      create(:subscription, user: neo, cancel_at_period_end: true)
+
+      expect(neo.canceling_at_subscription_end?).to be true
+    end
+
+    it "returns false when the users subscripitno is not set to cancel at the end of its period." do
+      neo = create(:user)
+      create(:subscription, user: neo, cancel_at_period_end: false)
+
+      expect(neo.canceling_at_subscription_end?).to be false
+    end
+  end
 end

@@ -35,8 +35,20 @@ def expect_to_see(text)
   expect(page).to have_content(text)
 end
 
+def expect_to_see_either(text1, text2)
+  expect_to_see(text1)
+rescue RSpec::Expectations::ExpectationNotMetError => e
+  expect_to_see(text2)
+end
+
 def expect_not_to_see(content)
   expect(page).not_to have_content(content)
+end
+
+def expect_not_to_see_either(text1, text2)
+  expect_not_to_see(text1)
+rescue RSpec::Expectations::ExpectationNotMetError => e
+  expect_not_to_see(text2)
 end
 
 def click_video(video)
@@ -59,4 +71,10 @@ def fill_in_card_info(card_number)
     wait_for_dom(dom_finder: "input[name='postal']")
     page.find("input[name='postal']").set("90210")
   end
+end
+
+def fill_in_valid_user_info
+  fill_in("Email Address", with: "neo@matrix.io")
+  fill_in("Password", with: "password")
+  fill_in("Full Name", with: "Thomas Anderson")
 end
