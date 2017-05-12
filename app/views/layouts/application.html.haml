@@ -7,10 +7,12 @@
     = csrf_meta_tag
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
+    %script(src="https://js.stripe.com/v3/")
   %body
     %header
       = render 'shared/header'
-    %section.content.clearfix.unobtrusive-flash-container
-      = yield
+    .clearfix.unobtrusive-flash-container(id="flash" data-turbolinks-temporary)
+    = yield
+    %section.footer
     %footer
       &copy 2017 MyFLIX

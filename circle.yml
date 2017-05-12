@@ -1,6 +1,11 @@
 machine:
   ruby:
-    version: 2.1.2
+    version: 2.4.1
+  timezone:
+    America/Los_Angeles
+dependencies:
+  pre:
+    - gem install bundler
 deployment:
   production:
     branch: master

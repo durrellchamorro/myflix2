@@ -7,6 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:email) }
   it { should have_many(:reviews).order("created_at DESC") }
   it { should have_many(:queue_items).order(:position) }
+  it { should have_many(:payments) }
 
   describe '#video_review' do
     let(:neo) { create(:user) }
@@ -100,6 +101,31 @@ describe User do
       morpheus.follow(neo)
 
       expect(Relationship.count).to eq(1)
+    end
+  end
+
+  describe '#deactivate!' do
+    it "sets the active attribute to false" do
+      neo = create(:user, active: true)
+      neo.deactivate!
+
+      expect(neo.reload).not_to be be_active
+    end
+  end
+
+  describe "#canceling_at_subscription_end?" do
+    it "returns true when the users subscription is set to cancel at the end of its period" do
+      neo = create(:user)
+      create(:subscription, user: neo, cancel_at_period_end: true)
+
+      expect(neo.canceling_at_subscription_end?).to be true
+    end
+
+    it "returns false when the users subscripitno is not set to cancel at the end of its period." do
+      neo = create(:user)
+      create(:subscription, user: neo, cancel_at_period_end: false)
+
+      expect(neo.canceling_at_subscription_end?).to be false
     end
   end
 end

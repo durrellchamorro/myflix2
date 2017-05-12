@@ -7,14 +7,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    user_sign_up = UserSignUp.new(@user, invitation)
 
-    if @user.save
+    user_sign_up.sign_up(params[:stripeToken])
+    if user_sign_up.successful
       flash[:success] = "You signed up successfully."
-
-      inviter_and_invitee_follow_eachother
-      AppMailer.delay.send_welcome_email(@user)
-
       redirect_to login_path
+    elsif user_sign_up.failed
+      flash[:danger] = user_sign_up.error_message
+      render :new
+      return
     else
       render :new
     end
@@ -42,17 +44,5 @@ class UsersController < ApplicationController
 
   def invitation
     Invitation.find_by(token: params[:token])
-  end
-
-  def inviter
-    User.find(invitation.inviter_id)
-  end
-
-  def inviter_and_invitee_follow_eachother
-    if invitation
-      @user.follow(inviter)
-      inviter.follow(@user)
-      invitation.update_column(:token, nil)
-    end
   end
 end

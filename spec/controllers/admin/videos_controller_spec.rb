@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe Admin::VideosController do
   describe "GET new" do
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :new }
-    end
-
     it_behaves_like "require_admin" do
       let(:action) { post :create }
     end
@@ -19,10 +15,6 @@ describe Admin::VideosController do
   end
 
   describe "POST create" do
-    it_behaves_like "require_sign_in" do
-      let(:action) { post :create }
-    end
-
     it_behaves_like "require_admin" do
       let(:action) { post :create }
     end

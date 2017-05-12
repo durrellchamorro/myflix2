@@ -16,4 +16,14 @@ feature "User signs in" do
 
     expect_to_see("Invalid email or password")
   end
+
+  scenario "deactivated user signs in", :js do
+    neo = create(:user, active: false)
+    visit login_path
+    fill_in('Email Address', with: neo.email)
+    fill_in("Password", with: neo.password)
+    click_on("Sign In")
+    expect_not_to_see(neo.full_name)
+    expect_to_see("Your account is not active. Only active users can sign in.")
+  end
 end

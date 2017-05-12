@@ -61,14 +61,6 @@ section.register, section.sign_in, section.reset_password
         font-size: 24px
         margin-bottom: 20px
 
-section.register
-  form
-    fieldset.credit_card
-      border-top: 1px solid #ccc
-      padding-top: 20px
-      select#date_month
-        margin-right: 25px
-
 section.forgot_password
   background: #f7f7f7
   padding: 30px
@@ -89,3 +81,15 @@ section.confirm_password_reset, section.invalid_token, section.reset_password
         margin-bottom: 20px
       p
         margin-bottom: 20px
+
+
+section.register
+  label.required + div
+    input
+      height: 33px
+
+@media (max-width: $screen-xs)
+  section.register
+    .col-sm-6
+      padding-left: 0px
+      padding-right: 0px

@@ -1,0 +1,36 @@
+%section.billing.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      .plan_and_payments
+        - unless current_user.canceling_at_subscription_end?
+          %section.plan
+            %header
+              %h1 Billing
+            %table.table
+              %thead
+                %tr
+                  %th
+                  %th Next Billing Date
+                  %th Price
+              %tbody
+                %tr
+                  %td The All You Can Watch Plan
+                  %td= @subscriptions.last.print_current_period_end
+                  %td= "$#{@subscriptions.last.usd} per month"
+            = button_to "Cancel Service", subscription_path(@subscriptions.last), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: "btn btn-primary"
+
+        %section.payment_history
+          %header
+            %h3 Payment History
+          %table.table
+            %thead
+              %tr
+                %th Date
+                %th Service Duration
+                %th Total
+            %tbody
+              - @subscriptions.each do |subscription|
+                %tr
+                  %td= subscription.print_current_period_start
+                  %td= "#{subscription.print_current_period_start} - #{subscription.print_current_period_end}"
+                  %td= "$#{subscription.usd}"
