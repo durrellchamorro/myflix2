@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509012433) do
+ActiveRecord::Schema.define(version: 20170510223304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20170509012433) do
     t.integer  "current_period_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "cancel_at_period_end", default: false
   end
 
   create_table "users", force: :cascade do |t|

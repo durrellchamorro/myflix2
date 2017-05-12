@@ -60,3 +60,9 @@ def fill_in_card_info(card_number)
     page.find("input[name='postal']").set("90210")
   end
 end
+
+def fill_in_valid_user_info
+  fill_in("Email Address", with: "neo@matrix.io")
+  fill_in("Password", with: "password")
+  fill_in("Full Name", with: "Thomas Anderson")
+end

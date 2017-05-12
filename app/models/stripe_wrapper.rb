@@ -69,6 +69,11 @@ module StripeWrapper
       end
     end
 
+    def self.cancel(subscription)
+      retrieved_subscription = Stripe::Subscription.retrieve(subscription.reference_id)
+      retrieved_subscription.delete(at_period_end: true)
+    end
+
     private_class_method def self.create_subscription(customer, plan)
       response = Stripe::Subscription.create(
         customer: customer.id,

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :queue_items, -> { order(:position) }
   has_many :following_relationships, class_name: "Relationship", foreign_key: :follower_id
   has_many :payments
-  has_many :subscriptions 
+  has_many :subscriptions
   has_secure_password
 
   def normalize_queue_item_positions
@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
 
   def deactivate!
     update_column("active", false)
+  end
+
+  def canceling_at_subscription_end?
+    subscriptions.last.cancel_at_period_end?
   end
 
   private

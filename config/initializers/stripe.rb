@@ -20,6 +20,20 @@ StripeEvent.configure do |events|
     user.deactivate!
   end
 
+  events.subscribe 'customer.subscription.deleted' do |event|
+    object = event.data.object
+    user = User.find_by(stripe_id: object.customer)
+
+    user.deactivate!
+  end
+
+  events.subscribe 'customer.subscription.updated' do |event|
+    object = event.data.object
+    user = User.find_by(stripe_id: object.customer)
+
+    user.subscriptions.last.update_column('cancel_at_period_end', true)
+  end
+
   events.subscribe 'customer.subscription.created' do |event|
     object = event.data.object
     user = User.find_by(stripe_id: object.customer)

@@ -38,5 +38,5 @@ Myflix::Application.routes.draw do
   resources :categories, only: [:show]
   resources :relationships, only: [:destroy, :create]
   resources :invitations, only: [:new, :create]
-  resources :subscriptions, only: [:index]
+  resources :subscriptions, only: [:index, :destroy]
 end
