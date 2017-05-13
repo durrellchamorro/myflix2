@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user, only: [:show]
+  before_action :require_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -34,6 +34,22 @@ class UsersController < ApplicationController
     else
       redirect_to expired_token_path
     end
+  end
+
+  def edit
+    @user = User.find(current_user.id)
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.try(:update, user_params)
+      flash.now[:success] = "Your account was successfully updated."
+    else
+      flash.now[:danger] = "Please try again."
+    end
+
+    render :edit
   end
 
   private

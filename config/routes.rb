@@ -31,10 +31,10 @@ Myflix::Application.routes.draw do
       get 'search'
     end
   end
-  resources :users, only: [:create]
+
+  resources :users, only: [:create, :show, :edit, :update]
   resources :sessions, only: [:create]
   resources :queue_items, only: [:create, :destroy]
-  resources :users, only: [:show]
   resources :categories, only: [:show]
   resources :relationships, only: [:destroy, :create]
   resources :invitations, only: [:new, :create]

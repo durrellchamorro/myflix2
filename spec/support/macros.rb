@@ -41,6 +41,10 @@ rescue RSpec::Expectations::ExpectationNotMetError => e
   expect_to_see(text2)
 end
 
+def expect_field_value(field:, value:)
+  expect(find_field(field).value).to eq(value)
+end
+
 def expect_not_to_see(content)
   expect(page).not_to have_content(content)
 end
