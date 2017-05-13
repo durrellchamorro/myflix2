@@ -4,21 +4,22 @@
       .col-sm-10.col-sm-offset-1
         %section.payment_history
           %ul.nav.nav-tabs
-            %li.active
+            %li.active.col-xs-6
               %a(href="") Recent Payments
-            %li
-              = link_to "Add a New Video", new_admin_video_path
-          %table.table
-            %thead
-              %tr
-                %th Name
-                %th Email
-                %th Amount
-                %th Reference ID
-            %tbody
-              - @payments.each do |payment|
+            %li.col-xs-6
+              = link_to "New Video", new_admin_video_path
+          .table-responsive
+            %table.table
+              %thead
                 %tr
-                  %td= payment.user.full_name
-                  %td= payment.user.email
-                  %td= "$#{payment.usd}"
-                  %td= payment.reference_id
+                  %th(width="35%") Name
+                  %th(width="35%") Email
+                  %th(width="5%") Amount
+                  %th(width="25%") Reference ID
+              %tbody
+                - @payments.each do |payment|
+                  %tr
+                    %td= payment.user.full_name
+                    %td= payment.user.email
+                    %td= "$#{payment.usd}"
+                    %td= payment.reference_id
