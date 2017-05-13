@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :require_user
 
   def index
-    @categories = Category.joins(:videos).distinct.order(:name)
+    @categories = Category.joins(:videos).distinct.order(:name).page(params[:page]).per(10)
   end
 
   def show

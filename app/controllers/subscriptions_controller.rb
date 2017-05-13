@@ -2,7 +2,9 @@ class SubscriptionsController < ApplicationController
   before_action :require_user
 
   def index
-    @subscriptions = Subscription.where(user: current_user).decorate
+    subscriptions = Subscription.where(user: current_user)
+    @paginatable_subscriptions = subscriptions.page(params[:page]).per(20)
+    @decoratable_subscriptions = subscriptions.decorate 
   end
 
   def destroy

@@ -29,3 +29,5 @@
                       = link_to queue_item, method: :delete do
                         %i.glyphicon.glyphicon-remove
           = submit_tag "Update Instant Queue", class: "btn btn-primary"
+.row
+  = paginate @queue_items

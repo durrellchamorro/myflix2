@@ -9,6 +9,7 @@ gem 'draper', '~> 2.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'turbolinks', '~> 5.0', '>= 5.0.1'
 gem 'unobtrusive_flash', '~> 3.3', '>= 3.3.1'
+gem 'kaminari', '~> 1.0', '>= 1.0.1'
 gem 'money-rails', '~> 1.8'
 gem 'uglifier', '~> 3.2'
 

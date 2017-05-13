@@ -1,5 +1,8 @@
+@import "variables"
+
 section.account
   background: #f7f7f7
+  min-height: $min-height
   form
     padding: 30px
     header
@@ -10,6 +13,7 @@ section.account
 section.billing
   background-color: #F7F7F7
   margin: 30px auto
+  min-height: $min-height
   .plan_and_payments
     padding: 20px
   table
@@ -26,3 +30,7 @@ section.billing
   form
     input[type="submit"]
       margin-bottom: 30px
+
+span#verifynote
+  color: #a94442
+  padding-left: 6px

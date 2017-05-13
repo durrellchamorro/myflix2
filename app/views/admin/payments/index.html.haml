@@ -23,3 +23,5 @@
                     %td= payment.user.email
                     %td= "$#{payment.usd}"
                     %td= payment.reference_id
+.row
+  = paginate @payments 
