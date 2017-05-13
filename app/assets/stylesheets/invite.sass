@@ -1,9 +1,17 @@
+@import 'variables'
+
 section.invite
+  background: #f7f7f7
   form
-    background: #f7f7f7
     padding: 30px
     header
       h1
         font-size: 24px
         margin-bottom: 20px
 
+@media (max-width: $screen-sm)
+  section.invite
+    form
+      header
+        h1
+          font-size: 20px
