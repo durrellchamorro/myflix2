@@ -20,6 +20,7 @@ end
 def sign_in(user=nil)
   user ||= create(:user)
   visit login_path
+  wait_for_text('Email Address')
   fill_in('Email Address', with: user.email)
   fill_in('Password', with: user.password)
   click_on("Sign In")
