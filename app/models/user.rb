@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :full_name, :password_digest, :email
+  validates_presence_of :full_name, :password_digest, :email, :password
   validates_uniqueness_of :email
   has_many :reviews, -> { order("created_at DESC") }
   has_many :queue_items, -> { order(:position) }

@@ -2,7 +2,7 @@
 
 $(document).on("turbolinks:load", function() {
   var bind_all_event_listeners = function() {
-    UnobtrusiveFlash.flashOptions['timeout'] = 8000; // milliseconds
+    // UnobtrusiveFlash.flashOptions['timeout'] = 8000; // milliseconds
     bind_file_upload();
     bind_submit_button();
   };

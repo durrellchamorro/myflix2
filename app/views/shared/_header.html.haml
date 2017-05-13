@@ -25,7 +25,7 @@
         %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
           %li
             = link_to "Invite a Friend", new_invitation_path
-            %a(href="#") Account
+            = link_to "Account", edit_user_path(current_user)
             = link_to("Plan and Billing", subscriptions_path) unless current_user.admin
             = link_to("Recent Payments", admin_payments_path) if current_user.admin
             = link_to("Add a New Video", new_admin_video_path) if current_user.admin
