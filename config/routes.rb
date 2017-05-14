@@ -39,4 +39,9 @@ Myflix::Application.routes.draw do
   resources :relationships, only: [:destroy, :create]
   resources :invitations, only: [:new, :create]
   resources :subscriptions, only: [:index, :destroy]
+
+  # friendly urls and caching with Kaminari
+  resources :videos do
+    get '/home/:page', action: :index, on: :collection
+  end
 end
