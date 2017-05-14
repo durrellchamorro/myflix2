@@ -3,12 +3,13 @@
 section.account
   background: #f7f7f7
   min-height: $min-height
+  padding-top: 15px
+  header
+    text-align: center
+    h1
+      font-size: 24px
   form
     padding: 30px
-    header
-      h1
-        font-size: 24px
-        margin-bottom: 20px
 
 section.billing
   background-color: #F7F7F7
@@ -34,3 +35,7 @@ section.billing
 span#verifynote
   color: #a94442
   padding-left: 6px
+
+@media (max-width: $screen-xs)
+  section.account, section.billing
+    min-height: $mobile-min-height
