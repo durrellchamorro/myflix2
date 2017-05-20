@@ -32,13 +32,15 @@ class Video < ActiveRecord::Base
     search(
       query,
       @advanced_search_options
-    ).results
+    )
   end
 
-  def self.set_advanced_search_options(rating_from, rating_to, reviews)
+  def self.set_advanced_search_options(rating_from, rating_to, reviews, page)
     @advanced_search_options = {
       fields: [{ title: :word_start }, "description^50", "title^100"],
-      where: { average_rating: {} }
+      where: { average_rating: {} },
+      page: page,
+      per_page: 20
     }
 
     @advanced_search_options[:fields] << :reviews if reviews == "y"

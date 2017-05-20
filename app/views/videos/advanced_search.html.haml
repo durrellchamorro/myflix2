@@ -45,3 +45,5 @@
             %span.reviews_count= "#{video.reviews.count} reviews"
           %p.video_review
             = video.reviews.first.try(:content)
+
+= paginate @videos if params[:query]

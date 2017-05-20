@@ -44,25 +44,25 @@ describe VideosController do
         it "assigns @videos to searchkick results based on title and description match" do
           get :search, search_term: "star"
 
-          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, star_trek])
+          expect(assigns(:videos)).to match_array([video1, video2, star_wars2, star_trek])
         end
 
         it "sets @videos equal to all the videos in the database when the search term is an empty string" do
           get :search, search_term: ""
 
-          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, bride_wars, star_trek])
+          expect(assigns(:videos)).to match_array([video1, video2, star_wars2, bride_wars, star_trek])
         end
 
         it "follows the default setting which is results must match all words in the query" do
           get :search, search_term: "Star Wars"
 
-          expect(assigns(:videos).results).to match_array([video1, star_wars2])
+          expect(assigns(:videos)).to match_array([video1, star_wars2])
         end
 
         it "matches the word start" do
           get :search, search_term: "str"
 
-          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, star_trek])
+          expect(assigns(:videos)).to match_array([video1, video2, star_wars2, star_trek])
         end
       end
 
