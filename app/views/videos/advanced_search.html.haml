@@ -42,7 +42,7 @@
           %hr
           .details
             %span.average_rating= "Average rating: #{video.print_average_video_rating}"
-            %span.reviews_count= "#{video.reviews.count} reviews"
+            %span.reviews_count= pluralize(video.reviews.count, "review")
           %p.video_review
             = video.reviews.first.try(:content)
 
