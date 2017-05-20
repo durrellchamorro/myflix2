@@ -1,6 +1,6 @@
 %section.genre
   %header.clearfix
-    %h1= @category.name.pluralize(@category.videos.size)
+    %h3= @category.name.pluralize(@category.videos.size)
     .genre_sorting
       Sort by:
       %select(name="")
@@ -8,8 +8,10 @@
         %option(value="z-a") Title: Z - A
         %option(value="rating") Rating
   %article.row
-    - @category.videos.each do |video|
+    - @videos.each do |video|
       .video.col-xs-6.col-sm-3.col-md-2
         .custom_thumb
           = link_to video_path(video) do
             = image_tag video.photos.first.try(:image_url, public: true)
+.row
+  = paginate @videos

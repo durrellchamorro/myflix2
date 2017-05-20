@@ -1,20 +1,15 @@
 %section.sign_in
   .row
-    .col-sm-10.col-sm-offset-1
+    %header.text-center
+      %h1 Sign in
+    .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.col-lg-4.col-lg-offset-4
       = form_tag sessions_path, class: 'sign_in' do
-        %header
-          %h1 Sign in
         %fieldset
           .form-group
             = label_tag :email, 'Email Address'
-            .row
-              .col-sm-4
-                = email_field_tag 'email', nil, class: 'form-control'
-          .form-group
+            = email_field_tag 'email', nil, class: 'form-control'
             = label_tag :password, 'Password'
-            .row
-              .col-sm-4
-                = password_field_tag 'password', nil, class: 'form-control'
+            = password_field_tag 'password', nil, class: 'form-control'
         %fieldset.form-group.action
-          = submit_tag 'Sign In', class: 'btn btn-default'
+          = submit_tag 'Sign In', class: 'btn btn-primary', data: { disable_with: 'loading...' }
           = link_to "Forgot Password?", forgot_password_path

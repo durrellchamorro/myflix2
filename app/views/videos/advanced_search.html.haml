@@ -1,0 +1,49 @@
+%section.advanced_search
+  = form_tag advanced_search_videos_path, class: "form-horizontal", method: :get do
+    %header
+      %h1 Advanced Search
+    .form-group
+      .col-sm-6
+        = search_field_tag :query, params[:query], placeholder: "search videos by title or description", class: "form-control search_input"
+    .form-group
+      .col-sm-6
+        .checkbox
+          %label
+            = check_box_tag :reviews, 'y', params[:reviews] == 'y'
+            Include Reviews
+    .form-group
+      .row.average_rating_label Average Rating
+      = label_tag :rating_from, "From:", class: "col-sm-2 control-label"
+      .col-sm-4.col-md-2
+        = select_tag :rating_from, options_for_select(ratings, params[:rating_from]), prompt: "-", class: "form-control"
+      = label_tag :rating_from, "To:", class: "col-sm-2 control-label"
+      .col-sm-4.col-md-2
+        = select_tag :rating_to, options_for_select(ratings, params[:rating_to]), prompt: "-", class: "form-control"
+    .form-group
+      .col-sm-6
+        = button_tag(type: "submit", class: "btn btn-primary") do
+          %span.glyphicon.glyphicon-search
+          Search
+  - if params[:query]
+    %hr
+    %h2.results_count Results: #{@videos.count} videos found
+    - @videos.each do |video|
+      %article.video.row
+        .custom_thumb_container
+          .custom_thumb
+            = link_to(video_path(video.slug)) do
+              = image_tag video.photo
+        %div.video_data
+          %header
+            %h3
+              = video.title
+          %p.video_description
+            = video.description
+          %hr
+          .details
+            %span.average_rating= "Average rating: #{video.print_average_video_rating}"
+            %span.reviews_count= pluralize(video.reviews.count, "review")
+          %p.video_review
+            = video.reviews.first.try(:content)
+
+= paginate @videos if params[:query]

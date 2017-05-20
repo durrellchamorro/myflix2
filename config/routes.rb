@@ -29,14 +29,23 @@ Myflix::Application.routes.draw do
   resources :videos do
     collection do
       get 'search'
+      get "autocomplete"
+      get "advanced_search"
+      get "show_advanced_search"
     end
+
   end
-  resources :users, only: [:create]
+
+  resources :users, only: [:create, :show, :edit, :update]
   resources :sessions, only: [:create]
   resources :queue_items, only: [:create, :destroy]
-  resources :users, only: [:show]
   resources :categories, only: [:show]
   resources :relationships, only: [:destroy, :create]
   resources :invitations, only: [:new, :create]
   resources :subscriptions, only: [:index, :destroy]
+
+  # friendly urls and caching with Kaminari
+  resources :videos do
+    get '/home/:page', action: :index, on: :collection
+  end
 end

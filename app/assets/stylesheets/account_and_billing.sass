@@ -1,16 +1,21 @@
+@import "variables"
+
 section.account
+  background: #f7f7f7
+  min-height: $min-height
+  padding-top: 15px
+  header
+    text-align: center
+    h1
+      font-size: 24px
   form
-    background: #f7f7f7
     padding: 30px
-    header
-      h1
-        font-size: 24px
-        margin-bottom: 20px
 
 section.billing
+  background-color: #F7F7F7
   margin: 30px auto
+  min-height: $min-height
   .plan_and_payments
-    background-color: #F7F7F7
     padding: 20px
   table
     tr
@@ -26,3 +31,14 @@ section.billing
   form
     input[type="submit"]
       margin-bottom: 30px
+
+span#verifynote
+  color: #a94442
+  padding-left: 6px
+
+@media (max-width: $screen-xs)
+  section.account, section.billing
+    min-height: $mobile-min-height
+    header
+      h1
+        font-size: 20px

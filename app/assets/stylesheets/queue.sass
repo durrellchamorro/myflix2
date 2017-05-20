@@ -1,10 +1,14 @@
+@import "variables"
+
 section.my_queue
   margin: 0 auto
   background-color: #F7F7F7
+  min-height: $min-height
 
   article
     padding: 20px
     header
+      text-align: center
       h2
         font-size: 24px
         margin-bottom: 30px
@@ -22,3 +26,11 @@ section.my_queue
             width: 80px
           select
             width: 100px
+
+@media (max-width: $screen-xs)
+  section.my_queue
+    min-height: $mobile-min-height
+    article
+      header
+        h2
+          font-size: 20px

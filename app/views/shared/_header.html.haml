@@ -3,16 +3,17 @@
     %h1
       = link_to "MyFLIX", root_path
   - if current_user
-    %div.col-md-3
+    %div.col-md-5
       %ul.header-links
         %li= link_to "Videos", home_path
         %li= link_to "My Queue", my_queue_path
         %li= link_to "People", people_path
-    %div.col-md-6
+        %li= link_to "Advanced Search", show_advanced_search_videos_path
+    %div.col-md-4
       #custom-search-input
         .input-group
           %form{action: search_videos_path, method: "get"}
-            %input.form-control.input-lg{:placeholder => "Video Search", :type => "text", name: 'search_term' }
+            %input.search_input.form-control.input-lg{:placeholder => "Video Search", :type => "text", name: 'search_term' }
             = hidden_field_tag :authenticity_token, form_authenticity_token
             %span.input-group-btn
               %button.btn.btn-info.btn-lg{:type => "submit"}
@@ -25,8 +26,8 @@
         %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
           %li
             = link_to "Invite a Friend", new_invitation_path
-            %a(href="#") Account
+            = link_to "Account", edit_user_path(current_user)
             = link_to("Plan and Billing", subscriptions_path) unless current_user.admin
             = link_to("Recent Payments", admin_payments_path) if current_user.admin
             = link_to("Add a New Video", new_admin_video_path) if current_user.admin
-            = link_to 'Sign Out', logout_path
+            = link_to 'Sign Out', logout_path, "data-turbolinks" => false

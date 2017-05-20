@@ -1,4 +1,4 @@
-class VideoDecorator < Draper::Decorator
+class VideoDecorator < ApplicationDecorator
   delegate_all
 
   def print_average_video_rating
@@ -7,7 +7,7 @@ class VideoDecorator < Draper::Decorator
   end
 
   def youtube_iframe
-    "<iframe height='480' src='https://www.youtube.com/embed/#{token}' width='854'></iframe>".html_safe
+    "<iframe width='854' height='480' src='https://www.youtube.com/embed/#{token}' frameborder='0' allowfullscreen></iframe>".html_safe
   end
 
   def add_to_queue_button(current_user)

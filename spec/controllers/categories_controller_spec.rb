@@ -13,5 +13,14 @@ describe CategoriesController do
 
       expect(assigns(:category)).to eq(comedies)
     end
+
+    it "sets @videos" do
+      set_current_user
+      action = create(:category)
+      the_matrix = create(:video, category: action)
+      get :show, id: action.id
+
+      expect(assigns(:videos)).to eq([the_matrix])
+    end
   end
 end

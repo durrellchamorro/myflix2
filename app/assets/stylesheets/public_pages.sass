@@ -3,6 +3,7 @@
 section.site_title
   background: #f7f7f7
   padding: 70px 70px
+  margin-bottom: 400px
   h1:first-of-type
     font-size: 34px
     margin-bottom: 5px
@@ -52,28 +53,31 @@ section.site_title
       font-size: 12px
       margin-bottom: 30px
 
-section.register, section.sign_in, section.reset_password
+section.sign_in, section.reset_password
+  header
+    h1
+      font-size: 24px
+  background: #f7f7f7
+  padding-top: 15px
+  min-height: $min-height
   form
-    background: #f7f7f7
     padding: 30px
-    header
-      h1
-        font-size: 24px
-        margin-bottom: 20px
 
 section.forgot_password
   background: #f7f7f7
   padding: 30px
-  form
-    header
-      h1
-        font-size: 24px
-      p
-        margin-bottom: 20px
+  min-height: $min-height
+  header
+    h1
+      font-size: 24px
+      margin-bottom: 10px
+    p
+      margin-bottom: 20px
 
 section.confirm_password_reset, section.invalid_token, section.reset_password
   background: #f7f7f7
   padding: 30px
+  min-height: $min-height
   form
     header
       h1
@@ -84,6 +88,14 @@ section.confirm_password_reset, section.invalid_token, section.reset_password
 
 
 section.register
+  background: #f7f7f7
+  min-height: $min-height
+  padding-top: 15px
+  h1
+    font-size: 24px
+    text-align: center
+  form
+    padding: 30px
   label.required + div
     input
       height: 33px
@@ -93,3 +105,6 @@ section.register
     .col-sm-6
       padding-left: 0px
       padding-right: 0px
+  section.confirm_password_reset, section.invalid_token, section.reset_password,
+  section.register, section.sign_in, section.forgot_password
+    min-height: $mobile-min-height

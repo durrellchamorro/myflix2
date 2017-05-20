@@ -2,7 +2,7 @@ class QueueItemsController < ApplicationController
   before_action :require_user
 
   def index
-    @queue_items = current_user.queue_items
+    @queue_items = current_user.queue_items.page(params[:page]).per(20)
   end
 
   def create

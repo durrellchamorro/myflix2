@@ -1,8 +1,11 @@
+@import "variables"
+
 section.user
-  margin: 30px auto
+  margin: 0px 0px 20px 0px
+  background-color: #F7F7F7
+  min-height: $min-height
 
   article
-    background-color: #F7F7F7
     padding: 20px
     header
       margin-bottom: 30px
@@ -16,6 +19,8 @@ section.user
         float: right
 
 section.user_reviews
+  background: #F7F7F7
+  padding: 15px 0px
   ul
     article.review
       margin-top: 20px
@@ -26,3 +31,13 @@ section.user_reviews
           font-size: 14px
         &:last-of-type
           border-bottom: none
+
+@media (max-width: $screen-xs)
+  section.user
+    min-height: $mobile-min-height
+@media (max-width: $screen-sm)
+  section.register
+    header
+      text-align: center
+  section.user_reviews
+    padding: 15px 15px

@@ -1,21 +1,16 @@
-%section.invite.container
+%section.invite
   .row
-    .col-sm-10.col-sm-offset-1
+    .col-sm-8.col-sm-offset-2
+      %header.text-center
+        %h1 Invite a friend to join MyFLIX!
       = bootstrap_form_for @invitation, class: "invite" do |f|
-        %header
-          %h1 Invite a friend to join MyFlix!
         %fieldset
           .form-group
-            .row
-              .col-sm-4
-                = f.text_field :recipient_name, class: "form-control", label: "Friend's Name"
-          .form-group
-            .row
-              .col-sm-4
-                = f.email_field :recipient_email, class: "form-control", label: "Friend's Email Address"
-          .form-group
-            .row
-              .col-sm-6
-                = f.text_area :message, class: "form-control", rows: 6, cols: 6, placeholder: "Please join this really cool site!", label: "Invitation Message"
-        %fieldset.form-group.action
-          = f.submit "Send Invitation", class: "btn btn-default"
+            .col-sm-8.col-sm-offset-2
+              = f.text_field :recipient_name, class: "form-control", label: "Friend's Name"
+            .col-sm-8.col-sm-offset-2
+              = f.email_field :recipient_email, class: "form-control", label: "Friend's Email Address"
+            .col-sm-8.col-sm-offset-2
+              = f.text_area :message, class: "form-control", rows: 6, cols: 6, placeholder: "Please join this really cool site!", label: "Invitation Message"
+        %fieldset.form-group.action.col-sm-8.col-sm-offset-2
+          = f.submit "Send Invitation", class: "btn btn-primary", data: { disable_with: 'loading...' }

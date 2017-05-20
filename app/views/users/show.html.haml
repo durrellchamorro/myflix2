@@ -1,11 +1,11 @@
-%section.user.container
+%section.user
   .row
     .col-sm-10.col-sm-offset-1
       %article
         %header
           %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}?s=40")
           %h2 #{@user.full_name}'s video collections (#{@user.queue_items.count})
-          = link_to("Follow", relationships_path(leader_id: @user.id), class: "btn btn-default", method: "post") if current_user.can_follow?(@user.id)
+          = link_to("Follow", relationships_path(leader_id: @user.id), class: "btn btn-primary", method: "post") if current_user.can_follow?(@user.id)
         %table.table
           %thead
             %tr
@@ -19,7 +19,7 @@
                 %td
                   = link_to queue_item.category_name, queue_item.category
 
-%section.user_reviews.container
+%section.user_reviews
   .row
     .col-sm-10.col-sm-offset-1
       %header

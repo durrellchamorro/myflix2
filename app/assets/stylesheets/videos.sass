@@ -3,7 +3,7 @@
 article.video
   background-color: #F7F7F7
   padding: 30px
-  margin: 0 0 30px
+  margin: 0 0 20px
   .video_info
     margin-left: 30px
     header
@@ -21,21 +21,11 @@ article.video
       a
         margin-right: 20px
 
-@media (max-width: $screen-lg)
-  article.video
-    .video_info
-      padding-top: 10px
-      margin-left: 0px
-  section.reviews.row
-    padding: 0px
-    .col-lg-10.col-lg-offset-1
-      padding-left: 0px
-      padding-right: 0px
-
-
 section.reviews
   padding: 30px
   margin: 0px
+  background-color: #F7F7F7
+
   form
     margin-bottom: 30px
   ul
@@ -49,3 +39,18 @@ section.reviews
           font-size: 14px
         &:last-of-type
           border-bottom: none
+
+@media (max-width: $screen-lg)
+  article.video
+    .video_info
+      padding-top: 10px
+      margin-left: 0px
+  section.reviews.row
+    padding: 0px
+    .col-lg-10.col-lg-offset-1
+      padding-left: 0px
+      padding-right: 0px
+
+@media (max-width: $screen-lg)
+  section.reviews.row
+    padding: 15px 15px

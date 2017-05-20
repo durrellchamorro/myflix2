@@ -1,4 +1,4 @@
-class SubscriptionDecorator < Draper::Decorator
+class SubscriptionDecorator < ApplicationDecorator
   delegate_all
 
   def print_current_period_start

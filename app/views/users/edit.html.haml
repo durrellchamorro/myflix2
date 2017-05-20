@@ -1,0 +1,16 @@
+%section.account
+  .row
+    %header
+      %h1 Your Account
+    .col-sm-10.col-sm-offset-2
+      %fieldset
+        = bootstrap_form_for @user, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-6', data: 'update_account' do |f|
+          = f.email_field :email, label: "Email Address"
+          = f.password_field :password
+          = f.password_field :password_match, label: "Confirm Password"
+          %span#verifynote.warn.hidden.col-sm-offset-2 passwords do not match
+          = f.text_field :full_name, label: "Full Name"
+          %fieldset.actions.control-group.col-sm-offset-2
+            .controls
+              = f.submit class: "btn btn-primary", value: "Update Account", data: { disable_with: 'loading...' }
+              = link_to "Cancel"

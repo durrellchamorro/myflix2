@@ -1,11 +1,13 @@
+@import "variables"
+
 section.genre
-  margin: 30px 10px 0 10px
+  background-color: #F7F7F7
+  padding-top: 15px
+  min-height: $min-height
   header
-    padding-bottom: 30px
-    border-bottom: 2px solid #BBBBB9
-    box-shadow: white 0 1px 0 0
-    h1
-      font-size: 32px
+    margin: 0px 15px
+    h3
+      font-size: 18px
       float: left
     .genre_sorting
       float: right
@@ -13,7 +15,7 @@ section.genre
       margin-top: 4px
       margin-left: 10px
       width: 120px
-  article
-    > .video
-      margin-bottom: 20px
-      margin-top: 20px
+
+@media (max-width: $screen-xs)
+  section.genre
+    min-height: $mobile-min-height

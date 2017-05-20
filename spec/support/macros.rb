@@ -20,6 +20,7 @@ end
 def sign_in(user=nil)
   user ||= create(:user)
   visit login_path
+  wait_for_text('Email Address')
   fill_in('Email Address', with: user.email)
   fill_in('Password', with: user.password)
   click_on("Sign In")
@@ -41,6 +42,10 @@ rescue RSpec::Expectations::ExpectationNotMetError => e
   expect_to_see(text2)
 end
 
+def expect_field_value(field:, value:)
+  expect(find_field(field).value).to eq(value)
+end
+
 def expect_not_to_see(content)
   expect(page).not_to have_content(content)
 end
@@ -60,7 +65,7 @@ def expect_page_to_have_video_title(video)
 end
 
 def fill_in_card_info(card_number)
-  stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
+  stripe_iframe = page.find("iframe[title='Secure payment input frame']")
 
   Capybara.within_frame stripe_iframe do
     page.find("input[name='cardnumber']").set(card_number)
