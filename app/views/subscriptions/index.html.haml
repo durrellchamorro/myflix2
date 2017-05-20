@@ -16,9 +16,9 @@
                 %tbody
                   %tr
                     %td The All You Can Watch Plan
-                    %td= @decoratable_subscriptions.last.print_current_period_end
-                    %td= "$#{@decoratable_subscriptions.last.usd} per month"
-            = button_to "Cancel Service", subscription_path(@decoratable_subscriptions.last), method: :delete, data: { confirm: 'Are you sure you want to cancel your subscription?', disable_with: 'loading...' }, class: "btn btn-primary"
+                    %td= @subscriptions.last.print_current_period_end
+                    %td= "$#{@subscriptions.last.usd} per month"
+            = button_to "Cancel Service", subscription_path(@subscriptions.last), method: :delete, data: { confirm: 'Are you sure you want to cancel your subscription?', disable_with: 'loading...' }, class: "btn btn-primary"
 
         %section.payment_history
           %header
@@ -31,10 +31,9 @@
                   %th Service Duration
                   %th Total
               %tbody
-                - @decoratable_subscriptions.each do |subscription|
+                - @subscriptions.each do |subscription|
                   %tr
                     %td= subscription.print_current_period_start
                     %td= "#{subscription.print_current_period_start} - #{subscription.print_current_period_end}"
                     %td= "$#{subscription.usd}"
-.row
-  = paginate @paginatable_subscriptions
+= paginate @subscriptions 

@@ -30,4 +30,4 @@
             = link_to("Plan and Billing", subscriptions_path) unless current_user.admin
             = link_to("Recent Payments", admin_payments_path) if current_user.admin
             = link_to("Add a New Video", new_admin_video_path) if current_user.admin
-            = link_to 'Sign Out', logout_path
+            = link_to 'Sign Out', logout_path, "data-turbolinks" => false

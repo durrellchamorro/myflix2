@@ -1,6 +1,5 @@
-class VideoDecorator < Draper::Decorator
+class VideoDecorator < ApplicationDecorator
   delegate_all
-  delegate :current_page, :total_pages, :limit_value, :entry_name, :total_count, :offset_value, :last_page?
 
   def print_average_video_rating
     return nil if reviews.blank?
