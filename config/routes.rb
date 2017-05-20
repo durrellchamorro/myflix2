@@ -29,7 +29,11 @@ Myflix::Application.routes.draw do
   resources :videos do
     collection do
       get 'search'
+      get "autocomplete"
+      get "advanced_search"
+      get "show_advanced_search"
     end
+
   end
 
   resources :users, only: [:create, :show, :edit, :update]

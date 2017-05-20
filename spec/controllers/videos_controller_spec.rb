@@ -29,24 +29,45 @@ describe VideosController do
     end
 
 
-    describe "POST search" do
+    describe "POST search", :search do
       context "with authenticated user" do
-        let(:video1) { create(:video, title: "Family Guy") }
-        let(:video2) { create(:video, title: "Star Trek") }
+        let!(:video1) { create(:video, :reindex, title: "Star Wars: Episode 1") }
+        let!(:video2) { create(:video, :reindex, title: "Matrix", description: "sun is a star") }
+        let!(:star_wars2) { create(:video, :reindex, title: "Star Wars: Episode 2") }
+        let!(:bride_wars) { create(:video, :reindex, title: "Bride Wars") }
+        let!(:star_trek) { create(:video, :reindex, title: "Star Trek") }
 
         before do
           set_current_user
         end
 
-        it "sets @videos to the result of Video.search_by_title(params[:search_term])" do
-          post :search, search_term: "Family"
+        it "assigns @videos to searchkick results based on title and description match" do
+          get :search, search_term: "star"
 
-          expect(assigns(:videos)).to eq([video1])
+          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, star_trek])
+        end
+
+        it "sets @videos equal to all the videos in the database when the search term is an empty string" do
+          get :search, search_term: ""
+
+          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, bride_wars, star_trek])
+        end
+
+        it "follows the default setting which is results must match all words in the query" do
+          get :search, search_term: "Star Wars"
+
+          expect(assigns(:videos).results).to match_array([video1, star_wars2])
+        end
+
+        it "matches the word start" do
+          get :search, search_term: "str"
+
+          expect(assigns(:videos).results).to match_array([video1, video2, star_wars2, star_trek])
         end
       end
 
       it "redirects to the login page if a user is not authenticated" do
-        post :search, search_term: "Family"
+        post :search, search_term: "Star Wars"
 
         expect(response).to redirect_to(:login)
       end

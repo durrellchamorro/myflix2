@@ -102,4 +102,17 @@ RSpec.configure do |config|
   Capybara.server_port = 3001
   Capybara.app_host = 'http://localhost:3001'
   Capybara.default_max_wait_time = 10
+
+  #searchkick
+  Searchkick.disable_callbacks
+
+  config.before :each do
+    Video.reindex
+  end
+
+  config.around(:each, search: true) do |example|
+    Searchkick.enable_callbacks
+    example.run
+    Searchkick.disable_callbacks
+  end
 end

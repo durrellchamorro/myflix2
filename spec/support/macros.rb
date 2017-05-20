@@ -65,7 +65,7 @@ def expect_page_to_have_video_title(video)
 end
 
 def fill_in_card_info(card_number)
-  stripe_iframe = all("iframe[name='__privateStripeFrame3']").first
+  stripe_iframe = page.find("iframe[title='Secure payment input frame']")
 
   Capybara.within_frame stripe_iframe do
     page.find("input[name='cardnumber']").set(card_number)
