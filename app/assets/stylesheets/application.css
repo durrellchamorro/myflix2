@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require whitespace-reset
  *= require rails_bootstrap_forms
+ *= require jquery-ui
  *= require_tree .
 */

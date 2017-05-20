@@ -14,6 +14,8 @@ gem 'money-rails', '~> 1.8'
 gem 'uglifier', '~> 3.2'
 
 gem 'pg', '~> 0.20.0'
+gem 'searchkick', '~> 2.3'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'rails', '~> 4.2', '>= 4.2.8'
 gem 'puma', '~> 3.8', '>= 3.8.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'

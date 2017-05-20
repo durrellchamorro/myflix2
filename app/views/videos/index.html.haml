@@ -8,6 +8,6 @@
           .video.col-xs-6.col-sm-3.col-md-2
             .custom_thumb
               = link_to(video_path(video.slug)) do
-                = image_tag video.photos.first.try(:image_url, public: true)
+                = image_tag video.photo
 .row
   = paginate @categories

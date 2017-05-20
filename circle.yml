@@ -3,6 +3,8 @@ machine:
     version: 2.4.1
   timezone:
     America/Los_Angeles
+  services:
+    - elasticsearch
 dependencies:
   pre:
     - gem install bundler
