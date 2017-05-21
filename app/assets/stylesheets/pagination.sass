@@ -8,3 +8,15 @@
 
 .pagination > li > a, .pagination > li > span
   color: #B9090B
+
+@media (max-width: $screen-sm)
+  .pagination
+    li
+      a[data-behavior="away-3"], a[data-behavior="away-4"]
+        display: none
+
+@media (max-width: $screen-xs)
+  .pagination
+    li
+      a[data-behavior="away-2"], a[data-behavior="away-3"], a[data-behavior="away-4"]
+        display: none

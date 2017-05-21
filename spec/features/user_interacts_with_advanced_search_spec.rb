@@ -17,14 +17,13 @@ feature "User interacts with advanced search", :search do
   end
 
   scenario "user searches with title" do
-    expect_not_to_see("videos found")
+    expect_not_to_see("Showing")
 
     within(".advanced_search") do
       fill_in "query", with: "Star Wars"
       click_button "Search"
     end
-
-    expect_to_see("2 videos found")
+    expect_to_see("Showing 2 of 2 Videos")
     expect_to_see("Star Wars: Episode 1")
     expect_to_see("Star Wars: Episode 2")
     expect_not_to_see("Star Trek")
@@ -46,7 +45,7 @@ feature "User interacts with advanced search", :search do
       click_button "Search"
     end
 
-    expect_to_see("0 videos found")
+    expect_to_see("Showing 0 of 0 Videos")
   end
 
   scenario "user searches with a string that matches the title, description and review content of different movies" do

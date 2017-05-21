@@ -1,6 +1,6 @@
 - if page.current?
   %li.active
-    = content_tag :a, page, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
+    = content_tag :a, "#{page} ""/ #{total_pages}", remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
 - else
   %li
-    = link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil))
+    = link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)), "data-behavior" => "away-#{(current_page.to_i - page.to_s.to_i).abs}"
