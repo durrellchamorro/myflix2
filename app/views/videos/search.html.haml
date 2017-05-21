@@ -1,4 +1,5 @@
 %section.search
+  %h2.results_count Showing #{ @videos.count } of #{ pluralize(@videos.total_count, "Video") }
   .row
     - @videos.each do |video|
       .video.video.col-xs-6.col-sm-3.col-md-2

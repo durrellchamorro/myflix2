@@ -2,7 +2,7 @@
   %header.clearfix
     %h3= @category.name.pluralize(@category.videos.size)
   %article.row
-    - @videos.each do |video|
+    - @videos.sort_by(&:title).each do |video|
       .video.col-xs-6.col-sm-3.col-md-2
         .custom_thumb
           = link_to video_path(video) do
