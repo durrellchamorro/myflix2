@@ -4,7 +4,7 @@
       %header
         %h3= link_to category.name, category
       .videos.row
-        - category.recent_videos.each do |video|
+        - category.recent_videos.sort_by(&:title).each do |video|
           .video.col-xs-6.col-sm-3.col-md-2
             .custom_thumb
               = link_to(video_path(video.slug)) do
