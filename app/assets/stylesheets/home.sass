@@ -16,6 +16,14 @@ section.video_index
   padding-top: 15px
   min-height: $min-height
 
-@media (max-width: $screen-xs)
-  section.video_category
-    min-height: $mobile-min-height
+@media (max-width: $screen-md)
+  article.video_category
+    .videos.row
+      div:first-of-type + div + div + div ~ div
+        display: none
+
+@media (max-width: $screen-sm)
+  article.video_category
+    .videos.row
+      div:first-of-type + div ~ div
+        display: none
