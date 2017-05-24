@@ -49,6 +49,7 @@ feature "user edits account", :js do
     click_on("Sign Out")
     visit login_path
     sleep 4
+    wait_for_text("Email Address")
     fill_in('Email Address', with: "morpheus@matrix.io")
     fill_in('Password', with: "secret")
     click_on("Sign In")
