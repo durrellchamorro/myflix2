@@ -50,10 +50,10 @@ describe SessionsController do
     end
   end
 
-  describe "GET destroy" do
+  describe "GET destroy", :js do
     before do
       set_current_user
-      get :destroy
+      xhr :get, :destroy
     end
 
     it "sets the user_id session to nil" do
@@ -65,7 +65,7 @@ describe SessionsController do
     end
 
     it "redirects to the root path" do
-      expect(response).to redirect_to(root_path)
+      expect(response).to render_template "sessions/destroy"
     end
   end
 end
