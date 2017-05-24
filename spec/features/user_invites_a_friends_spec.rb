@@ -11,6 +11,7 @@ feature "User successfully invites a friend" do
     friend_should_follow_inviter
 
     friend_signs_out
+    sleep 1
     sign_in(bob)
 
     inviter_should_follow_friend

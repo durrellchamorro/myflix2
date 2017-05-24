@@ -23,6 +23,7 @@ feature "user edits account", :js do
 
     click_on("Welcome, The Chosen One")
     click_on("Sign Out")
+    sleep 1
     visit login_path
     fill_in('Email Address', with: "mr_anderson@matrix.io")
     fill_in('Password', with: "secret")
@@ -47,6 +48,7 @@ feature "user edits account", :js do
     click_on("Welcome, Thomas Anderson")
     click_on("Sign Out")
     visit login_path
+    sleep 1
     fill_in('Email Address', with: "morpheus@matrix.io")
     fill_in('Password', with: "secret")
     click_on("Sign In")
