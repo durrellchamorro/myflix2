@@ -53,3 +53,7 @@
 * Sikdekiq to send emails in background jobs
 * File uploading using the shrine gem
 * Continuous integration with circleci
+#### See it in the Wild!
+Deployed on [Heroku]
+
+[Heroku]: <https://durrellsnetflix.herokuapp.com>
