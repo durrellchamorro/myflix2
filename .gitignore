@@ -19,3 +19,6 @@
 
 # Environment files that may contain sensitive data
 .env
+
+# redis is generating a db dump file called dump.rdb, I dont think that should be checked in
+dump.rdb

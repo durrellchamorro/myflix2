@@ -51,8 +51,15 @@
 * Decorators using the draper gem to push view logic out of models
 * Advanced search using the Elasticsearch API and the searchkick gem
 * Sikdekiq to send emails in background jobs
-* File uploading using the shrine gem
-* Continuous integration with circleci
+* File uploading directly to Amazon S3 using the shrine gem
+
+#### Deployment and Coding Environment
+* Continuous Integration and Deployment with Circle CI
+* Uses Puma server
+* Deployed with Heroku
+    * Staging app to test changes in production environment before pushing to production app
+* Uses Raven to monitor production server errors.
+
 #### See it in the Wild!
 Deployed on [Heroku]
 
