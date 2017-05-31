@@ -15,8 +15,10 @@ $(document).on("turbolinks:load", function() {
         var displayError = document.getElementById("card-errors");
         if (event.error) {
           displayError.textContent = event.error.message;
+          enable_sign_up_button();
         } else {
           displayError.textContent = "";
+          enable_sign_up_button();
         }
       });
       create_stripe_token(stripe, card);
@@ -34,12 +36,17 @@ $(document).on("turbolinks:load", function() {
           // Inform the user if there was an error
           var errorElement = document.getElementById("card-errors");
           errorElement.textContent = result.error.message;
+          enable_sign_up_button();
         } else {
           // Send the token to your server
           stripeTokenHandler(result.token, form);
         }
       });
     });
+  };
+
+  var enable_sign_up_button = function() {
+    $("[data-behavior=enable_button]").prop("disabled", false).val("Sign Up")
   };
 
   var stripeTokenHandler = function(token, form) {
