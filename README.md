@@ -1,5 +1,5 @@
 # MyFLIX
-[![CircleCI](https://circleci.com/gh/durrellchamorro/myflix2/tree/master.svg?style=svg)](https://circleci.com/gh/durrellchamorro/myflix2/tree/master)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/durrellchamorro/myflix2/master.svg)]()
 # Features
 
 #### Registration, Authentication, and Payments
