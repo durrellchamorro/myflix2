@@ -7,6 +7,7 @@ Bundler.require(:default, Rails.env)
 module Myflix
   class Application < Rails::Application
     config.encoding = "utf-8"
+    config.active_job.queue_adapter = :sidekiq
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
     config.time_zone = "Pacific Time (US & Canada)"

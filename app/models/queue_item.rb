@@ -1,4 +1,4 @@
-class QueueItem < ActiveRecord::Base
+class QueueItem < ApplicationRecord
   belongs_to :user
   belongs_to :video
   delegate :category, to: :video

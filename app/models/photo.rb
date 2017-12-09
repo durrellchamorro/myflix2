@@ -1,4 +1,4 @@
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   include ImageUploader[:image] # adds an `image` virtual attribute
   belongs_to :video
 

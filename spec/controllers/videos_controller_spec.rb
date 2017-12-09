@@ -7,7 +7,7 @@ describe VideosController do
 
       before do
         set_current_user
-        get :show, id: video.id
+        get :show, params: { id: video.id }
       end
 
       it "sets @video" do
@@ -24,8 +24,8 @@ describe VideosController do
     end
 
     it_behaves_like "require_sign_in" do
-      video = FactoryGirl.create(:video)
-      let(:action) { get :show, id: video.id }
+      video = FactoryBot.create(:video)
+      let(:action) { get :show, params: { id: video.id } }
     end
 
 
@@ -42,32 +42,32 @@ describe VideosController do
         end
 
         it "assigns @videos to searchkick results based on title and description match" do
-          get :search, search_term: "star"
+          get :search, params: { search_term: "star" }
 
           expect(assigns(:videos)).to match_array([video1, video2, star_wars2, star_trek])
         end
 
         it "sets @videos equal to all the videos in the database when the search term is an empty string" do
-          get :search, search_term: ""
+          get :search, params: { search_term: "" }
 
           expect(assigns(:videos)).to match_array([video1, video2, star_wars2, bride_wars, star_trek])
         end
 
         it "follows the default setting which is results must match all words in the query" do
-          get :search, search_term: "Star Wars"
+          get :search, params: { search_term: "Star Wars" }
 
           expect(assigns(:videos)).to match_array([video1, star_wars2])
         end
 
         it "matches the word start" do
-          get :search, search_term: "str"
+          get :search, params: { search_term: "str" }
 
           expect(assigns(:videos)).to match_array([video1, video2, star_wars2, star_trek])
         end
       end
 
       it "redirects to the login page if a user is not authenticated" do
-        post :search, search_term: "Star Wars"
+        post :search, params: { search_term: "Star Wars" }
 
         expect(response).to redirect_to(:login)
       end

@@ -1,4 +1,4 @@
-class AppMailer < ActionMailer::Base
+class AppMailer < ApplicationMailer
   def send_welcome_email(user)
     @user = user
     mail to: user.email, from: "info@durrellsnetflix.herokuapp.com", subject: "Welcom To MyFLIX!"

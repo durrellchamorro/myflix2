@@ -26,25 +26,25 @@ describe QueueItemsController do
       end
 
       it "redirects to the my queue page" do
-        post :create, video_slug: star_wars.slug
+        post :create, params: { video_slug: star_wars.slug }
 
         expect(response).to redirect_to(my_queue_path)
       end
 
       it "creates a queue item" do
-        post :create, video_slug: star_wars.slug
+        post :create, params: { video_slug: star_wars.slug }
 
         expect(QueueItem.count).to eq(1)
       end
 
       it "creates the queue item that is associated with the video" do
-        post :create, video_slug: star_wars.slug
+        post :create, params: { video_slug: star_wars.slug }
 
         expect(QueueItem.first.video).to eq(star_wars)
       end
 
       it "creates the queue item that is associated with the signed in user" do
-        post :create, video_slug: star_wars.slug
+        post :create, params: { video_slug: star_wars.slug }
 
         expect(QueueItem.first.user.id).to eq(session[:user_id])
       end
@@ -54,7 +54,7 @@ describe QueueItemsController do
         star_wars_queue_item = star_wars.queue_items.first
         matrix = create(:video)
 
-        post :create, video_slug: matrix.slug
+        post :create, params: { video_slug: matrix.slug }
         matrix_queue_item = matrix.queue_items.first
 
         expect(matrix_queue_item.position).to eq(2)
@@ -62,14 +62,14 @@ describe QueueItemsController do
       end
 
       it "does not add the video to the queue if the video is already in the queue" do
-        post :create, video_slug: star_wars.slug
+        post :create, params: { video_slug: star_wars.slug }
 
         expect(current_user.queue_items.count).to eq(1)
       end
     end
 
     it_behaves_like "require_sign_in" do
-      let(:action) { post :create, video_slug: create(:video).slug }
+      let(:action) { post :create, params: { video_slug: create(:video).slug } }
     end
   end
 
@@ -82,7 +82,7 @@ describe QueueItemsController do
 
       before do
         set_current_user(neo)
-        delete :destroy, id: queue_item2.id
+        delete :destroy, params: { id: queue_item2.id }
       end
 
       it "redirects to the my queue page" do
@@ -96,7 +96,7 @@ describe QueueItemsController do
       it "does not delete the queue item if the current user does not own the queue item" do
         other_user = create(:user)
         other_users_queue_item = create(:queue_item, user: other_user)
-        delete :destroy, id: other_users_queue_item.id
+        delete :destroy, params: { id: other_users_queue_item.id }
 
         expect(QueueItem.find(other_users_queue_item.id)).to be_present
       end
@@ -108,7 +108,7 @@ describe QueueItemsController do
     end
 
     it_behaves_like "require_sign_in" do
-      let(:action) { delete :destroy, id: 1 }
+      let(:action) { delete :destroy, params: { id: 1 } }
     end
   end
 
@@ -123,19 +123,19 @@ describe QueueItemsController do
       end
 
       it "redirects to the my queue page" do
-        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }]
+        post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }] }
         expect(response).to redirect_to(my_queue_path)
       end
 
       it "reorders the queue items" do
-        post :update_queue, queue_items: [{ id: queue_item1.id, position: 2 }, { id: queue_item2.id, position: 1 }]
+        post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 2 }, { id: queue_item2.id, position: 1 }] }
 
         expect(queue_item1.reload.position).to eq(2)
         expect(queue_item2.reload.position).to eq(1)
       end
 
       it "normalizes the position numbers" do
-        post :update_queue, queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }]
+        post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }] }
 
         expect(queue_item1.reload.position).to eq(2)
         expect(queue_item2.reload.position).to eq(1)
@@ -149,7 +149,7 @@ describe QueueItemsController do
 
       before do
         set_current_user(neo)
-        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2.5 }]
+        post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2.5 }] }
       end
 
       it "redirects to the my queue page" do
@@ -170,7 +170,7 @@ describe QueueItemsController do
       let(:queue_item2) { create(:queue_item) }
 
       it_behaves_like "require_sign_in" do
-        let(:action) { post :update_queue, queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }] }
+        let(:action) { post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 5 }, { id: queue_item2.id, position: 4 }] } }
       end
     end
 
@@ -182,7 +182,7 @@ describe QueueItemsController do
 
       it "does not change the queue items" do
         set_current_user(morpheus)
-        post :update_queue, queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }]
+        post :update_queue, params: { queue_items: [{ id: queue_item1.id, position: 1 }, { id: queue_item2.id, position: 2 }] }
 
         expect(queue_item1.reload.position).to eq(3)
         expect(queue_item2.reload.position).to eq(4)

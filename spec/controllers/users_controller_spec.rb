@@ -16,7 +16,7 @@ describe UsersController do
         expect(UserSignUp).to receive(:new).and_return(user_sign_up)
         expect(user_sign_up).to receive(:sign_up)
 
-        post :create, user: { email: "", password: "", full_name: "" }, token: "", stripeToken: ""
+        post :create, params: { user: { email: "", password: "", full_name: "" }, token: "", stripeToken: "" }
       end
 
       it "assigns @user" do
@@ -37,7 +37,7 @@ describe UsersController do
         user_sign_up = double(failed: true, successful: nil, error_message: "Failed")
         expect(UserSignUp).to receive(:new).and_return(user_sign_up)
         expect(user_sign_up).to receive(:sign_up)
-        post :create, user: { email: '', password: "", full_name: "" }, stripeToken: ""
+        post :create, params: { user: { email: '', password: "", full_name: "" }, stripeToken: "" }
       end
 
       it "assigns @user" do
@@ -58,7 +58,7 @@ describe UsersController do
         user_sign_up = double(failed: nil, successful: nil)
         expect(UserSignUp).to receive(:new).and_return(user_sign_up)
         expect(user_sign_up).to receive(:sign_up)
-        post :create, user: { email: "" }
+        post :create, params: { user: { email: "" } }
       end
 
       it "renders the new template" do
@@ -73,14 +73,14 @@ describe UsersController do
 
   describe "GET show" do
     it_behaves_like "require_sign_in" do
-      let(:action) { get :show, id: 1 }
+      let(:action) { get :show, params: { id: 1 } }
     end
 
     it "sets @user" do
       set_current_user
       neo = create(:user)
 
-      get :show, id: neo.id
+      get :show, params: { id: neo.id }
 
       expect(assigns(:user)).to eq(neo)
     end
@@ -91,7 +91,7 @@ describe UsersController do
       let(:invitation) { create(:invitation) }
 
       before do
-        get :new_with_invitation_token, token: invitation.token
+        get :new_with_invitation_token, params: { token: invitation.token }
       end
 
       it "sets @user with recipient's email" do
@@ -113,7 +113,7 @@ describe UsersController do
 
     context "with invalid token" do
       it "redirects to the expired token page" do
-        get :new_with_invitation_token, token: 'not in database'
+        get :new_with_invitation_token, params: { token: 'not in database' }
         expect(response).to redirect_to expired_token_path
       end
     end

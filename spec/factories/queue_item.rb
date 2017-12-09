@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :queue_item do
     position (1..10).to_a.sample
     user

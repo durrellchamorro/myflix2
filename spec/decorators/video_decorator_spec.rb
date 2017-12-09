@@ -16,6 +16,7 @@ describe VideoDecorator do
     it "retuns the aveage rating when there are more than one rating" do
       create(:review, rating: 1, video: video)
       create(:review, rating: 2, video: video)
+      video.reload
 
       expect(video.print_average_video_rating).to eq(1.5)
     end
@@ -24,7 +25,8 @@ describe VideoDecorator do
       create(:review, rating: 1, video: video)
       create(:review, rating: 1, video: video)
       create(:review, rating: 3, video: video)
-
+      video.reload
+      
       expect(video.print_average_video_rating).to eq(1.67)
     end
 

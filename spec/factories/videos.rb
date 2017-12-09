@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   title = Faker::Name.name
   factory :video do
     title title
