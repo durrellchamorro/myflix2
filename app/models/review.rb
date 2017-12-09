@@ -1,4 +1,4 @@
-class Review < ActiveRecord::Base
+class Review < ApplicationRecord
   belongs_to :user
   belongs_to :video
   validates_presence_of :content

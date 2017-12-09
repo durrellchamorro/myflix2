@@ -2,13 +2,12 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'capybara/rails'
 require 'capybara/email/rspec'
 require 'capybara/poltergeist'
 require 'sidekiq/testing'
 require 'vcr'
-
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
@@ -16,6 +15,9 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.allow_http_connections_when_no_cassette = true
   c.ignore_localhost = true
+  c.default_cassette_options = {
+    re_record_interval: 1.month
+  }
 end
 
 Sidekiq::Testing.inline!
@@ -114,5 +116,13 @@ RSpec.configure do |config|
     Searchkick.enable_callbacks
     example.run
     Searchkick.disable_callbacks
+  end
+
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+      with.library :rails
+    end
   end
 end

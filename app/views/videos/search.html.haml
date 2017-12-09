@@ -5,5 +5,8 @@
       .video.video.col-xs-6.col-sm-3.col-md-2
         .custom_thumb
           = link_to(video_path(video.id)) do
-            = image_tag video.photo
+            - if video.photo.blank?
+              ''
+            - else
+              = image_tag video.photo
 = paginate @videos

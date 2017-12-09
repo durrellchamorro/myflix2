@@ -32,7 +32,10 @@
         .custom_thumb_container
           .custom_thumb
             = link_to(video_path(video.slug)) do
-              = image_tag video.photo
+              - if video.photo.blank?
+                ''
+              - else
+                = image_tag video.photo
         %div.video_data
           %header
             %h3

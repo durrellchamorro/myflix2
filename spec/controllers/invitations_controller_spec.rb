@@ -15,13 +15,13 @@ describe InvitationsController do
 
   describe "POST create" do
     it_behaves_like "require_sign_in" do
-      let(:action) { post :create, invitation: {} }
+      let(:action) { post :create, params: { invitation: {} } }
     end
 
     context "with valid input" do
       before do
         set_current_user
-        post :create, invitation: { recipient_name: "Thomas Anderson", recipient_email: 'neo@matrix.com', message: "Please take the red pill!" }
+        post :create, params: { invitation: { recipient_name: "Thomas Anderson", recipient_email: 'neo@matrix.com', message: "Please take the red pill!" } }
       end
 
       it "creates an invitation" do
@@ -44,7 +44,7 @@ describe InvitationsController do
     context "with invalid input" do
       before do
         set_current_user
-        post :create, invitation: { recipient_name: "", recipient_email: 'neo@matrix.com', message: "Please take the red pill!" }
+        post :create, params: { invitation: { recipient_name: "", recipient_email: 'neo@matrix.com', message: "Please take the red pill!" } }
       end
 
       it "renders the :new template" do

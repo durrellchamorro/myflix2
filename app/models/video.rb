@@ -1,4 +1,4 @@
-class Video < ActiveRecord::Base
+class Video < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :history
 

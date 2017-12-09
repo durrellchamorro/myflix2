@@ -26,13 +26,13 @@ describe RelationshipsController do
     end
 
     it_behaves_like "require_sign_in" do
-      let(:action) { delete :destroy, id: 1 }
+      let(:action) { delete :destroy, params: { id: 1 } }
     end
 
     it "deletes the relationship if the current user is the follower" do
       relationship = create(:relationship, leader: morpheus, follower: neo)
 
-      delete :destroy, id: relationship.id
+      delete :destroy, params: { id: relationship.id }
 
       expect(Relationship.count).to eq(0)
     end
@@ -40,13 +40,13 @@ describe RelationshipsController do
     it "does not delete the relationship if the current user is not the follower" do
       relationship = create(:relationship, leader: neo, follower: morpheus)
 
-      delete :destroy, id: relationship.id
+      delete :destroy, params: { id: relationship.id }
 
       expect(Relationship.count).to eq(1)
     end
 
     it "redirects to the people page" do
-      delete :destroy, id: 1
+      delete :destroy, params: { id: 1 }
 
       expect(response).to redirect_to people_path
     end
@@ -54,7 +54,7 @@ describe RelationshipsController do
     it "sets the success flash if the relationship was deleted" do
       relationship = create(:relationship, leader: morpheus, follower: neo)
 
-      delete :destroy, id: relationship.id
+      delete :destroy, params: { id: relationship.id }
 
       expect(flash[:success]).to be_present
     end
@@ -62,7 +62,7 @@ describe RelationshipsController do
     it "sets the danger flash if the relationship was not deleted" do
       relationship = create(:relationship, leader: neo, follower: morpheus)
 
-      delete :destroy, id: relationship.id
+      delete :destroy, params: { id: relationship.id }
 
       expect(flash[:danger]).to be_present
     end
@@ -76,29 +76,29 @@ describe RelationshipsController do
     end
 
     it_behaves_like "require_sign_in" do
-      let(:action) { post :create, leader_id: 1 }
+      let(:action) { post :create, params: { leader_id: 1 } }
     end
 
     it "creates a relationship that the current user follows the leader" do
-      post :create, leader_id: morpheus.id
+      post :create, params: { leader_id: morpheus.id }
 
       expect(neo.following_relationships.first.leader).to eq(morpheus)
     end
 
     it "redirects to the people page" do
-      post :create, leader_id: morpheus.id
+      post :create, params: { leader_id: morpheus.id }
       expect(response).to redirect_to people_path
     end
 
     it "does not create a relationship if the current user already follows the leader" do
       create(:relationship, leader: morpheus, follower: neo)
-      post :create, leader_id: morpheus.id
+      post :create, params: { leader_id: morpheus.id }
 
       expect(Relationship.count).to eq(1)
     end
 
     it "does not allow user to follow himself" do
-      post :create, leader_id: neo.id
+      post :create, params: { leader_id: neo.id }
 
       expect(Relationship.count).to eq(0)
     end

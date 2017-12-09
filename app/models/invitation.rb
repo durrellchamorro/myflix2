@@ -1,4 +1,4 @@
-class Invitation < ActiveRecord::Base
+class Invitation < ApplicationRecord
   belongs_to :inviter, class_name: "User"
   validates_presence_of :inviter_id, :recipient_name, :recipient_email, :message
   before_create :generate_token

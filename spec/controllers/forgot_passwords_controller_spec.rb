@@ -4,20 +4,19 @@ describe ForgotPasswordsController do
   describe "POST create" do
     context "with blank input" do
       it "redirects to the forgot password page" do
-        post :create, email: ''
+        post :create, params: { email: '' }
         expect(response).to redirect_to forgot_password_path
       end
 
       it "shows an error message" do
-        post :create, email: ''
+        post :create, params: { email: '' }
         expect(flash[:danger]).to eq("Email cannot be blank.")
       end
-
     end
 
     context "with existing email" do
       let!(:neo) { create(:user, email: "neo@matrix.com") }
-      before { post :create, email: "neo@matrix.com" }
+      before { post :create, params: { email: "neo@matrix.com" } }
 
       it "redirects to the forgot password confirmation page" do
         expect(response).to redirect_to forgot_password_confirmation_path
@@ -33,7 +32,7 @@ describe ForgotPasswordsController do
     end
 
     context "with non-existing email" do
-      before { post :create, email: 'foo@example.com' }
+      before { post :create, params: { email: 'foo@example.com' } }
 
       it "redirects to the forgot password page" do
         expect(response).to redirect_to forgot_password_path

@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   validates_presence_of :full_name, :password_digest, :email, :password
   validates_uniqueness_of :email
   has_many :reviews, -> { order("created_at DESC") }
