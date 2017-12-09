@@ -57,7 +57,9 @@ rescue RSpec::Expectations::ExpectationNotMetError => e
 end
 
 def click_video(video)
-  find("a[href='/videos/#{video.slug}']").click
+  # find("a[href='/videos/#{video.slug}']").click
+  # find("img[title='#{video.slug}']").click
+  click_on video.slug
 end
 
 def expect_page_to_have_video_title(video)

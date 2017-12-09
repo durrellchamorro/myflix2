@@ -11,7 +11,7 @@ feature "User interacts with social networking features" do
     drama = create(:category)
     titans = create(:video, category_id: drama.id)
     create(:photo, video: titans)
-    create(:review, user: bob, video: titans)
+    create(:review, user: bob, video: titans, content: "This is a very short review!")
 
     sign_in(neo)
     click_video(titans)

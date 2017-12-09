@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "Admin adds a video" do
   # this feature works and this test used to pass but now it fails. I will debug this later.
-  
+
   # scenario "admin adds a video successfully", :js do
   #   create(:category, name: "Drama")
   #   alex = create(:user, admin: true)
