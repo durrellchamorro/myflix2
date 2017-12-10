@@ -95,26 +95,26 @@ describe "Create payment on successful charge" do
   end
 
   it "creates a payment with the webhook from stripe for charge succeeded", :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Payment.count).to eq(1)
   end
 
   it "creates the payment associated with the user", :vcr do
     neo = create(:user, stripe_id: "cus_Ac6Enrxmt7FfT6")
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Payment.first.user).to eq(neo)
   end
 
   it "creates the payment with the ammount", :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Payment.first.amount).to eq(999)
   end
 
   it "creates the payment with the reference_id", :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Payment.first.reference_id).to eq("ch_1AGs2VGXpxGLtyRZFFNwDuPK")
   end

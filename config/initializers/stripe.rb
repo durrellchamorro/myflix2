@@ -4,6 +4,7 @@ Rails.configuration.stripe = {
 }
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
+# StripeEvent.signing_secret = ENV['STRIPE_SIGNING_SECRET'] TODO: start useing this
 
 StripeEvent.configure do |events|
   events.subscribe 'charge.succeeded' do |event|

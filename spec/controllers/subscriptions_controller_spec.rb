@@ -13,14 +13,14 @@ describe SubscriptionsController do
         expect(Subscription).to receive(:find).with("2").and_return(subscription)
         expect(StripeWrapper::Subscription).to receive(:cancel).with(subscription)
 
-        post :destroy, _method: "delete", id: "2"
+        post :destroy, params: { _method: "delete", id: "2" }
       end
 
       it "sets the flash success message" do
         allow(Subscription).to receive(:find)
         allow(StripeWrapper::Subscription).to receive(:cancel)
 
-        post :destroy, _method: "delete", id: "2"
+        post :destroy, params: { _method: "delete", id: "2" }
 
         expect(flash[:success]).to be_present
       end
@@ -29,7 +29,7 @@ describe SubscriptionsController do
         allow(Subscription).to receive(:find)
         allow(StripeWrapper::Subscription).to receive(:cancel)
 
-        post :destroy, _method: "delete", id: "2"
+        post :destroy, params: { _method: "delete", id: "2" }
 
         expect(response).to redirect_to home_path
       end
@@ -40,7 +40,7 @@ describe SubscriptionsController do
         allow(Subscription).to receive(:find)
         allow(StripeWrapper::Subscription).to receive(:cancel)
 
-        post :destroy, _method: "delete", id: "2"
+        post :destroy, params: { _method: "delete", id: "2" }
 
         expect(response).to redirect_to login_path
       end
@@ -49,7 +49,7 @@ describe SubscriptionsController do
         allow(Subscription).to receive(:find)
         allow(StripeWrapper::Subscription).to receive(:cancel)
 
-        post :destroy, _method: "delete", id: "2"
+        post :destroy, params: { _method: "delete", id: "2" }
 
         expect(flash[:danger]).to be_present
       end

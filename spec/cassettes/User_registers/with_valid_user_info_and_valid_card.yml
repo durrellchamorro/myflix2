@@ -5,18 +5,18 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: email=example%40gmail.com&card=tok_1AGgVFGXpxGLtyRZDRZB2TMT
+      string: email=neo%40matrix.io&card=tok_1BXHVRGXpxGLtyRZnYWob2Yk
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/2.8.0
+      - Stripe/v1 RubyBindings/3.9.0
       Authorization:
       - Bearer sk_test_yGFEJfYxnx1GBParGqjGM8RE
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"2.8.0","lang":"ruby","lang_version":"2.4.1 p111 (2017-03-22)","platform":"x86_64-darwin16","engine":"ruby","publisher":"stripe","uname":"Darwin
-        Durrells-MacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3
-        16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64 x86_64","hostname":"Durrells-MacBook-Pro.local"}'
+      - '{"bindings_version":"3.9.0","lang":"ruby","lang_version":"2.4.1 p111 (2017-03-22)","platform":"x86_64-darwin16","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Durrells-MacBook-Pro.local 16.7.0 Darwin Kernel Version 16.7.0: Thu Jun 15
+        17:36:27 PDT 2017; root:xnu-3789.70.16~2/RELEASE_X86_64 x86_64","hostname":"Durrells-MacBook-Pro.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,11 +29,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 07 May 2017 03:56:13 GMT
+      - Sat, 09 Dec 2017 23:13:18 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1399'
+      - '1395'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -42,30 +42,32 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AbuJzf2VlpNkf3
+      - req_X0v9BeNvdfUQIz
       Stripe-Version:
       - '2017-04-06'
       Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
+      - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "cus_AbuJomg32BEXNR",
+          "id": "cus_Bv7kG2eRZ3DYHy",
           "object": "customer",
           "account_balance": 0,
-          "created": 1494129373,
+          "created": 1512861198,
           "currency": null,
-          "default_source": "card_1AGgVFGXpxGLtyRZdV02Wwmn",
+          "default_source": "card_1BXHVRGXpxGLtyRZzrxv1Lqj",
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "example@gmail.com",
+          "email": "neo@matrix.io",
           "livemode": false,
           "metadata": {},
           "shipping": null,
@@ -73,7 +75,7 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "card_1AGgVFGXpxGLtyRZdV02Wwmn",
+                "id": "card_1BXHVRGXpxGLtyRZzrxv1Lqj",
                 "object": "card",
                 "address_city": null,
                 "address_country": null,
@@ -85,7 +87,7 @@ http_interactions:
                 "address_zip_check": "pass",
                 "brand": "Visa",
                 "country": "US",
-                "customer": "cus_AbuJomg32BEXNR",
+                "customer": "cus_Bv7kG2eRZ3DYHy",
                 "cvc_check": "pass",
                 "dynamic_last4": null,
                 "exp_month": 1,
@@ -100,35 +102,35 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/customers/cus_AbuJomg32BEXNR/sources"
+            "url": "/v1/customers/cus_Bv7kG2eRZ3DYHy/sources"
           },
           "subscriptions": {
             "object": "list",
             "data": [],
             "has_more": false,
             "total_count": 0,
-            "url": "/v1/customers/cus_AbuJomg32BEXNR/subscriptions"
+            "url": "/v1/customers/cus_Bv7kG2eRZ3DYHy/subscriptions"
           }
         }
     http_version: 
-  recorded_at: Sun, 07 May 2017 03:56:13 GMT
+  recorded_at: Sat, 09 Dec 2017 23:13:19 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/subscriptions
     body:
       encoding: UTF-8
-      string: customer=cus_AbuJomg32BEXNR&plan=basic_plan_id
+      string: customer=cus_Bv7kG2eRZ3DYHy&plan=basic_plan_id
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/2.8.0
+      - Stripe/v1 RubyBindings/3.9.0
       Authorization:
       - Bearer sk_test_yGFEJfYxnx1GBParGqjGM8RE
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"2.8.0","lang":"ruby","lang_version":"2.4.1 p111 (2017-03-22)","platform":"x86_64-darwin16","engine":"ruby","publisher":"stripe","uname":"Darwin
-        Durrells-MacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3
-        16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64 x86_64","hostname":"Durrells-MacBook-Pro.local"}'
+      - '{"bindings_version":"3.9.0","lang":"ruby","lang_version":"2.4.1 p111 (2017-03-22)","platform":"x86_64-darwin16","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Durrells-MacBook-Pro.local 16.7.0 Darwin Kernel Version 16.7.0: Thu Jun 15
+        17:36:27 PDT 2017; root:xnu-3789.70.16~2/RELEASE_X86_64 x86_64","hostname":"Durrells-MacBook-Pro.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -141,11 +143,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 07 May 2017 03:56:14 GMT
+      - Sat, 09 Dec 2017 23:13:20 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1566'
+      - '1617'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -154,38 +156,42 @@ http_interactions:
       - GET, POST, HEAD, OPTIONS, DELETE
       Access-Control-Allow-Origin:
       - "*"
+      Access-Control-Expose-Headers:
+      - X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required
       Access-Control-Max-Age:
       - '300'
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_AbuJRNTNyVrVDo
+      - req_EghbHo6czfuX67
       Stripe-Version:
       - '2017-04-06'
       Strict-Transport-Security:
-      - max-age=31556926; includeSubDomains
+      - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
         {
-          "id": "sub_AbuJ4qtoQjwzqW",
+          "id": "sub_Bv7kRk1nJafJGo",
           "object": "subscription",
           "application_fee_percent": null,
+          "billing": "charge_automatically",
           "cancel_at_period_end": false,
           "canceled_at": null,
-          "created": 1494129374,
-          "current_period_end": 1496807774,
-          "current_period_start": 1494129374,
-          "customer": "cus_AbuJomg32BEXNR",
+          "created": 1512861199,
+          "current_period_end": 1515539599,
+          "current_period_start": 1512861199,
+          "customer": "cus_Bv7kG2eRZ3DYHy",
           "discount": null,
           "ended_at": null,
           "items": {
             "object": "list",
             "data": [
               {
-                "id": "si_1AGgVGGXpxGLtyRZMvgUC0K2",
+                "id": "si_Bv7khXj5Olimkt",
                 "object": "subscription_item",
-                "created": 1494129375,
+                "created": 1512861199,
+                "metadata": {},
                 "plan": {
                   "id": "basic_plan_id",
                   "object": "plan",
@@ -205,7 +211,7 @@ http_interactions:
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/subscription_items?subscription=sub_AbuJ4qtoQjwzqW"
+            "url": "/v1/subscription_items?subscription=sub_Bv7kRk1nJafJGo"
           },
           "livemode": false,
           "metadata": {},
@@ -224,12 +230,12 @@ http_interactions:
             "trial_period_days": null
           },
           "quantity": 1,
-          "start": 1494129374,
+          "start": 1512861199,
           "status": "active",
           "tax_percent": null,
           "trial_end": null,
           "trial_start": null
         }
     http_version: 
-  recorded_at: Sun, 07 May 2017 03:56:14 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Sat, 09 Dec 2017 23:13:20 GMT
+recorded_with: VCR 4.0.0

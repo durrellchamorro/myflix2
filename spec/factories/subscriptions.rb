@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :subscription do
     amount 999
     reference_id 'sub_Ace4PVkZr7X3aN'

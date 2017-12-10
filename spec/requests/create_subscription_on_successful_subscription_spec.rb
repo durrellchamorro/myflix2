@@ -84,38 +84,38 @@ describe "create subscription on successful subscription event" do
   end
 
   it 'creates a subscription from the webhook from stripe for customer.subscription.created', :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.count).to eq(1)
   end
 
   it "creates the subscription associated with the user", :vcr do
     neo = create(:user, stripe_id: "cus_Ace43pxndfZILX")
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.first.user).to eq(neo)
   end
 
   it "creates the subscription with the current_period_start" do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.first.current_period_start).to eq(1494299599)
   end
 
   it "creates the subscription with the current_period_end" do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.first.current_period_end).to eq(1496977999)
   end
 
   it "creates the subscription with the ammount", :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.first.amount).to eq(999)
   end
 
   it "creates the subscription with the reference_id", :vcr do
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(Subscription.first.reference_id).to eq("sub_Ace4PVkZr7X3aN")
   end

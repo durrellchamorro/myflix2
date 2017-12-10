@@ -14,7 +14,7 @@ describe ReviewsController do
         before do
           set_current_user
           review = build(:review, user: user, video: video)
-          post :create, review.attributes
+          post :create, params: review.attributes
         end
 
         it "creates a review" do
@@ -42,7 +42,7 @@ describe ReviewsController do
         before do
           set_current_user
           review = build(:review, user: user, video: video, content: nil, rating: nil)
-          post :create, review.attributes
+          post :create, params: review.attributes
         end
 
         it "sets @video" do

@@ -16,12 +16,12 @@ class UserSignUp
       customer: customer,
       plan: "basic_plan_id"
     )
-      
+
     if subscription.successful?
       @user.stripe_id = customer.id
       @user.save
       inviter_and_invitee_follow_eachother
-      AppMailer.delay.send_welcome_email(@user)
+      AppMailer.send_welcome_email(@user).deliver_later
       @successful = true
     else
       @failed = true

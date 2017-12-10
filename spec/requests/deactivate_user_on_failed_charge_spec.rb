@@ -96,7 +96,7 @@ describe "Deactive user on failed charge" do
 
   it "deactivates a user with the web hook data from stripe for a failed charge", :vcr do
     neo = create(:user, stripe_id: "cus_AcCPCYLTWeH2pw")
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(neo.reload).not_to be_active
   end

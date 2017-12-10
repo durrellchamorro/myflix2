@@ -90,7 +90,7 @@ describe "marks subscription to cancel at period end after receiving the custome
   it "changes the cancel_at_period_end column in subscriptions to true", :vcr do
     neo = create(:user, stripe_id: "cus_Ace43pxndfZILX")
     create(:subscription, user: neo)
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(neo.reload.canceling_at_subscription_end?).to be true
   end

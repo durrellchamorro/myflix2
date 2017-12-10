@@ -18,7 +18,7 @@ describe SessionsController do
 
   describe "POST create" do
     before do
-      post :create, email: user.email, password: user.password
+      post :create, params: { email: user.email, password: user.password }
     end
 
     context "user authenticates" do
@@ -53,7 +53,7 @@ describe SessionsController do
   describe "GET destroy", :js do
     before do
       set_current_user
-      xhr :get, :destroy
+      get :destroy, xhr: true
     end
 
     it "sets the user_id session to nil" do

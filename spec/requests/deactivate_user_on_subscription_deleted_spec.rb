@@ -85,7 +85,7 @@ describe "deactivate user on subscription deleted event" do
 
   it "deactivates a user with the web hook data from stripe for a customer.subscription.deleted", :vcr do
     neo = create(:user, stripe_id: "cus_AchhHp5sdUL4EC")
-    post "/stripe_events", event_data, headers
+    post "/stripe_events", params: event_data, headers: headers
 
     expect(neo.reload).not_to be_active
   end
